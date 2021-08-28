@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <!--<UserSecretsId>0d0844f4-20c7-4481-b4e3-67c69193e879</UserSecretsId>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BillsManagement.DomainModels\BillsManagement.DomainModels.csproj" />
+    <ProjectReference Include="..\BillsManagement.Exception\BillsManagement.Exception.csproj" />
+    <ProjectReference Include="..\BillsManagement.Services\BillsManagement.Services.csproj" />
+  </ItemGroup>
+
+</Project>
