@@ -7,8 +7,8 @@ namespace BillsManagement.DAL.Models
 {
     public partial class NotificationSetting
     {
-        public int? SettingsKey { get; set; }
+        public int SettingsKey { get; set; }
         public string BusinessEmail { get; set; }
-        public string BusinessEmailPassword { get; set; }
+        public string Password { get; set; }
     }
 }

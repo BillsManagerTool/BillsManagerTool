@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class Authorization
+    public class SecurityToken
     {
-        public Guid UserId { get; set; }
+        public Guid OccupantId { get; set; }
 
-        public string JsonWebToken { get; set; }
+        public string Token { get; set; }
 
         public bool? IsExpired { get; set; }
 

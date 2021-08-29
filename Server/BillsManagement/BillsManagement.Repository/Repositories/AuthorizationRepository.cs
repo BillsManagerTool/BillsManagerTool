@@ -7,33 +7,33 @@
 
     public class AuthorizationRepository : BaseRepository<DomainModel.User>, IAuthorizationRepository
     {
-        public AuthorizationRepository(BillsManagementContext dbContext, IMapper mapper)
+        public AuthorizationRepository(BillsManager_DevContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
 
         }
 
-        public void SaveAuthorization(DomainModel.Authorization authorization)
+        public void SaveSecurityToken(DomainModel.SecurityToken securityToken)
         {
-            Authorization mappedAuthorization = this._mapper.Map<DomainModel.Authorization, Authorization>(authorization);
+            SecurityToken mappedSecurityToken = this._mapper.Map<DomainModel.SecurityToken, SecurityToken>(securityToken);
 
-            this._dbContext.Authorizations.Add(mappedAuthorization);
+            this._dbContext.SecurityTokens.Add(mappedSecurityToken);
             this._dbContext.SaveChanges();
         }
 
-        public void UpdateToken(DomainModel.Authorization authorization)
+        public void UpdateToken(DomainModel.SecurityToken securityToken)
         {
-            var oldAuthorization = this._dbContext.Authorizations
-                .FirstOrDefault(authorization => authorization.IsExpired == false && authorization.UserId == authorization.UserId);
+            var prevSecurityToken = this._dbContext.SecurityTokens
+                .FirstOrDefault(st => st.IsExpired == false && st.OccupantId == securityToken.OccupantId);
 
-            if (oldAuthorization != null)
+            if (prevSecurityToken != null)
             {
-                oldAuthorization.IsExpired = true;
+                prevSecurityToken.IsExpired = true;
             }
 
-            var mappedAuthorization = this._mapper.Map<DomainModel.Authorization, Authorization>(authorization);
+            var mappedSecurityToken = this._mapper.Map<DomainModel.SecurityToken, SecurityToken>(securityToken);
 
-            this._dbContext.Add(mappedAuthorization);
+            this._dbContext.Add(mappedSecurityToken);
             this._dbContext.SaveChanges();
         }
     }

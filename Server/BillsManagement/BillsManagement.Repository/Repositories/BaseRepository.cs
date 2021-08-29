@@ -8,21 +8,21 @@
 
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        public readonly BillsManagementContext _dbContext;
+        public readonly BillsManager_DevContext _dbContext;
         public readonly IMapper _mapper;
 
-        public BaseRepository(BillsManagementContext dbContext, IMapper mapper)
+        public BaseRepository(BillsManager_DevContext dbContext, IMapper mapper)
         {
             this._dbContext = dbContext;
             this._mapper = mapper;
         }
 
-        public bool CheckIfUserExistsById(Guid? userId)
+        public bool CheckIfOccupantExistsById(Guid occupantId)
         {
             bool isExisting = false;
 
-            User user = this._dbContext.Users
-                .FirstOrDefault(x => x.UserId == userId);
+            Occupant user = this._dbContext.Occupants
+                .FirstOrDefault(x => x.OccupantId == occupantId);
 
             if (user != null)
             {
@@ -32,9 +32,9 @@
             return isExisting;
         }
 
-        public CashAccount GetCashAccountByUserId(Guid? userId)
-            => this._dbContext.CashAccounts
-            .FirstOrDefault(x => x.UserId == userId);
+        //public CashAccount GetCashAccountByUserId(Guid? userId)
+        //    => this._dbContext.CashAccounts
+        //    .FirstOrDefault(x => x.UserId == userId);
 
         public DomainModel.Settings GetNotificationSettings(int key)
         {
@@ -47,15 +47,15 @@
             return settings;
         }
 
-        public DomainModel.Authorization GetAuthorizationByUserId(Guid userId)
+        public DomainModel.SecurityToken GetSecurityTokenByOccupantId(Guid occupantId)
         {
-            Authorization authorization = this._dbContext.Authorizations
-                .FirstOrDefault(x => x.IsExpired == false & x.UserId == userId);
+            SecurityToken token = this._dbContext.SecurityTokens
+                .FirstOrDefault(x => x.IsExpired == false & x.OccupantId == occupantId);
 
-            DomainModel.Authorization mappedAuthorization = this._mapper
-                .Map<Authorization, DomainModel.Authorization>(authorization);
+            DomainModel.SecurityToken mappedToken = this._mapper
+                .Map<SecurityToken, DomainModel.SecurityToken>(token);
 
-            return mappedAuthorization;
+            return mappedToken;
         }
     }
 }

@@ -9,6 +9,6 @@
 
         DomainModel.LoginResponse Login(LoginRequest request);
 
-        void ValidateJwtToken(Guid userId);
+        void ValidateJwtToken(Guid occupantId);
     }
 }

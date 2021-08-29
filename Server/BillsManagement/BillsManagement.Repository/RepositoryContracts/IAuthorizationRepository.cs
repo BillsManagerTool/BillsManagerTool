@@ -2,8 +2,8 @@
 {
     public interface IAuthorizationRepository : IBaseRepository<DomainModel.User>
     {
-        void SaveAuthorization(DomainModel.Authorization securityToken);
+        void SaveSecurityToken(DomainModel.SecurityToken securityToken);
 
-        void UpdateToken(DomainModel.Authorization securityToken);
+        void UpdateToken(DomainModel.SecurityToken securityToken);
     }
 }

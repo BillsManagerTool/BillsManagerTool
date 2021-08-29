@@ -25,17 +25,17 @@
 
         public LoginResponse Login(LoginRequest request)
         {
-            DomainModel.User user = this._userRepository
-                .GetUserDetails(request.Email);
+            DomainModel.User occupant = this._userRepository
+                .GetOccupantDetails(request.Email);
 
-            PasswordCipher.Decrypt(user.Password, request.Password);
+            PasswordCipher.Decrypt(occupant.Password, request.Password);
 
-            DomainModel.Authorization token = this._userRepository
-                .GetAuthorizationByUserId(user.UserId);
+            DomainModel.SecurityToken token = this._userRepository
+                .GetSecurityTokenByOccupantId(occupant.OccupantId);
 
             DomainModel.TokenValidator tokenValidator = new DomainModel.TokenValidator();
             tokenValidator.SecurityToken = token;
-            tokenValidator.User = user;
+            tokenValidator.Occupant = occupant;
 
             var securityToken = this.GetValidToken(tokenValidator);
 
@@ -47,22 +47,21 @@
 
         public RegisterResponse Register(RegisterRequest request)
         {
-            this.ValidateUserExistence(request.Email);
+            this.ValidateOccupantExistence(request.Email);
             var encryptedPassword = PasswordCipher.Encrypt(request.Password);
 
-            var registration = this._userRepository
-                .Register(request.Email, encryptedPassword, out DomainModel.Settings settings);
+            this._userRepository.Register(request.Email, encryptedPassword);
 
-            this.SendRegisterNotificationEmail(registration, settings);
+            var settings = this._userRepository.GetNotificationSettings(1);
+            this.SendRegisterNotificationEmail(request.Email, settings);
 
             RegisterResponse response = new RegisterResponse();
-            response.Registration = registration;
             return response;
         }
 
-        public void ValidateJwtToken(Guid userId)
+        public void ValidateJwtToken(Guid occupantId)
         {
-            DomainModel.Authorization authorization = this._userRepository.GetAuthorizationByUserId(userId);
+            DomainModel.SecurityToken authorization = this._userRepository.GetSecurityTokenByOccupantId(occupantId);
 
             if (authorization.ExpirationDate <= DateTime.Now)
             {

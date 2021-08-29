@@ -34,14 +34,14 @@
             }
         }
 
-        private string GenerateJwtToken(DomainModel.User user)
+        private string GenerateJwtToken(DomainModel.User occupant)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("UserId", user.UserId.ToString()),
-                    new Claim("Email", user.Email),
+                    new Claim("UserId", occupant.OccupantId.ToString()),
+                    new Claim("Email", occupant.Email),
                     new Claim("Secret", Secret),
                     new Claim("GenerateTime", this.GenerateTime.ToString()),
                     new Claim("Expires", this.Expires.ToString())
@@ -65,56 +65,56 @@
 
         private string GetValidToken(DomainModel.TokenValidator tokenValidator)
         {
-            var authorization = new DomainModel.Authorization();
-            authorization.Secret = this.Secret;
-            authorization.ExpirationDate = this.Expires;
-            authorization.UserId = tokenValidator.User.UserId;
+            var securityToken = new DomainModel.SecurityToken();
+            securityToken.Secret = this.Secret;
+            securityToken.ExpirationDate = this.Expires;
+            securityToken.OccupantId = tokenValidator.Occupant.OccupantId;
 
             if (tokenValidator.SecurityToken == null)
             {
-                var token = this.GenerateJwtToken(tokenValidator.User);
-                authorization.JsonWebToken = token;
-                this._authorizationRepository.SaveAuthorization(authorization);
+                var token = this.GenerateJwtToken(tokenValidator.Occupant);
+                securityToken.Token = token;
+                this._authorizationRepository.SaveSecurityToken(securityToken);
             }
             else if (tokenValidator.SecurityToken?.ExpirationDate <= DateTime.Now)
             {
-                string refreshedSecurityToken = this.RefreshToken(authorization, tokenValidator.User);
-                authorization.JsonWebToken = refreshedSecurityToken;
+                string refreshedSecurityToken = this.RefreshToken(securityToken, tokenValidator.Occupant);
+                securityToken.Token = refreshedSecurityToken;
             }
             else
             {
-                authorization.JsonWebToken = tokenValidator.SecurityToken.JsonWebToken;
+                securityToken.Token = tokenValidator.SecurityToken.Token;
             }
 
-            return authorization.JsonWebToken;
+            return securityToken.Token;
         }
 
-        private string RefreshToken(DomainModel.Authorization authorization, DomainModel.User user)
+        private string RefreshToken(DomainModel.SecurityToken securityToken, DomainModel.User occupant)
         {
-            string refreshedSecurityToken = this.GenerateJwtToken(user);
-            authorization.JsonWebToken = refreshedSecurityToken;
-            this._authorizationRepository.UpdateToken(authorization);
+            string refreshedSecurityToken = this.GenerateJwtToken(occupant);
+            securityToken.Token = refreshedSecurityToken;
+            this._authorizationRepository.UpdateToken(securityToken);
 
             return refreshedSecurityToken;
         }
 
-        private void ValidateUserExistence(string email)
+        private void ValidateOccupantExistence(string email)
         {
-            if (this._userRepository.IsExistingUser(email))
+            if (this._userRepository.IsExistingOccupant(email))
             {
                 string msg = "Email is already used on another account";
                 throw new HttpStatusCodeException(HttpStatusCode.Conflict, msg);
             }
         }
 
-        private void SendRegisterNotificationEmail(DomainModel.Registration registration, DomainModel.Settings settings)
+        private void SendRegisterNotificationEmail(string email, DomainModel.Settings settings)
         {
             using (MailMessage mail = new MailMessage())
             {
                 var notificationMessage = this.CreateNotificationMessage();
 
                 mail.From = new MailAddress(settings.BusinessEmail);
-                mail.To.Add(registration.Email);
+                mail.To.Add(email);
                 mail.Subject = "Registration confirmed!";
                 mail.Body = notificationMessage;
                 mail.IsBodyHtml = true;

@@ -8,41 +8,41 @@
     using System.Linq;
     using System.Net;
 
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<Occupant>, IUserRepository
     {
-        public UserRepository(BillsManagementContext dbContext, IMapper mapper)
+        public UserRepository(BillsManager_DevContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
 
         }
 
-        public DomainModel.User GetUserDetails(string email)
+        public DomainModel.User GetOccupantDetails(string email)
         {
-            var user = this._dbContext.Users
+            var occupant = this._dbContext.OccupantDetails
                 .FirstOrDefault(x => x.Email == email);
 
-            if (user == null)
+            if (occupant == null)
             {
                 string msg = "Can't read user details.";
                 throw new HttpStatusCodeException(HttpStatusCode.NotFound, msg);
             }
 
-            var mappedAuth = this._mapper
-                .Map<User, DomainModel.User>(user);
+            var mappedOccupant = this._mapper
+                .Map<OccupantDetail, DomainModel.User>(occupant);
 
-            return mappedAuth;
+            return mappedOccupant;
         }
 
-        public Guid GetUserInformation(string email)
-            => this._dbContext.Users
-                .FirstOrDefault(x => x.Email == email).UserId;
+        public Guid GetOccupantInformation(string email)
+            => this._dbContext.OccupantDetails
+                .FirstOrDefault(x => x.Email == email).OccupantDetailsId;
 
-        public bool IsExistingUser(string email)
+        public bool IsExistingOccupant(string email)
         {
-            User user = this._dbContext.Users
+            OccupantDetail occupant = this._dbContext.OccupantDetails
                 .FirstOrDefault(u => u.Email == email);
 
-            if (user == null)
+            if (occupant == null)
             {
                 return false;
             }
@@ -50,7 +50,7 @@
             return true;
         }
 
-        public DomainModel.Registration Register(string email, string password, out DomainModel.Settings settings)
+        public void Register(string email, string password)
         {
             if (email == null || email == String.Empty || password == String.Empty)
             {
@@ -58,35 +58,36 @@
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, msg);
             }
 
-            User user = new User()
+            OccupantDetail occupantDetails = new OccupantDetail()
             {
-                UserId = Guid.NewGuid(),
+                OccupantDetailsId = Guid.NewGuid(),
                 Email = email,
                 Password = password
             };
 
-            var registration = this._mapper
-                .Map<User, DomainModel.Registration>(user);
+            Occupant occupant = new Occupant()
+            {
+                OccupantId = Guid.NewGuid(),
+                OccupantDetailsId = occupantDetails.OccupantDetailsId,
+                PeriodStart = DateTime.Now
+            };
 
-            this._dbContext.Users.Add(user);
+            this._dbContext.OccupantDetails.Add(occupantDetails);
+            this._dbContext.Occupants.Add(occupant);
             this._dbContext.SaveChanges();
-
-            settings = this.GetNotificationSettings(1);
-
-            return registration;
         }
 
-        public void UpdateToken(DomainModel.Authorization token)
+        public void UpdateToken(DomainModel.SecurityToken token)
         {
-            var authorization = this._mapper
-                .Map<DomainModel.Authorization, DAL.Models.Authorization>(token);
+            var mappedSecurityToken = this._mapper
+                .Map<DomainModel.SecurityToken, DAL.Models.SecurityToken>(token);
 
-            this._dbContext.Authorizations.Add(authorization);
+            this._dbContext.SecurityTokens.Add(mappedSecurityToken);
 
-            foreach (var securityToken in this._dbContext.Authorizations
-                .Where(x => x.SecurityTokenId != authorization.SecurityTokenId))
+            foreach (var securityToken in this._dbContext.SecurityTokens
+                .Where(x => x.SecurityTokenId != mappedSecurityToken.SecurityTokenId))
             {
-                if (securityToken.UserId == token.UserId)
+                if (securityToken.OccupantId == token.OccupantId)
                 {
                     securityToken.IsExpired = true;
                 }

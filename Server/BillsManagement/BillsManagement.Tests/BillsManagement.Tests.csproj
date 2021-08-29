@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="UsersControllerTests\Tests.Private.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="UsersControllerTests\Tests.Private.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
@@ -32,6 +24,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BillsManagement.Core\BillsManagement.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ChargesControllerTests\" />
+    <Folder Include="UsersControllerTests\" />
   </ItemGroup>
 
 </Project>

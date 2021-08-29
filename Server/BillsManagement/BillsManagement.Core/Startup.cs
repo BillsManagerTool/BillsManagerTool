@@ -56,7 +56,7 @@
 
             // DbContext configuration
             var connectionString = Configuration["Secrets:JWT_Secret"];
-            services.AddDbContext<BillsManagementContext>(options =>
+            services.AddDbContext<BillsManager_DevContext>(options =>
                 options.UseSqlServer(Configuration["Secrets:ConnectionString"]));
 
             // Repository configurations

@@ -3,18 +3,18 @@
     using BillsManagement.DAL.Models;
     using System;
 
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<Occupant>
     {
-        DomainModel.Registration Register(string email, string password, out DomainModel.Settings settings);
+        void Register(string email, string password);
 
-        bool IsExistingUser(string email);
+        bool IsExistingOccupant(string email);
 
-        DomainModel.User GetUserDetails(string email);
+        DomainModel.User GetOccupantDetails(string email);
 
-        DomainModel.Authorization GetAuthorizationByUserId(Guid userId);
+        //DomainModel.SecurityToken GetAuthorizationByUserId(Guid userId);
 
-        Guid GetUserInformation(string email);
+        Guid GetOccupantInformation(string email);
 
-        void UpdateToken(DomainModel.Authorization token);
+        void UpdateToken(DomainModel.SecurityToken token);
     }
 }

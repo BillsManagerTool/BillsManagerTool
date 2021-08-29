@@ -104,7 +104,7 @@ Manual of how to set up the project locally.
    dotnet user-secrets set "Secrets:JWT_Secret" "7582ae4085c54c2c85c7b770ae720c3d"
    ```
 	  ```sh
-   dotnet user-secrets set "Secrets:ConnectionString" "server=.\SQLEXPRESS;database=BillsManagement;Trusted_Connection=true;MultipleActiveResultSets=true;"
+   dotnet user-secrets set "Secrets:ConnectionString" "server=.\SQLEXPRESS;database=BillsManager_Dev;Trusted_Connection=true;MultipleActiveResultSets=true;"
    ```
 	<font size="3">***Important:*** Replace server name (SQLEXPRESS) with your own SQL Server name</font>
 

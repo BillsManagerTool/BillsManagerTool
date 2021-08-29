@@ -34,8 +34,8 @@
                 throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, GlobalConstants.UnauthorizedMessage);
             }
 
-            Guid extractedUserId = Guid.Parse(claim.Value);
-            this._userService.ValidateJwtToken(extractedUserId);
+            Guid extractedOccupantId = Guid.Parse(claim.Value);
+            this._userService.ValidateJwtToken(extractedOccupantId);
         }
     }
 }

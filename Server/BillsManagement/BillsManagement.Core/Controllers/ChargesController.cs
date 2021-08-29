@@ -4,7 +4,6 @@
     using BillsManagement.Services.ServiceContracts;
     using Microsoft.AspNetCore.Mvc;
     using System;
-    using System.Net;
 
     [Route("rest/charges")]
     [ApiController]
@@ -33,11 +32,12 @@
         {
             try
             {
-                this.Authorize();
-                GetChargesResponse response = new GetChargesResponse();
-                response = this._service.GetCharges();
-                response.StatusCode = HttpStatusCode.OK;
-                return response;
+                //this.Authorize();
+                //GetChargesResponse response = new GetChargesResponse();
+                //response = this._service.GetCharges();
+                //response.StatusCode = HttpStatusCode.OK;
+                //return response;
+                throw new NotImplementedException();
             }
             catch (Exception ex)
             {
@@ -52,10 +52,11 @@
         {
             try
             {
-                GenerateChargeResponse response = new GenerateChargeResponse();
-                response = this._service.GenerateCharge(request);
-                response.StatusCode = HttpStatusCode.OK;
-                return response;
+                //GenerateChargeResponse response = new GenerateChargeResponse();
+                //response = this._service.GenerateCharge(request);
+                //response.StatusCode = HttpStatusCode.OK;
+                //return response;
+                throw new NotImplementedException();
             }
             catch (Exception ex)
             {
