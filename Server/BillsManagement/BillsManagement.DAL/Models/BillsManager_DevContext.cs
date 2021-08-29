@@ -174,7 +174,7 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F72E44AB26");
+                    .HasName("PK__Notifica__BA44B3F725CDDA7D");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -207,7 +207,7 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EB6A9C8861");
+                    .HasName("PK__Occupant__C28410EBC5FDE6CA");
 
                 entity.Property(e => e.OccupantDetailsId).ValueGeneratedNever();
 
@@ -257,9 +257,13 @@ namespace BillsManagement.DAL.Models
 
                 entity.Property(e => e.SecurityTokenId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.CreationDate).HasColumnType("date");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ExpirationDate).HasColumnType("date");
+                entity.Property(e => e.ExpirationDate)
+                    .HasColumnType("smalldatetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.IsExpired).HasDefaultValueSql("((0))");
 

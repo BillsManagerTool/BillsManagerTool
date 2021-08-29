@@ -2,13 +2,14 @@
 {
     using AutoMapper;
     using BillsManagement.DAL.Models;
+    using BillsManagement.DomainModel;
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Repository.RepositoryContracts;
     using System;
     using System.Linq;
     using System.Net;
 
-    public class UserRepository : BaseRepository<Occupant>, IUserRepository
+    public class UserRepository : BaseRepository<DAL.Models.Occupant>, IUserRepository
     {
         public UserRepository(BillsManager_DevContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
@@ -16,21 +17,30 @@
 
         }
 
-        public DomainModel.User GetOccupantDetails(string email)
+        public DomainModel.OccupantDetails GetOccupantDetails(string email)
         {
-            var occupant = this._dbContext.OccupantDetails
-                .FirstOrDefault(x => x.Email == email);
+            var queryDetails = from OccupantDetail od in this._dbContext.OccupantDetails
+                               where od.Email == email
+                               select new OccupantDetails()
+                               {
+                                   OccupantDetailsId = od.OccupantDetailsId,
+                                   OccupantId = od.Occupants.Where(x => x.OccupantDetailsId == od.OccupantDetailsId).FirstOrDefault().OccupantId,
+                                   FirstName = od.FirstName,
+                                   LastName = od.LastName,
+                                   Email = od.Email,
+                                   MobileNumber = od.MobileNumber,
+                                   Password = od.Password
+                               };
 
-            if (occupant == null)
+            var occupantDetails = queryDetails.FirstOrDefault();
+
+            if (occupantDetails == null)
             {
                 string msg = "Can't read user details.";
                 throw new HttpStatusCodeException(HttpStatusCode.NotFound, msg);
             }
 
-            var mappedOccupant = this._mapper
-                .Map<OccupantDetail, DomainModel.User>(occupant);
-
-            return mappedOccupant;
+            return occupantDetails;
         }
 
         public Guid GetOccupantInformation(string email)
@@ -65,7 +75,7 @@
                 Password = password
             };
 
-            Occupant occupant = new Occupant()
+            DAL.Models.Occupant occupant = new DAL.Models.Occupant()
             {
                 OccupantId = Guid.NewGuid(),
                 OccupantDetailsId = occupantDetails.OccupantDetailsId,

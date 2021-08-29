@@ -34,14 +34,14 @@
             }
         }
 
-        private string GenerateJwtToken(DomainModel.User occupant)
+        private string GenerateJwtToken(DomainModel.OccupantDetails occupantDetails)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("UserId", occupant.OccupantId.ToString()),
-                    new Claim("Email", occupant.Email),
+                    new Claim("UserId", occupantDetails.OccupantId.ToString()),
+                    new Claim("Email", occupantDetails.Email),
                     new Claim("Secret", Secret),
                     new Claim("GenerateTime", this.GenerateTime.ToString()),
                     new Claim("Expires", this.Expires.ToString())
@@ -89,9 +89,9 @@
             return securityToken.Token;
         }
 
-        private string RefreshToken(DomainModel.SecurityToken securityToken, DomainModel.User occupant)
+        private string RefreshToken(DomainModel.SecurityToken securityToken, DomainModel.OccupantDetails occupantDetails)
         {
-            string refreshedSecurityToken = this.GenerateJwtToken(occupant);
+            string refreshedSecurityToken = this.GenerateJwtToken(occupantDetails);
             securityToken.Token = refreshedSecurityToken;
             this._authorizationRepository.UpdateToken(securityToken);
 

@@ -9,7 +9,7 @@
 
         bool IsExistingOccupant(string email);
 
-        DomainModel.User GetOccupantDetails(string email);
+        DomainModel.OccupantDetails GetOccupantDetails(string email);
 
         //DomainModel.SecurityToken GetAuthorizationByUserId(Guid userId);
 

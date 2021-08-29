@@ -25,17 +25,17 @@
 
         public LoginResponse Login(LoginRequest request)
         {
-            DomainModel.User occupant = this._userRepository
+            DomainModel.OccupantDetails occupantDetails = this._userRepository
                 .GetOccupantDetails(request.Email);
 
-            PasswordCipher.Decrypt(occupant.Password, request.Password);
+            PasswordCipher.Decrypt(occupantDetails.Password, request.Password);
 
             DomainModel.SecurityToken token = this._userRepository
-                .GetSecurityTokenByOccupantId(occupant.OccupantId);
+                .GetSecurityTokenByOccupantId(occupantDetails.OccupantId);
 
             DomainModel.TokenValidator tokenValidator = new DomainModel.TokenValidator();
             tokenValidator.SecurityToken = token;
-            tokenValidator.Occupant = occupant;
+            tokenValidator.Occupant = occupantDetails;
 
             var securityToken = this.GetValidToken(tokenValidator);
 

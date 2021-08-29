@@ -28,34 +28,16 @@
 
             #region Authentication Translators
 
-            //CreateMap<Occupant, DomainModel.Registration>()
-            //    .ForMember(destination => destination.FirstName, options => options.MapFrom(source => source.FirstName))
-            //    .ForMember(destination => destination.MiddleName, options => options.MapFrom(source => source.MiddleName))
-            //    .ForMember(destination => destination.LastName, options => options.MapFrom(source => source.LastName))
-            //    .ForMember(destination => destination.Address, options => options.MapFrom(source => source.Address))
-            //    .ForMember(destination => destination.Email, options => options.MapFrom(source => source.Email))
-            //    .ForMember(destination => destination.Phone, options => options.MapFrom(source => source.Phone));
-
-            //CreateMap<Occupant, DomainModel.User>()
-            //    .ForMember(destination => destination.OccupantId, options => options.MapFrom(source => source.OccupantId))
-            //    .ForMember(destination => destination.FirstName, options => options.MapFrom(source => source.FirstName))
-            //    .ForMember(destination => destination.MiddleName, options => options.MapFrom(source => source.MiddleName))
-            //    .ForMember(destination => destination.LastName, options => options.MapFrom(source => source.LastName))
-            //    .ForMember(destination => destination.Email, options => options.MapFrom(source => source.Email))
-            //    .ForMember(destination => destination.Phone, options => options.MapFrom(source => source.Phone))
-            //    .ForMember(destination => destination.Address, options => options.MapFrom(source => source.Address))
-            //    .ForMember(destination => destination.IsAdmin, options => options.MapFrom(source => source.IsAdmin))
-            //    .ForMember(destination => destination.Password, options => options.MapFrom(source => source.Password));
-
-            //CreateMap<OccupantDetail, DomainModel.RegisterResponse>()
-            //    .ForMember(destination => destination, options => options.MapFrom(source => new OccupantDetail
-            //    {
-            //        FirstName = source.FirstName,
-            //        LastName = source.LastName,
-            //        Email = source.Email,
-            //        MobileNumber = source.MobileNumber
-            //        // Have more props
-            //    }));
+            CreateMap<Occupant, DomainModel.Occupant>()
+                .ForMember(destination => destination.OccupantId, options => options.MapFrom(source => source.OccupantId))
+                .ForMember(destination => destination.OccupantDetails, options => options.MapFrom(source => new OccupantDetail
+                {
+                    FirstName = source.OccupantDetails.FirstName,
+                    LastName = source.OccupantDetails.LastName,
+                    MobileNumber = source.OccupantDetails.MobileNumber,
+                    Email = source.OccupantDetails.Email,
+                    Password = source.OccupantDetails.Password
+                }));
 
             #endregion
 

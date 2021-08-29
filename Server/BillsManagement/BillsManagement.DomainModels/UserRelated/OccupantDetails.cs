@@ -2,11 +2,11 @@
 
 namespace BillsManagement.DomainModel
 {
-    public class User
+    public class OccupantDetails
     {
-        public Guid OccupantId { get; set; }
-
         public Guid OccupantDetailsId { get; set; }
+
+        public Guid OccupantId { get; set; }
 
         public string FirstName { get; set; }
 
