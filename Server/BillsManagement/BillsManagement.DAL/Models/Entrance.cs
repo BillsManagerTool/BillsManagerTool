@@ -12,8 +12,8 @@ namespace BillsManagement.DAL.Models
             Apartments = new HashSet<Apartment>();
         }
 
-        public Guid EntranceId { get; set; }
-        public Guid BuildingId { get; set; }
+        public int EntranceId { get; set; }
+        public int BuildingId { get; set; }
         public string EntranceNumber { get; set; }
 
         public virtual Building Building { get; set; }

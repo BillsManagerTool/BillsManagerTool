@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DomainModel
 {
     public class OccupantDetails
     {
-        public Guid OccupantDetailsId { get; set; }
+        public int OccupantDetailsId { get; set; }
 
-        public Guid OccupantId { get; set; }
+        public int OccupantId { get; set; }
 
         public string FirstName { get; set; }
 

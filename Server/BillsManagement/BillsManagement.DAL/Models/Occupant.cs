@@ -14,8 +14,8 @@ namespace BillsManagement.DAL.Models
             SecurityTokens = new HashSet<SecurityToken>();
         }
 
-        public Guid OccupantId { get; set; }
-        public Guid OccupantDetailsId { get; set; }
+        public int OccupantId { get; set; }
+        public int OccupantDetailsId { get; set; }
         public DateTime PeriodStart { get; set; }
         public DateTime? LeaveDate { get; set; }
 

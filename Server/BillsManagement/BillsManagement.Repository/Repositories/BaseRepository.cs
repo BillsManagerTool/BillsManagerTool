@@ -3,7 +3,6 @@
     using AutoMapper;
     using BillsManagement.DAL.Models;
     using BillsManagement.Repository.RepositoryContracts;
-    using System;
     using System.Linq;
 
     public class BaseRepository<T> : IBaseRepository<T> where T : class
@@ -17,7 +16,7 @@
             this._mapper = mapper;
         }
 
-        public bool CheckIfOccupantExistsById(Guid occupantId)
+        public bool CheckIfOccupantExistsById(int occupantId)
         {
             bool isExisting = false;
 
@@ -47,7 +46,7 @@
             return settings;
         }
 
-        public DomainModel.SecurityToken GetSecurityTokenByOccupantId(Guid occupantId)
+        public DomainModel.SecurityToken GetSecurityTokenByOccupantId(int occupantId)
         {
             SecurityToken token = this._dbContext.SecurityTokens
                 .FirstOrDefault(x => x.IsExpired == false & x.OccupantId == occupantId);

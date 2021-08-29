@@ -4,7 +4,7 @@
 
     public class SecurityToken
     {
-        public Guid OccupantId { get; set; }
+        public int OccupantId { get; set; }
 
         public string Token { get; set; }
 

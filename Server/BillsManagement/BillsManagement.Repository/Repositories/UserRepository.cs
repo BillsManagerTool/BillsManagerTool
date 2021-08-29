@@ -43,7 +43,7 @@
             return occupantDetails;
         }
 
-        public Guid GetOccupantInformation(string email)
+        public int GetOccupantInformation(string email)
             => this._dbContext.OccupantDetails
                 .FirstOrDefault(x => x.Email == email).OccupantDetailsId;
 
@@ -68,21 +68,16 @@
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, msg);
             }
 
-            OccupantDetail occupantDetails = new OccupantDetail()
-            {
-                OccupantDetailsId = Guid.NewGuid(),
-                Email = email,
-                Password = password
-            };
-
             DAL.Models.Occupant occupant = new DAL.Models.Occupant()
             {
-                OccupantId = Guid.NewGuid(),
-                OccupantDetailsId = occupantDetails.OccupantDetailsId,
+                OccupantDetails = new OccupantDetail()
+                {
+                    Email = email,
+                    Password = password
+                },
                 PeriodStart = DateTime.Now
             };
 
-            this._dbContext.OccupantDetails.Add(occupantDetails);
             this._dbContext.Occupants.Add(occupant);
             this._dbContext.SaveChanges();
         }

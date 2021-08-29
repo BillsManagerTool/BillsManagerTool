@@ -1,7 +1,6 @@
 ﻿namespace BillsManagement.Repository.RepositoryContracts
 {
     using BillsManagement.DAL.Models;
-    using System;
 
     public interface IUserRepository : IBaseRepository<Occupant>
     {
@@ -13,7 +12,7 @@
 
         //DomainModel.SecurityToken GetAuthorizationByUserId(Guid userId);
 
-        Guid GetOccupantInformation(string email);
+        int GetOccupantInformation(string email);
 
         void UpdateToken(DomainModel.SecurityToken token);
     }

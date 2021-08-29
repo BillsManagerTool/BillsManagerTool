@@ -1,7 +1,6 @@
 ﻿namespace BillsManagement.Services.ServiceContracts
 {
     using BillsManagement.DomainModel;
-    using System;
 
     public interface IUserService
     {
@@ -9,6 +8,6 @@
 
         DomainModel.LoginResponse Login(LoginRequest request);
 
-        void ValidateJwtToken(Guid occupantId);
+        void ValidateJwtToken(int occupantId);
     }
 }

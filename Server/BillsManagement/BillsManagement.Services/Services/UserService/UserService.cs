@@ -59,7 +59,7 @@
             return response;
         }
 
-        public void ValidateJwtToken(Guid occupantId)
+        public void ValidateJwtToken(int occupantId)
         {
             DomainModel.SecurityToken authorization = this._userRepository.GetSecurityTokenByOccupantId(occupantId);
 

@@ -12,7 +12,7 @@ namespace BillsManagement.DAL.Models
             Occupants = new HashSet<Occupant>();
         }
 
-        public Guid OccupantDetailsId { get; set; }
+        public int OccupantDetailsId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

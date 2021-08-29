@@ -48,8 +48,6 @@ namespace BillsManagement.DAL.Models
             {
                 entity.ToTable("Apartment");
 
-                entity.Property(e => e.ApartmentId).ValueGeneratedNever();
-
                 entity.Property(e => e.Number)
                     .IsRequired()
                     .HasMaxLength(16);
@@ -71,8 +69,6 @@ namespace BillsManagement.DAL.Models
             {
                 entity.ToTable("Building");
 
-                entity.Property(e => e.BuildingId).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(64);
@@ -87,8 +83,6 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<Charge>(entity =>
             {
                 entity.ToTable("Charge");
-
-                entity.Property(e => e.ChargeId).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("date");
 
@@ -112,8 +106,6 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<CostCenter>(entity =>
             {
                 entity.ToTable("CostCenter");
-
-                entity.Property(e => e.CostCenterId).ValueGeneratedNever();
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -158,8 +150,6 @@ namespace BillsManagement.DAL.Models
             {
                 entity.ToTable("Entrance");
 
-                entity.Property(e => e.EntranceId).ValueGeneratedNever();
-
                 entity.Property(e => e.EntranceNumber)
                     .IsRequired()
                     .HasMaxLength(16);
@@ -174,7 +164,7 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F725CDDA7D");
+                    .HasName("PK__Notifica__BA44B3F792592F93");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -191,8 +181,6 @@ namespace BillsManagement.DAL.Models
             {
                 entity.ToTable("Occupant");
 
-                entity.Property(e => e.OccupantId).ValueGeneratedNever();
-
                 entity.Property(e => e.LeaveDate).HasColumnType("date");
 
                 entity.Property(e => e.PeriodStart).HasColumnType("date");
@@ -207,9 +195,7 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EBC5FDE6CA");
-
-                entity.Property(e => e.OccupantDetailsId).ValueGeneratedNever();
+                    .HasName("PK__Occupant__C28410EB0ED3752B");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -235,8 +221,6 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<OccupantToApartment>(entity =>
             {
                 entity.ToTable("OccupantToApartment");
-
-                entity.Property(e => e.OccupantToApartmentId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Apartment)
                     .WithMany(p => p.OccupantToApartments)

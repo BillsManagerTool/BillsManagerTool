@@ -8,7 +8,7 @@ namespace BillsManagement.DAL.Models
     public partial class SecurityToken
     {
         public Guid SecurityTokenId { get; set; }
-        public Guid OccupantId { get; set; }
+        public int OccupantId { get; set; }
         public string Token { get; set; }
         public bool? IsExpired { get; set; }
         public DateTime? ExpirationDate { get; set; }
