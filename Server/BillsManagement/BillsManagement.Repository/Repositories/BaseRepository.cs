@@ -20,20 +20,16 @@
         {
             bool isExisting = false;
 
-            Occupant user = this._dbContext.Occupants
+            Occupant occupant = this._dbContext.Occupants
                 .FirstOrDefault(x => x.OccupantId == occupantId);
 
-            if (user != null)
+            if (occupant != null)
             {
                 isExisting = true;
             }
 
             return isExisting;
         }
-
-        //public CashAccount GetCashAccountByUserId(Guid? userId)
-        //    => this._dbContext.CashAccounts
-        //    .FirstOrDefault(x => x.UserId == userId);
 
         public DomainModel.Settings GetNotificationSettings(int key)
         {

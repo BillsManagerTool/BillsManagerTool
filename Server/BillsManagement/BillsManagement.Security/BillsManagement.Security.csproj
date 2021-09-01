@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BillsManagement.DAL\BillsManagement.DAL.csproj" />
+    <ProjectReference Include="..\BillsManagement.Exception\BillsManagement.Exception.csproj" />
     <ProjectReference Include="..\BillsManagement.Utility\BillsManagement.Utility.csproj" />
   </ItemGroup>
 

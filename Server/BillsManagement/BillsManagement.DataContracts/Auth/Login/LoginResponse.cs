@@ -1,10 +1,10 @@
-﻿namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DataContracts.Auth
 {
     using System.Text.Json.Serialization;
 
     public class LoginResponse : BaseResponse
     {
-        [JsonPropertyName("Token")]
+        [JsonPropertyName("JWT")]
         public string Token { get; set; }
     }
 }

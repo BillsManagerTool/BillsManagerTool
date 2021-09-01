@@ -6,8 +6,6 @@
 
         public DomainModel.Settings GetNotificationSettings(int key);
 
-        //public CashAccount GetCashAccountByUserId(Guid? userId);
-
         public bool CheckIfOccupantExistsById(int occupantId);
     }
 }

@@ -2,7 +2,7 @@
 {
     using BillsManagement.DAL.Models;
 
-    public interface IUserRepository : IBaseRepository<Occupant>
+    public interface IAuthRepository : IBaseRepository<Occupant>
     {
         void Register(string email, string password);
 
@@ -10,10 +10,8 @@
 
         DomainModel.OccupantDetails GetOccupantDetails(string email);
 
-        //DomainModel.SecurityToken GetAuthorizationByUserId(Guid userId);
-
         int GetOccupantInformation(string email);
 
-        void UpdateToken(DomainModel.SecurityToken token);
+        void UpdateToken(DomainModel.SecurityToken token); // Arg token param
     }
 }

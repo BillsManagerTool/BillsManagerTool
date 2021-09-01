@@ -1,18 +1,18 @@
 ﻿namespace BillsManagement.Core.Controllers
 {
-    using BillsManagement.DomainModel;
+    using BillsManagement.DataContracts.Auth;
     using BillsManagement.Services.ServiceContracts;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Net;
 
-    [Route("rest/user")]
     [ApiController]
-    public class UsersController : BaseController
+    [Route("api/auth")]
+    public class AuthController : BaseController
     {
-        private readonly IUserService _service;
+        private readonly IAuthService _service;
 
-        public UsersController(IUserService service)
+        public AuthController(IAuthService service)
             : base(service)
         {
             this._service = service;
@@ -20,8 +20,8 @@
 
         [HttpPost]
         [Route("register")]
-        // POST: /rest/user/register
-        public ActionResult<DomainModel.RegisterResponse> Register(RegisterRequest request)
+        // POST: /api/auth/register
+        public ActionResult<RegisterResponse> Register(RegisterRequest request)
         {
             try
             {
@@ -38,8 +38,8 @@
 
         [HttpPost]
         [Route("login")]
-        // POST: /rest/user/login
-        public ActionResult<DomainModel.LoginResponse> Login(LoginRequest request)
+        // POST: /api/auth/login
+        public ActionResult<LoginResponse> Login(LoginRequest request)
         {
             try
             {

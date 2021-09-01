@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DataContracts
 {
     using System.Net;
     using System.Text.Json.Serialization;

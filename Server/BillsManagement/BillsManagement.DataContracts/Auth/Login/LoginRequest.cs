@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DataContracts.Auth
 {
     public class LoginRequest
     {

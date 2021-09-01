@@ -1,13 +1,18 @@
 ﻿namespace BillsManagement.Security
 {
+    using BillsManagement.Exception.CustomExceptions;
+    using BillsManagement.Utility;
     using System;
     using System.IO;
+    using System.Net;
     using System.Security.Cryptography;
     using System.Text;
 
     public static class PasswordCipher
     {
         private const string Secret = "3319FBA22A224DC8833A83B769037D53";
+
+        // Save password secret for each user and for decrypt use the saved secret (Different for each user)
 
         public static string Encrypt(string password)
         {
@@ -59,7 +64,7 @@
 
                             if (decryptedPassword != requestedPassword)
                             {
-                                throw new Exception("Incorrect password.");
+                                throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, GlobalConstants.UnauthorizedMessage);
                             }
                         }
                     }

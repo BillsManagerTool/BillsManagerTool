@@ -1,6 +1,8 @@
 ﻿namespace BillsManagement.Repository.RepositoryContracts
 {
-    public interface IAuthorizationRepository : IBaseRepository<DomainModel.Occupant>
+    using BillsManagement.DAL.Models;
+
+    public interface IAuthorizationRepository : IBaseRepository<Occupant>
     {
         void SaveSecurityToken(DomainModel.SecurityToken securityToken);
 

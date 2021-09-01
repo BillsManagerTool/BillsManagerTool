@@ -2,16 +2,15 @@
 {
     using AutoMapper;
     using BillsManagement.DAL.Models;
-    using BillsManagement.DomainModel;
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Repository.RepositoryContracts;
     using System;
     using System.Linq;
     using System.Net;
 
-    public class UserRepository : BaseRepository<DAL.Models.Occupant>, IUserRepository
+    public class AuthRepository : BaseRepository<Occupant>, IAuthRepository
     {
-        public UserRepository(BillsManager_DevContext dbContext, IMapper mapper)
+        public AuthRepository(BillsManager_DevContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
 
@@ -21,10 +20,11 @@
         {
             var queryDetails = from OccupantDetail od in this._dbContext.OccupantDetails
                                where od.Email == email
-                               select new OccupantDetails()
+                               select new DomainModel.OccupantDetails()
                                {
                                    OccupantDetailsId = od.OccupantDetailsId,
-                                   OccupantId = od.Occupants.Where(x => x.OccupantDetailsId == od.OccupantDetailsId).FirstOrDefault().OccupantId,
+                                   OccupantId = od.Occupants.Where(x => x.OccupantDetailsId == od.OccupantDetailsId)
+                                                            .FirstOrDefault().OccupantId,
                                    FirstName = od.FirstName,
                                    LastName = od.LastName,
                                    Email = od.Email,
@@ -60,9 +60,11 @@
             return true;
         }
 
-        public void Register(string email, string password)
+        public void Register(string email, string password) // Use args model param in repos
         {
-            if (email == null || email == String.Empty || password == String.Empty)
+            if (email == null
+                || email == String.Empty
+                || password == String.Empty)
             {
                 string msg = "Invalid request.";
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, msg);

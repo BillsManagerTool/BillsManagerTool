@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Services.Services.UserService
+﻿namespace BillsManagement.Services.Services.AuthService
 {
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Services.ServiceContracts;
@@ -10,7 +10,7 @@
     using System.Security.Claims;
     using System.Text;
 
-    public partial class UserService : IUserService
+    public partial class AuthService : IAuthService
     {
         private string Issuer { get; set; } = Guid.NewGuid().ToString();
         private DateTime Expires { get; set; } = DateTime.Now.AddMinutes(1);

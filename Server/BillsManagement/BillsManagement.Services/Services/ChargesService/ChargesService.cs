@@ -11,10 +11,5 @@
         {
             this._chargesRepository = chargesRepository;
         }
-
-        public object RegisterPayment()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

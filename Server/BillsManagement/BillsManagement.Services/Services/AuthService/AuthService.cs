@@ -1,5 +1,6 @@
-﻿namespace BillsManagement.Services.Services.UserService
+﻿namespace BillsManagement.Services.Services.AuthService
 {
+    using BillsManagement.DataContracts.Auth;
     using BillsManagement.DomainModel;
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Repository.RepositoryContracts;
@@ -10,13 +11,13 @@
     using System;
     using System.Net;
 
-    public partial class UserService : IUserService
+    public partial class AuthService : IAuthService
     {
         private readonly Secrets _secrets;
-        private readonly IUserRepository _userRepository;
+        private readonly IAuthRepository _userRepository;
         private readonly IAuthorizationRepository _authorizationRepository;
 
-        public UserService(IOptions<Secrets> secrets, IUserRepository userRepository, IAuthorizationRepository authorizationRepository)
+        public AuthService(IOptions<Secrets> secrets, IAuthRepository userRepository, IAuthorizationRepository authorizationRepository)
         {
             this._secrets = secrets.Value ?? throw new ArgumentException(nameof(secrets));
             this._userRepository = userRepository;
@@ -39,7 +40,7 @@
 
             var securityToken = this.GetValidToken(tokenValidator);
 
-            DomainModel.LoginResponse response = new DomainModel.LoginResponse();
+            LoginResponse response = new LoginResponse();
             response.Token = securityToken;
 
             return response;
@@ -61,7 +62,7 @@
 
         public void ValidateJwtToken(int occupantId)
         {
-            DomainModel.SecurityToken authorization = this._userRepository.GetSecurityTokenByOccupantId(occupantId);
+            SecurityToken authorization = this._userRepository.GetSecurityTokenByOccupantId(occupantId);
 
             if (authorization.ExpirationDate <= DateTime.Now)
             {

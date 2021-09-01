@@ -1,6 +1,5 @@
 ﻿namespace BillsManagement.Core.Controllers
 {
-    using BillsManagement.DomainModel.Charges;
     using BillsManagement.Services.ServiceContracts;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -11,7 +10,7 @@
     {
         private readonly IChargesService _service;
 
-        public ChargesController(IChargesService service, IUserService userService)
+        public ChargesController(IChargesService service, IAuthService userService)
             : base(userService)
         {
             this._service = service;
@@ -28,7 +27,7 @@
         [HttpGet]
         [Route("getCharges")]
         // GET: /rest/charges/getCharges
-        public ActionResult<GetChargesResponse> GetCharges()
+        public ActionResult<Object> GetCharges()
         {
             try
             {
@@ -48,7 +47,7 @@
         [HttpPost]
         [Route("generateCharge")]
         // POST: /rest/charges/generateCharge
-        public ActionResult<GenerateChargeResponse> GenerateCharge(GenerateChargeRequest request)
+        public ActionResult<Object> GenerateCharge(Object request)
         {
             try
             {

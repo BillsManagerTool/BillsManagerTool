@@ -8,8 +8,8 @@
     using BillsManagement.Repository.RepositoryContracts;
     using BillsManagement.Security;
     using BillsManagement.Services.ServiceContracts;
+    using BillsManagement.Services.Services.AuthService;
     using BillsManagement.Services.Services.ChargesService;
-    using BillsManagement.Services.Services.UserService;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -60,12 +60,12 @@
                 options.UseSqlServer(Configuration["Secrets:ConnectionString"]));
 
             // Repository configurations
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IChargesRepository, ChargesRepository>();
             services.AddScoped<IAuthorizationRepository, AuthorizationRepository>();
 
             // Service configurations
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IChargesService, ChargesService>();
 
             // Cors

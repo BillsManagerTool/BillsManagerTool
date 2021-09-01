@@ -5,8 +5,6 @@
 
     public interface IChargesRepository : IBaseRepository<Charge>
     {
-        //DomainModel.Charge GenerateCharge(DomainModel.Charge charge);
-
         List<DomainModel.Charge> GetCharges();
     }
 }

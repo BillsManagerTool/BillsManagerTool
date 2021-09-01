@@ -5,7 +5,7 @@
     using BillsManagement.Repository.RepositoryContracts;
     using System.Linq;
 
-    public class AuthorizationRepository : BaseRepository<DomainModel.Occupant>, IAuthorizationRepository
+    public class AuthorizationRepository : BaseRepository<Occupant>, IAuthorizationRepository
     {
         public AuthorizationRepository(BillsManager_DevContext dbContext, IMapper mapper)
             : base(dbContext, mapper)

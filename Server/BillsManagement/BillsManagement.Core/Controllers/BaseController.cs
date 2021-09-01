@@ -11,11 +11,11 @@
 
     public class BaseController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public BaseController(IUserService userService)
+        public BaseController(IAuthService authService)
         {
-            this._userService = userService;
+            this._authService = authService;
         }
 
         protected Guid GetUserId()
@@ -35,7 +35,7 @@
             }
 
             int extractedOccupantId = int.Parse(claim.Value);
-            this._userService.ValidateJwtToken(extractedOccupantId);
+            this._authService.ValidateJwtToken(extractedOccupantId);
         }
     }
 }
