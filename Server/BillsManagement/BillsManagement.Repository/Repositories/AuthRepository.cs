@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using BillsManagement.DAL.Models;
+    using BillsManagement.DataContracts.Args;
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Repository.RepositoryContracts;
     using System;
@@ -60,22 +61,20 @@
             return true;
         }
 
-        public void Register(string email, string password) // Use args model param in repos
+        public void Register(RegisterArgument arg) // Use args model param in repos
         {
-            if (email == null
-                || email == String.Empty
-                || password == String.Empty)
+            if (arg == null)
             {
                 string msg = "Invalid request.";
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, msg);
             }
 
-            DAL.Models.Occupant occupant = new DAL.Models.Occupant()
+            Occupant occupant = new DAL.Models.Occupant()
             {
                 OccupantDetails = new OccupantDetail()
                 {
-                    Email = email,
-                    Password = password
+                    Email = arg.Email,
+                    Password = arg.Password
                 },
                 PeriodStart = DateTime.Now
             };

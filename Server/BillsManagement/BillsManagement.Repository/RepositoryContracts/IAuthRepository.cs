@@ -1,10 +1,11 @@
 ﻿namespace BillsManagement.Repository.RepositoryContracts
 {
     using BillsManagement.DAL.Models;
+    using BillsManagement.DataContracts.Args;
 
     public interface IAuthRepository : IBaseRepository<Occupant>
     {
-        void Register(string email, string password);
+        void Register(RegisterArgument args);
 
         bool IsExistingOccupant(string email);
 

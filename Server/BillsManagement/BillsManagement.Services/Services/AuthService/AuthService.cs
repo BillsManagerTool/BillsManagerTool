@@ -1,5 +1,6 @@
 ﻿namespace BillsManagement.Services.Services.AuthService
 {
+    using BillsManagement.DataContracts.Args;
     using BillsManagement.DataContracts.Auth;
     using BillsManagement.DomainModel;
     using BillsManagement.Exception.CustomExceptions;
@@ -51,7 +52,13 @@
             this.ValidateOccupantExistence(request.Email);
             var encryptedPassword = PasswordCipher.Encrypt(request.Password);
 
-            this._userRepository.Register(request.Email, encryptedPassword);
+            var registerArg = new RegisterArgument()
+            {
+                Email = request.Email,
+                Password = encryptedPassword
+            };
+
+            this._userRepository.Register(registerArg);
 
             var settings = this._userRepository.GetNotificationSettings(1);
             this.SendRegisterNotificationEmail(request.Email, settings);

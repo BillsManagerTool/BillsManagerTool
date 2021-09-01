@@ -30,9 +30,9 @@
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -48,9 +48,9 @@
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

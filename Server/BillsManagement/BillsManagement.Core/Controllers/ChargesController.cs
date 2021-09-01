@@ -38,9 +38,9 @@
                 //return response;
                 throw new NotImplementedException();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -57,9 +57,9 @@
                 //return response;
                 throw new NotImplementedException();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 

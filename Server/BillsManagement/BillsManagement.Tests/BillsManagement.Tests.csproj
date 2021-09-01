@@ -26,9 +26,4 @@
     <ProjectReference Include="..\BillsManagement.Core\BillsManagement.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ChargesControllerTests\" />
-    <Folder Include="UsersControllerTests\" />
-  </ItemGroup>
-
 </Project>
