@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BillsManagement.Core\BillsManagement.Core.csproj" />
+    <ProjectReference Include="..\BillsManagement.Services\BillsManagement.Services.csproj" />
   </ItemGroup>
 
 </Project>
