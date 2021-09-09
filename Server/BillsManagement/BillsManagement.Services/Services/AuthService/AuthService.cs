@@ -25,6 +25,8 @@
             this._authorizationRepository = authorizationRepository;
         }
 
+        public AuthService() { }
+
         public LoginResponse Login(LoginRequest request)
         {
             DomainModel.OccupantDetails occupantDetails = this._userRepository

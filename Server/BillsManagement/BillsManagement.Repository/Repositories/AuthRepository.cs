@@ -19,21 +19,26 @@
 
         public DomainModel.OccupantDetails GetOccupantDetails(string email)
         {
-            var queryDetails = from OccupantDetail od in this._dbContext.OccupantDetails
-                               where od.Email == email
-                               select new DomainModel.OccupantDetails()
-                               {
-                                   OccupantDetailsId = od.OccupantDetailsId,
-                                   OccupantId = od.Occupants.Where(x => x.OccupantDetailsId == od.OccupantDetailsId)
-                                                            .FirstOrDefault().OccupantId,
-                                   FirstName = od.FirstName,
-                                   LastName = od.LastName,
-                                   Email = od.Email,
-                                   MobileNumber = od.MobileNumber,
-                                   Password = od.Password
-                               };
+            DomainModel.OccupantDetails occupantDetails = new DomainModel.OccupantDetails();
 
-            var occupantDetails = queryDetails.FirstOrDefault();
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var query = from OccupantDetail od in context.OccupantDetails
+                            where od.Email == email
+                            select new DomainModel.OccupantDetails()
+                            {
+                                OccupantDetailsId = od.OccupantDetailsId,
+                                OccupantId = od.Occupants.Where(x => x.OccupantDetailsId == od.OccupantDetailsId)
+                                                         .FirstOrDefault().OccupantId,
+                                FirstName = od.FirstName,
+                                LastName = od.LastName,
+                                Email = od.Email,
+                                MobileNumber = od.MobileNumber,
+                                Password = od.Password
+                            };
+
+                occupantDetails = query.FirstOrDefault();
+            }
 
             if (occupantDetails == null)
             {
@@ -50,8 +55,13 @@
 
         public bool IsExistingOccupant(string email)
         {
-            OccupantDetail occupant = this._dbContext.OccupantDetails
-                .FirstOrDefault(u => u.Email == email);
+            OccupantDetail occupant = new OccupantDetail();
+
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                occupant = context.OccupantDetails
+                    .FirstOrDefault(o => o.Email == email);
+            }
 
             if (occupant == null)
             {
@@ -69,7 +79,7 @@
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, msg);
             }
 
-            Occupant occupant = new DAL.Models.Occupant()
+            Occupant occupant = new Occupant()
             {
                 OccupantDetails = new OccupantDetail()
                 {
@@ -79,27 +89,33 @@
                 PeriodStart = DateTime.Now
             };
 
-            this._dbContext.Occupants.Add(occupant);
-            this._dbContext.SaveChanges();
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                context.Occupants.Add(occupant);
+                context.SaveChanges();
+            }
         }
 
         public void UpdateToken(DomainModel.SecurityToken token)
         {
             var mappedSecurityToken = this._mapper
-                .Map<DomainModel.SecurityToken, DAL.Models.SecurityToken>(token);
+                .Map<DomainModel.SecurityToken, SecurityToken>(token);
 
-            this._dbContext.SecurityTokens.Add(mappedSecurityToken);
-
-            foreach (var securityToken in this._dbContext.SecurityTokens
-                .Where(x => x.SecurityTokenId != mappedSecurityToken.SecurityTokenId))
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
             {
-                if (securityToken.OccupantId == token.OccupantId)
-                {
-                    securityToken.IsExpired = true;
-                }
-            };
+                context.SecurityTokens.Add(mappedSecurityToken);
 
-            this._dbContext.SaveChanges();
+                foreach (var securityToken in context.SecurityTokens
+                    .Where(x => x.SecurityTokenId != mappedSecurityToken.SecurityTokenId))
+                {
+                    if (securityToken.OccupantId == token.OccupantId)
+                    {
+                        securityToken.IsExpired = true;
+                    }
+                };
+
+                context.SaveChanges();
+            }
         }
     }
 }
