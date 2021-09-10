@@ -44,8 +44,9 @@
                     new Claim("Email", occupantDetails.Email),
                     new Claim("Secret", Secret),
                     new Claim("GenerateTime", this.GenerateTime.ToString()),
-                    new Claim("Expires", this.Expires.ToString())
-                }),
+                    new Claim("Expires", this.Expires.ToString()),
+                    new Claim("IsHousekeeper", occupantDetails.IsHousekeeper.ToString())
+            }),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(
                      Encoding.UTF8

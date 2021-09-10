@@ -29,14 +29,13 @@
 
         public LoginResponse Login(LoginRequest request)
         {
-            DomainModel.OccupantDetails occupantDetails = this._userRepository
-                .GetOccupantDetails(request.Email);
+            DomainModel.OccupantDetails occupantDetails = this._userRepository.GetOccupantDetails(request.Email);
 
             PasswordCipher.Decrypt(occupantDetails.Password, request.Password);
 
-            DomainModel.SecurityToken token = this._userRepository
-                .GetSecurityTokenByOccupantId(occupantDetails.OccupantId);
+            DomainModel.SecurityToken token = this._userRepository.GetSecurityTokenByOccupantId(occupantDetails.OccupantId);
 
+            // TODO: Move TokenValidator on another place as it is not DomainModel
             DomainModel.TokenValidator tokenValidator = new DomainModel.TokenValidator();
             tokenValidator.SecurityToken = token;
             tokenValidator.Occupant = occupantDetails;

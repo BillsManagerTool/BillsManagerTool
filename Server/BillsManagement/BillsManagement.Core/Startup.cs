@@ -1,6 +1,7 @@
 ﻿namespace BillsManagement.Core
 {
     using AutoMapper;
+    using BillsManagement.Core.Configuration;
     using BillsManagement.Core.CustomExceptions;
     using BillsManagement.DAL.Models;
     using BillsManagement.Repository;
@@ -11,6 +12,7 @@
     using BillsManagement.Services.Services.AuthService;
     using BillsManagement.Services.Services.ChargesService;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -99,6 +101,17 @@
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            // Policy based authorization
+            services.AddAuthorization(configure =>
+            {
+                configure.AddPolicy("Housekeeper", policyBuilder =>
+                {
+                    policyBuilder.AddRequirements(new HousekeeperRequirement(true));
+                });
+            });
+
+            services.AddSingleton<IAuthorizationHandler, HousekeeperRequirementHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

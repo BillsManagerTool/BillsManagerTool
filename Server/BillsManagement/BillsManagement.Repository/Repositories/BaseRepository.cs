@@ -20,8 +20,7 @@
         {
             bool isExisting = false;
 
-            Occupant occupant = this._dbContext.Occupants
-                .FirstOrDefault(x => x.OccupantId == occupantId);
+            Occupant occupant = this._dbContext.Occupants.FirstOrDefault(x => x.OccupantId == occupantId);
 
             if (occupant != null)
             {
@@ -33,11 +32,9 @@
 
         public DomainModel.Settings GetNotificationSettings(int key)
         {
-            var notificationSettings = this._dbContext.NotificationSettings
-                .FirstOrDefault(x => x.SettingsKey == 1);
+            var notificationSettings = this._dbContext.NotificationSettings.FirstOrDefault(x => x.SettingsKey == 1);
 
-            var settings = this._mapper
-                .Map<NotificationSetting, DomainModel.Settings>(notificationSettings);
+            var settings = this._mapper.Map<NotificationSetting, DomainModel.Settings>(notificationSettings);
 
             return settings;
         }
@@ -47,10 +44,9 @@
             SecurityToken token = this._dbContext.SecurityTokens
                 .FirstOrDefault(x => x.IsExpired == false & x.OccupantId == occupantId);
 
-            DomainModel.SecurityToken mappedToken = this._mapper
-                .Map<SecurityToken, DomainModel.SecurityToken>(token);
+            DomainModel.SecurityToken tokenModel = this._mapper.Map<SecurityToken, DomainModel.SecurityToken>(token);
 
-            return mappedToken;
+            return tokenModel;
         }
     }
 }

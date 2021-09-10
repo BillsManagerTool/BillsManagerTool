@@ -12,6 +12,8 @@
 
         public string Email { get; set; }
 
+        public bool? IsHousekeeper { get; set; }
+
         public string MobileNumber { get; set; }
 
         public string Password { get; set; }
