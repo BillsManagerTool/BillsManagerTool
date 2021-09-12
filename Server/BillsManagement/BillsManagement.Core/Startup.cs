@@ -11,6 +11,7 @@
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Services.Services.AuthService;
     using BillsManagement.Services.Services.ChargesService;
+    using BillsManagement.Utility.Security;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Builder;
@@ -66,7 +67,7 @@
             services.AddScoped<IChargesRepository, ChargesRepository>();
             services.AddScoped<IAuthorizationRepository, AuthorizationRepository>();
 
-            //services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IJwtUtils, JwtUtils>();
 
             // Service configurations
             services.AddScoped<IAuthService, AuthService>();

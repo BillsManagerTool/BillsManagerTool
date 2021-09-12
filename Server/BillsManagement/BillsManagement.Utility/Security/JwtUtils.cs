@@ -1,5 +1,7 @@
 ﻿namespace BillsManagement.Utility.Security
 {
+    using BillsManagement.Security;
+    using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.IdentityModel.Tokens.Jwt;
@@ -10,21 +12,18 @@
 
     public class JwtUtils : IJwtUtils
     {
-        private readonly int _id;
+        private readonly Secrets _secrets;
 
-        public JwtUtils(int id)
+        public JwtUtils(IOptions<Secrets> secrets)
         {
-            this._id = id;
+            this._secrets = secrets.Value;
         }
 
         public string GenerateJwtToken(DomainModel.OccupantDetails occupant)
         {
-            SecurityHelper helper = new SecurityHelper();
-            var occupantIdAsGuid = helper.ToGuid(occupant.OccupantId);
-
             // generate token that is valid for 15 minutes
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(occupantIdAsGuid.ToString());
+            var key = Encoding.ASCII.GetBytes(this._secrets.JWT_Secret.ToString());
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -45,11 +44,8 @@
             if (token == null)
                 return null;
 
-            SecurityHelper helper = new SecurityHelper();
-            var occupantIdAsGuid = helper.ToGuid(this._id);
-
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(occupantIdAsGuid.ToString());
+            var key = Encoding.ASCII.GetBytes(this._secrets.JWT_Secret.ToString());
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters

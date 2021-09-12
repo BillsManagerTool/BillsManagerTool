@@ -2,50 +2,58 @@
 {
     using BillsManagement.DataContracts.Args;
     using BillsManagement.DataContracts.Auth;
+    using BillsManagement.DomainModel;
+    using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Repository.RepositoryContracts;
     using BillsManagement.Security;
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility.Security;
     using Microsoft.Extensions.Options;
     using System;
+    using System.Net;
 
     public partial class AuthService : IAuthService
     {
         private readonly Secrets _secrets;
         private readonly IAuthRepository _authRepository;
+        private readonly IJwtUtils _jwtUtils;
 
         public AuthService(IOptions<Secrets> secrets,
-            IAuthRepository authRepository)
+            IAuthRepository authRepository,
+            IJwtUtils jwtUtils)
         {
             this._secrets = secrets.Value ?? throw new ArgumentException(nameof(secrets));
             this._authRepository = authRepository;
+            this._jwtUtils = jwtUtils;
         }
-
         public AuthService() { }
 
         public LoginResponse Authenticate(LoginRequest request, string ipAddress)
         {
-            DomainModel.OccupantDetails occupantDetails = this._authRepository.GetOccupantDetails(request.Email);
+            OccupantDetails occupantDetails = this._authRepository.GetOccupantDetails(request.Email);
+
+            if (occupantDetails == null)
+            {
+                string msg = "User is not valid.";
+                throw new HttpStatusCodeException(HttpStatusCode.NotFound, msg);
+            }
 
             // validate
             PasswordCipher.Decrypt(occupantDetails.Password, request.Password);
 
-            JwtUtils jwt = new JwtUtils(occupantDetails.OccupantId);
-
             // authentication successful so generate jwt and refresh tokens
-            var jwtToken = jwt.GenerateJwtToken(occupantDetails);
-            var refreshToken = jwt.GenerateRefreshToken(ipAddress);
+            var jwtToken = this._jwtUtils.GenerateJwtToken(occupantDetails);
+            var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
 
             this._authRepository.SaveRefreshToken(occupantDetails.OccupantDetailsId, refreshToken);
 
             // remove old refresh tokens from user
             //removeOldRefreshTokens(user);
 
-            LoginResponse response = new LoginResponse()
-            {
-                Token = jwtToken,
-                RefreshToken = refreshToken.Token
-            };
+            LoginResponse response = new LoginResponse();
+            response.Token = jwtToken;
+            response.Email = occupantDetails.Email;
+            response.RefreshToken = refreshToken.Token;
 
             return response;
         }
