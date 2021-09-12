@@ -37,7 +37,7 @@
                     MobileNumber = source.OccupantDetails.MobileNumber,
                     Email = source.OccupantDetails.Email,
                     Password = source.OccupantDetails.Password
-                }));
+                })).ReverseMap();
 
             #endregion
 

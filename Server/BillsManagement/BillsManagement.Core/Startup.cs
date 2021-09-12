@@ -136,6 +136,9 @@
 
             app.UseMiddleware<CustomExceptionMiddleware>();
 
+            // custom jwt auth middleware
+            app.UseMiddleware<JwtMiddleware>();
+
             app.UseStaticFiles();
 
             app.UseCors("CorsPolicy");

@@ -15,7 +15,7 @@
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://localhost:3777");
+                    .UseUrls("https://localhost:3777");
                 });
     }
 }

@@ -10,6 +10,7 @@
     using BillsManagement.Utility.Security;
     using Microsoft.Extensions.Options;
     using System;
+    using System.Collections.Generic;
     using System.Net;
 
     public partial class AuthService : IAuthService
@@ -76,6 +77,15 @@
 
             RegisterResponse response = new RegisterResponse();
             return response;
+        }
+
+        public Occupant GetOccupantById(int id)
+        {
+            var occupant = this._authRepository.GetOccupantById(id);
+            if (occupant == null)
+                throw new KeyNotFoundException("User not found");
+
+            return occupant;
         }
     }
 }

@@ -15,6 +15,19 @@
 
         }
 
+        public DomainModel.Occupant GetOccupantById(int id)
+        {
+            DomainModel.Occupant occupant = new DomainModel.Occupant();
+
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var occupantEntity = context.Occupants.Find(id);
+                occupant = this._mapper.Map<Occupant, DomainModel.Occupant>(occupantEntity);
+            }
+
+            return occupant;
+        }
+
         public DomainModel.OccupantDetails GetOccupantDetails(string email)
         {
             DomainModel.OccupantDetails occupantDetails = new DomainModel.OccupantDetails();
@@ -49,10 +62,6 @@
 
             return occupantDetails;
         }
-
-        public int GetOccupantInformation(string email)
-            => this._dbContext.OccupantDetails
-                .FirstOrDefault(x => x.Email == email).OccupantDetailsId;
 
         public bool IsExistingOccupant(string email) // TODO: Change name to CheckIfOccupantExistsByEmail
         {
@@ -102,6 +111,7 @@
                 var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
 
                 occupantDetailsEntity.RefreshTokens.Add(refreshTokenEntity); //??
+                context.Update(occupantDetailsEntity);
                 context.SaveChanges();
             }
         }

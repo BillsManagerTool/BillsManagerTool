@@ -2,65 +2,12 @@
 {
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Services.ServiceContracts;
-    using System;
     using System.Net;
     using System.Net.Mail;
     using System.Text;
 
     public partial class AuthService : IAuthService
     {
-        private string Issuer { get; set; } = Guid.NewGuid().ToString();
-        private DateTime Expires { get; set; } = DateTime.Now.AddMinutes(1);
-        private DateTime GenerateTime { get; set; } = DateTime.Now;
-        private string Secret
-        {
-            get
-            {
-                return this._secrets.JWT_Secret;
-            }
-            set
-            {
-                if (this._secrets.JWT_Secret != null)
-                {
-                    this._secrets.JWT_Secret = value;
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-        }
-
-        //private string GenerateJwtToken(DomainModel.OccupantDetails occupantDetails)
-        //{
-        //    var tokenDescriptor = new SecurityTokenDescriptor
-        //    {
-        //        Subject = new ClaimsIdentity(new Claim[]
-        //        {
-        //            new Claim("UserId", occupantDetails.OccupantId.ToString()),
-        //            new Claim("Email", occupantDetails.Email),
-        //            new Claim("Secret", Secret),
-        //            new Claim("GenerateTime", this.GenerateTime.ToString()),
-        //            new Claim("Expires", this.Expires.ToString()),
-        //            new Claim("IsHousekeeper", occupantDetails.IsHousekeeper.ToString())
-        //    }),
-        //        SigningCredentials = new SigningCredentials(
-        //            new SymmetricSecurityKey(
-        //             Encoding.UTF8
-        //             .GetBytes(Secret)), SecurityAlgorithms.HmacSha256Signature)
-        //    };
-
-        //    var tokenHandler = new JwtSecurityTokenHandler();
-        //    var securityToken = tokenHandler.WriteToken(new JwtSecurityToken(Issuer,
-        //        null,
-        //        tokenDescriptor.Subject.Claims,
-        //        null,
-        //        Expires,
-        //        tokenDescriptor.SigningCredentials));
-
-        //    return securityToken;
-        //}
-
         private void ValidateOccupantExistence(string email)
         {
             if (this._authRepository.IsExistingOccupant(email))

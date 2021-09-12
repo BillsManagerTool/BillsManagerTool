@@ -11,10 +11,8 @@
 
         DomainModel.OccupantDetails GetOccupantDetails(string email);
 
-        int GetOccupantInformation(string email);
+        DomainModel.Occupant GetOccupantById(int id);
 
         void SaveRefreshToken(int occupantId, DomainModel.RefreshToken refreshToken);
-
-        //void UpdateToken(DomainModel.SecurityToken token); // Arg token param
     }
 }

@@ -16,9 +16,8 @@
         {
             try
             {
-                //RegisterResponse response = new RegisterResponse();
-                //response = this._service.Register(request);
-                //response.StatusCode = HttpStatusCode.OK;
+                // Thats how we get user id after successfully validating and extracting data from jwt middleware
+                var id = HttpContext.Items["UserId"];
                 return "Occupant";
             }
             catch (Exception)
