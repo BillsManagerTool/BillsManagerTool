@@ -1,16 +1,17 @@
 ﻿namespace BillsManagement.Core.Controllers
 {
+    using BillsManagement.Utility.Constants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
 
     [ApiController]
-    [Route("api/occupants")]
+    [Route(Endpoint.BaseOccupantRoute)]
     public class OccupantsController : Controller
     {
         [HttpGet]
-        [Route("occupant")]
-        [Authorize("Housekeeper")]
+        [Route(Endpoint.GetOccupant)]
+        [Authorize(AuthenticationPolicy.Housekeeper)]
         // POST: /api/auth/register
         public ActionResult<string> GetOccupant()
         {

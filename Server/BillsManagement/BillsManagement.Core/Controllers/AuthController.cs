@@ -2,12 +2,13 @@
 {
     using BillsManagement.DataContracts.Auth;
     using BillsManagement.Services.ServiceContracts;
+    using BillsManagement.Utility.Constants;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Net;
 
     [ApiController]
-    [Route("api/auth")]
+    [Route(Endpoint.BaseAuthRoute)]
     public class AuthController : BaseController
     {
         private readonly IAuthService _service;
@@ -19,7 +20,7 @@
         }
 
         [HttpPost]
-        [Route("register")]
+        [Route(Endpoint.Register)]
         // POST: /api/auth/register
         public ActionResult<RegisterResponse> Register(RegisterRequest request)
         {
@@ -37,7 +38,7 @@
         }
 
         [HttpPost]
-        [Route("authenticate")]
+        [Route(Endpoint.Authenticate)]
         // POST: /api/auth/login
         public ActionResult<LoginResponse> Authenticate(LoginRequest request)
         {
