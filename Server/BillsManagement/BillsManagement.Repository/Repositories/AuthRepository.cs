@@ -106,11 +106,12 @@
 
             using (BillsManager_DevContext context = new BillsManager_DevContext())
             {
-                var occupantDetailsEntity = context.OccupantDetails.SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
+                var occupantDetailsEntity = context.OccupantDetails
+                    .SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
 
                 var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
 
-                occupantDetailsEntity.RefreshTokens.Add(refreshTokenEntity); //??
+                occupantDetailsEntity.RefreshTokens.Add(refreshTokenEntity);
                 context.Update(occupantDetailsEntity);
                 context.SaveChanges();
             }

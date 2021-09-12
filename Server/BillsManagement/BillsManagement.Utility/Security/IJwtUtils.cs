@@ -1,7 +1,7 @@
-﻿using BillsManagement.DomainModel;
-
-namespace BillsManagement.Utility.Security
+﻿namespace BillsManagement.Utility.Security
 {
+    using BillsManagement.DomainModel;
+
     public interface IJwtUtils
     {
         public string GenerateJwtToken(OccupantDetails user);

@@ -8,11 +8,11 @@
 
     public partial class AuthService : IAuthService
     {
-        private void ValidateOccupantExistence(string email)
+        private void ValidateOccupantExistence(string email) // Think for a better method name
         {
             if (this._authRepository.IsExistingOccupant(email))
             {
-                string msg = "Email is already used on another account";
+                string msg = "Email is already used on another account"; // Think for a better message
                 throw new HttpStatusCodeException(HttpStatusCode.Conflict, msg);
             }
         }

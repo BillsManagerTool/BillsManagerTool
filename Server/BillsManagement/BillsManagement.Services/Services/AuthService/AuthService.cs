@@ -27,19 +27,17 @@
             this._authRepository = authRepository;
             this._jwtUtils = jwtUtils;
         }
-        public AuthService() { }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest request, string ipAddress)
         {
             OccupantDetails occupantDetails = this._authRepository.GetOccupantDetails(request.Email);
 
+            // validate
             if (occupantDetails == null)
             {
                 string msg = "User is not valid.";
                 throw new HttpStatusCodeException(HttpStatusCode.NotFound, msg);
             }
-
-            // validate
             PasswordCipher.Decrypt(occupantDetails.Password, request.Password);
 
             // authentication successful so generate jwt and refresh tokens
@@ -83,7 +81,7 @@
         {
             var occupant = this._authRepository.GetOccupantById(id);
             if (occupant == null)
-                throw new KeyNotFoundException("User not found");
+                throw new KeyNotFoundException("Occupant not found");
 
             return occupant;
         }
