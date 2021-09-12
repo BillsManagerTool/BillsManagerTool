@@ -12,7 +12,6 @@
         [HttpGet]
         [Route(Endpoint.GetOccupant)]
         [Authorize(AuthenticationPolicy.Housekeeper)]
-        // POST: /api/auth/register
         public ActionResult<string> GetOccupant()
         {
             try

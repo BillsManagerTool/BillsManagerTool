@@ -29,7 +29,7 @@
         }
         public AuthService() { }
 
-        public LoginResponse Authenticate(LoginRequest request, string ipAddress)
+        public AuthenticateResponse Authenticate(AuthenticateRequest request, string ipAddress)
         {
             OccupantDetails occupantDetails = this._authRepository.GetOccupantDetails(request.Email);
 
@@ -51,7 +51,7 @@
             // remove old refresh tokens from user
             //removeOldRefreshTokens(user);
 
-            LoginResponse response = new LoginResponse();
+            AuthenticateResponse response = new AuthenticateResponse();
             response.Token = jwtToken;
             response.Email = occupantDetails.Email;
             response.RefreshToken = refreshToken.Token;

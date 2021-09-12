@@ -21,7 +21,6 @@
 
         [HttpPost]
         [Route(Endpoint.Register)]
-        // POST: /api/auth/register
         public ActionResult<RegisterResponse> Register(RegisterRequest request)
         {
             try
@@ -39,12 +38,11 @@
 
         [HttpPost]
         [Route(Endpoint.Authenticate)]
-        // POST: /api/auth/login
-        public ActionResult<LoginResponse> Authenticate(LoginRequest request)
+        public ActionResult<AuthenticateResponse> Authenticate(AuthenticateRequest request)
         {
             try
             {
-                LoginResponse response = new LoginResponse();
+                AuthenticateResponse response = new AuthenticateResponse();
 
                 var ipAddress = this.GetIpAddress();
 

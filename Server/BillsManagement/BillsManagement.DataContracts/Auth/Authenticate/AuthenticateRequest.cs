@@ -1,6 +1,6 @@
 ﻿namespace BillsManagement.DataContracts.Auth
 {
-    public class LoginRequest
+    public class AuthenticateRequest
     {
         public string Email { get; set; }
 

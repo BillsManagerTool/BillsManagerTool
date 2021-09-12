@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class LoginResponse : BaseResponse
+    public class AuthenticateResponse : BaseResponse
     {
         [JsonPropertyName("JWT")]
         public string Token { get; set; }

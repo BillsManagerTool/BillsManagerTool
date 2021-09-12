@@ -1,11 +1,11 @@
-﻿using BillsManagement.Services.ServiceContracts;
-using BillsManagement.Utility.Security;
-using Microsoft.AspNetCore.Http;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BillsManagement.Core.Configuration
+﻿namespace BillsManagement.Core.Configuration
 {
+    using BillsManagement.Services.ServiceContracts;
+    using BillsManagement.Utility.Security;
+    using Microsoft.AspNetCore.Http;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;

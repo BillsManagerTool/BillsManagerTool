@@ -65,7 +65,6 @@
             // Repository configurations
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IChargesRepository, ChargesRepository>();
-            services.AddScoped<IAuthorizationRepository, AuthorizationRepository>();
 
             services.AddScoped<IJwtUtils, JwtUtils>();
 
