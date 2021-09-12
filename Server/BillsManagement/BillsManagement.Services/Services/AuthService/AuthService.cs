@@ -2,48 +2,50 @@
 {
     using BillsManagement.DataContracts.Args;
     using BillsManagement.DataContracts.Auth;
-    using BillsManagement.DomainModel;
-    using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Repository.RepositoryContracts;
     using BillsManagement.Security;
     using BillsManagement.Services.ServiceContracts;
-    using BillsManagement.Utility;
+    using BillsManagement.Utility.Security;
     using Microsoft.Extensions.Options;
     using System;
-    using System.Net;
 
     public partial class AuthService : IAuthService
     {
         private readonly Secrets _secrets;
-        private readonly IAuthRepository _userRepository;
-        private readonly IAuthorizationRepository _authorizationRepository;
+        private readonly IAuthRepository _authRepository;
 
-        public AuthService(IOptions<Secrets> secrets, IAuthRepository userRepository, IAuthorizationRepository authorizationRepository)
+        public AuthService(IOptions<Secrets> secrets,
+            IAuthRepository authRepository)
         {
             this._secrets = secrets.Value ?? throw new ArgumentException(nameof(secrets));
-            this._userRepository = userRepository;
-            this._authorizationRepository = authorizationRepository;
+            this._authRepository = authRepository;
         }
 
         public AuthService() { }
 
-        public LoginResponse Login(LoginRequest request)
+        public LoginResponse Authenticate(LoginRequest request, string ipAddress)
         {
-            DomainModel.OccupantDetails occupantDetails = this._userRepository.GetOccupantDetails(request.Email);
+            DomainModel.OccupantDetails occupantDetails = this._authRepository.GetOccupantDetails(request.Email);
 
+            // validate
             PasswordCipher.Decrypt(occupantDetails.Password, request.Password);
 
-            DomainModel.SecurityToken token = this._userRepository.GetSecurityTokenByOccupantId(occupantDetails.OccupantId);
+            JwtUtils jwt = new JwtUtils(occupantDetails.OccupantId);
 
-            // TODO: Move TokenValidator on another place as it is not DomainModel
-            DomainModel.TokenValidator tokenValidator = new DomainModel.TokenValidator();
-            tokenValidator.SecurityToken = token;
-            tokenValidator.Occupant = occupantDetails;
+            // authentication successful so generate jwt and refresh tokens
+            var jwtToken = jwt.GenerateJwtToken(occupantDetails);
+            var refreshToken = jwt.GenerateRefreshToken(ipAddress);
 
-            var securityToken = this.GetValidToken(tokenValidator);
+            this._authRepository.SaveRefreshToken(occupantDetails.OccupantDetailsId, refreshToken);
 
-            LoginResponse response = new LoginResponse();
-            response.Token = securityToken;
+            // remove old refresh tokens from user
+            //removeOldRefreshTokens(user);
+
+            LoginResponse response = new LoginResponse()
+            {
+                Token = jwtToken,
+                RefreshToken = refreshToken.Token
+            };
 
             return response;
         }
@@ -59,23 +61,13 @@
                 Password = encryptedPassword
             };
 
-            this._userRepository.Register(registerArg);
+            this._authRepository.Register(registerArg);
 
-            var settings = this._userRepository.GetNotificationSettings(1);
+            var settings = this._authRepository.GetNotificationSettings(1);
             this.SendRegisterNotificationEmail(request.Email, settings);
 
             RegisterResponse response = new RegisterResponse();
             return response;
-        }
-
-        public void ValidateJwtToken(int occupantId)
-        {
-            SecurityToken authorization = this._userRepository.GetSecurityTokenByOccupantId(occupantId);
-
-            if (authorization.ExpirationDate <= DateTime.Now)
-            {
-                throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, GlobalConstants.UnauthorizedMessage);
-            }
         }
     }
 }

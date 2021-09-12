@@ -1,10 +1,9 @@
 ﻿using BillsManagement.DataContracts.Args;
 using BillsManagement.DomainModel;
-using BillsManagement.Repository.RepositoryContracts;
 
 namespace BillsManagement.Tests.RepositoryMocks
 {
-    public class AuthRepository : IAuthRepository
+    public class AuthRepository //: IAuthRepository
     {
         public bool CheckIfOccupantExistsById(int occupantId)
         {

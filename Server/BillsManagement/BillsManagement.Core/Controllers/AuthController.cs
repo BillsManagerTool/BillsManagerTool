@@ -37,14 +37,18 @@
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("authenticate")]
         // POST: /api/auth/login
-        public ActionResult<LoginResponse> Login(LoginRequest request)
+        public ActionResult<LoginResponse> Authenticate(LoginRequest request)
         {
             try
             {
                 LoginResponse response = new LoginResponse();
-                response = this._service.Login(request);
+
+                var ipAddress = this.GetIpAddress();
+
+                response = this._service.Authenticate(request, ipAddress);
+                this.SetTokenCookie(response.RefreshToken);
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
             }

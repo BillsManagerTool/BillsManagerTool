@@ -51,22 +51,15 @@
 
             #region Security Translators
 
-            CreateMap<SecurityToken, DomainModel.SecurityToken>()
-                .ForMember(destination => destination.OccupantId, options => options.MapFrom(source => source.OccupantId))
+            CreateMap<DomainModel.RefreshToken, RefreshToken>()
+                .ForMember(destination => destination.Id, options => options.MapFrom(source => source.Id))
                 .ForMember(destination => destination.Token, options => options.MapFrom(source => source.Token))
-                .ForMember(destination => destination.IsExpired, options => options.MapFrom(source => source.IsExpired))
-                .ForMember(destination => destination.ExpirationDate, options => options.MapFrom(source => source.ExpirationDate))
-                .ForMember(destination => destination.CreationDate, options => options.MapFrom(source => source.CreationDate))
-                .ForMember(destination => destination.Secret, options => options.MapFrom(source => source.Secret));
-
-
-            CreateMap<DomainModel.SecurityToken, SecurityToken>()
-                .ForMember(destination => destination.OccupantId, options => options.MapFrom(source => source.OccupantId))
-                .ForMember(destination => destination.Token, options => options.MapFrom(source => source.Token))
-                .ForMember(destination => destination.IsExpired, options => options.MapFrom(source => source.IsExpired))
-                .ForMember(destination => destination.ExpirationDate, options => options.MapFrom(source => source.ExpirationDate))
-                .ForMember(destination => destination.CreationDate, options => options.MapFrom(source => source.CreationDate))
-                .ForMember(destination => destination.Secret, options => options.MapFrom(source => source.Secret));
+                .ForMember(destination => destination.Expires, options => options.MapFrom(source => source.Expires))
+                .ForMember(destination => destination.Created, options => options.MapFrom(source => source.Created))
+                .ForMember(destination => destination.Revoked, options => options.MapFrom(source => source.Revoked))
+                .ForMember(destination => destination.ReasonRevoked, options => options.MapFrom(source => source.ReasonRevoked))
+                .ForMember(destination => destination.ReplacedByToken, options => options.MapFrom(source => source.ReplacedByToken))
+                .ReverseMap();
 
             #endregion
         }

@@ -39,14 +39,14 @@
             return settings;
         }
 
-        public DomainModel.SecurityToken GetSecurityTokenByOccupantId(int occupantId)
-        {
-            SecurityToken token = this._dbContext.SecurityTokens
-                .FirstOrDefault(x => x.IsExpired == false & x.OccupantId == occupantId);
+        //public DomainModel.SecurityToken GetSecurityTokenByOccupantId(int occupantId)
+        //{
+        //    SecurityToken token = this._dbContext.SecurityTokens
+        //        .FirstOrDefault(x => x.IsExpired == false & x.OccupantId == occupantId);
 
-            DomainModel.SecurityToken tokenModel = this._mapper.Map<SecurityToken, DomainModel.SecurityToken>(token);
+        //    DomainModel.SecurityToken tokenModel = this._mapper.Map<SecurityToken, DomainModel.SecurityToken>(token);
 
-            return tokenModel;
-        }
+        //    return tokenModel;
+        //}
     }
 }

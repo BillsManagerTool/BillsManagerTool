@@ -28,7 +28,7 @@ namespace BillsManagement.DAL.Models
         public virtual DbSet<Occupant> Occupants { get; set; }
         public virtual DbSet<OccupantDetail> OccupantDetails { get; set; }
         public virtual DbSet<OccupantToApartment> OccupantToApartments { get; set; }
-        public virtual DbSet<SecurityToken> SecurityTokens { get; set; }
+        public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
         public virtual DbSet<Town> Towns { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -164,7 +164,7 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F792592F93");
+                    .HasName("PK__Notifica__BA44B3F72E67F2EB");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -195,7 +195,7 @@ namespace BillsManagement.DAL.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EB0ED3752B");
+                    .HasName("PK__Occupant__C28410EB05CEE0AE");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -235,35 +235,35 @@ namespace BillsManagement.DAL.Models
                     .HasConstraintName("FK_Occupant_OccupantToApartment");
             });
 
-            modelBuilder.Entity<SecurityToken>(entity =>
+            modelBuilder.Entity<RefreshToken>(entity =>
             {
-                entity.ToTable("SecurityToken", "Security");
+                entity.ToTable("RefreshToken", "Security");
 
-                entity.Property(e => e.SecurityTokenId).HasDefaultValueSql("(newid())");
-
-                entity.Property(e => e.CreationDate)
+                entity.Property(e => e.Created)
                     .HasColumnType("smalldatetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ExpirationDate)
+                entity.Property(e => e.Expires)
                     .HasColumnType("smalldatetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.IsExpired).HasDefaultValueSql("((0))");
+                entity.Property(e => e.ReasonRevoked).HasMaxLength(256);
 
-                entity.Property(e => e.Secret)
-                    .IsRequired()
-                    .HasMaxLength(512);
+                entity.Property(e => e.ReplacedByToken).HasMaxLength(1024);
+
+                entity.Property(e => e.Revoked).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.RevokedByIp).HasMaxLength(32);
 
                 entity.Property(e => e.Token)
                     .IsRequired()
                     .HasMaxLength(1024);
 
-                entity.HasOne(d => d.Occupant)
-                    .WithMany(p => p.SecurityTokens)
-                    .HasForeignKey(d => d.OccupantId)
+                entity.HasOne(d => d.OccupantDetails)
+                    .WithMany(p => p.RefreshTokens)
+                    .HasForeignKey(d => d.OccupantDetailsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OccupantSecurityToken");
+                    .HasConstraintName("FK_OccupantDetailsRefreshToken");
             });
 
             modelBuilder.Entity<Town>(entity =>

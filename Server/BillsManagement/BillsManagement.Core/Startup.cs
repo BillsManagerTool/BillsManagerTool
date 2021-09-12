@@ -66,6 +66,8 @@
             services.AddScoped<IChargesRepository, ChargesRepository>();
             services.AddScoped<IAuthorizationRepository, AuthorizationRepository>();
 
+            //services.AddScoped<IJwtUtils, JwtUtils>();
+
             // Service configurations
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IChargesService, ChargesService>();

@@ -4,8 +4,8 @@
 
     public interface IAuthorizationRepository : IBaseRepository<Occupant>
     {
-        void SaveSecurityToken(DomainModel.SecurityToken securityToken);
+        //void SaveSecurityToken(DomainModel.SecurityToken securityToken);
 
-        void UpdateToken(DomainModel.SecurityToken securityToken);
+        //void UpdateToken(DomainModel.SecurityToken securityToken);
     }
 }

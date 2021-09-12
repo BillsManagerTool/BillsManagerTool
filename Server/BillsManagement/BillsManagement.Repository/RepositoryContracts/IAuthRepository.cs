@@ -13,6 +13,8 @@
 
         int GetOccupantInformation(string email);
 
-        void UpdateToken(DomainModel.SecurityToken token); // Arg token param
+        void SaveRefreshToken(int occupantId, DomainModel.RefreshToken refreshToken);
+
+        //void UpdateToken(DomainModel.SecurityToken token); // Arg token param
     }
 }

@@ -92,23 +92,16 @@
             }
         }
 
-        public void UpdateToken(DomainModel.SecurityToken token)
+        public void SaveRefreshToken(int occupantDetailsId, DomainModel.RefreshToken refreshToken)
         {
-            var tokenEntity = this._mapper.Map<DomainModel.SecurityToken, SecurityToken>(token);
 
             using (BillsManager_DevContext context = new BillsManager_DevContext())
             {
-                context.SecurityTokens.Add(tokenEntity);
+                var occupantDetailsEntity = context.OccupantDetails.SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
 
-                foreach (var securityToken in context.SecurityTokens
-                    .Where(x => x.SecurityTokenId != tokenEntity.SecurityTokenId))
-                {
-                    if (securityToken.OccupantId == token.OccupantId)
-                    {
-                        securityToken.IsExpired = true;
-                    }
-                };
+                var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
 
+                occupantDetailsEntity.RefreshTokens.Add(refreshTokenEntity); //??
                 context.SaveChanges();
             }
         }

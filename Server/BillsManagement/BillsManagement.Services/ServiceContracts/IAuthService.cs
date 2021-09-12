@@ -6,8 +6,6 @@
     {
         RegisterResponse Register(RegisterRequest request);
 
-        LoginResponse Login(LoginRequest request);
-
-        void ValidateJwtToken(int occupantId);
+        LoginResponse Authenticate(LoginRequest request, string ipAddress);
     }
 }

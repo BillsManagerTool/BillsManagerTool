@@ -3,6 +3,7 @@
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Linq;
@@ -35,7 +36,26 @@
             }
 
             int extractedOccupantId = int.Parse(claim.Value);
-            this._authService.ValidateJwtToken(extractedOccupantId);
+        }
+
+        protected void SetTokenCookie(string token)
+        {
+            // append cookie with refresh token to the http response
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
+        }
+
+        protected string GetIpAddress()
+        {
+            // get source ip address for the current request
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+                return Request.Headers["X-Forwarded-For"];
+            else
+                return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
         }
     }
 }

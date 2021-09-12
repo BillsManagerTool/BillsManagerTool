@@ -11,7 +11,6 @@ namespace BillsManagement.DAL.Models
         {
             CostCenters = new HashSet<CostCenter>();
             OccupantToApartments = new HashSet<OccupantToApartment>();
-            SecurityTokens = new HashSet<SecurityToken>();
         }
 
         public int OccupantId { get; set; }
@@ -22,6 +21,5 @@ namespace BillsManagement.DAL.Models
         public virtual OccupantDetail OccupantDetails { get; set; }
         public virtual ICollection<CostCenter> CostCenters { get; set; }
         public virtual ICollection<OccupantToApartment> OccupantToApartments { get; set; }
-        public virtual ICollection<SecurityToken> SecurityTokens { get; set; }
     }
 }
