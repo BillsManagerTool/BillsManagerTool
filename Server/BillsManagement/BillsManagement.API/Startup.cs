@@ -2,7 +2,7 @@
 {
     using AutoMapper;
     using BillsManagement.API.Configuration;
-    using BillsManagement.Core.CustomExceptions;
+    using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Data.Models;
     using BillsManagement.Data.Contracts;
     using BillsManagement.Security;

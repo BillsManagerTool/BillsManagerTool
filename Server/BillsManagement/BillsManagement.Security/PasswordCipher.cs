@@ -1,6 +1,6 @@
 ﻿namespace BillsManagement.Security
 {
-    using BillsManagement.Exception.CustomExceptions;
+    using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Utility;
     using System;
     using System.IO;

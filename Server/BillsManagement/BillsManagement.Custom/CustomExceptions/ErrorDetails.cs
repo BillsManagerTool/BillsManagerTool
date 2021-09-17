@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace BillsManagement.Core.CustomExceptions
+namespace BillsManagement.Custom.CustomExceptions
 {
     public class ErrorDetails
     {

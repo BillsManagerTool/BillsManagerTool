@@ -1,6 +1,5 @@
-﻿namespace BillsManagement.Core.CustomExceptions
+﻿namespace BillsManagement.Custom.CustomExceptions
 {
-    using BillsManagement.Exception.CustomExceptions;
     using Microsoft.AspNetCore.Http;
     using System;
     using System.Net;

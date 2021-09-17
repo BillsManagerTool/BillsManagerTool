@@ -2,7 +2,7 @@
 using System;
 using System.Net;
 
-namespace BillsManagement.Exception.CustomExceptions
+namespace BillsManagement.Custom.CustomExceptions
 {
     public class HttpStatusCodeException : SystemException
     {

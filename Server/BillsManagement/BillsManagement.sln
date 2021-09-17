@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Utility", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.DomainModels", "BillsManagement.DomainModels\BillsManagement.DomainModels.csproj", "{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Exception", "BillsManagement.Exception\BillsManagement.Exception.csproj", "{D665760D-1A8C-448D-89B3-3CA33796B3C9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.DataContracts", "BillsManagement.DataContracts\BillsManagement.DataContracts.csproj", "{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Tests", "BillsManagement.Tests\BillsManagement.Tests.csproj", "{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}"
@@ -23,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Data.Contra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Business", "BillsManagement.Business\BillsManagement.Business.csproj", "{D32F4EF5-1FEC-42C9-B35C-B64B38DE1196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsManagement.Business.Contracts", "BillsManagement.Business.Contracts\BillsManagement.Business.Contracts.csproj", "{3458E7B2-B6FB-4423-9AEF-76B38EA1678B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Business.Contracts", "BillsManagement.Business.Contracts\BillsManagement.Business.Contracts.csproj", "{3458E7B2-B6FB-4423-9AEF-76B38EA1678B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Custom", "BillsManagement.Custom\BillsManagement.Custom.csproj", "{77F6CCEB-2971-491E-9638-82DE1C6CE55D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,6 @@ Global
 		{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D665760D-1A8C-448D-89B3-3CA33796B3C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D665760D-1A8C-448D-89B3-3CA33796B3C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D665760D-1A8C-448D-89B3-3CA33796B3C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D665760D-1A8C-448D-89B3-3CA33796B3C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +71,10 @@ Global
 		{3458E7B2-B6FB-4423-9AEF-76B38EA1678B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3458E7B2-B6FB-4423-9AEF-76B38EA1678B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3458E7B2-B6FB-4423-9AEF-76B38EA1678B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

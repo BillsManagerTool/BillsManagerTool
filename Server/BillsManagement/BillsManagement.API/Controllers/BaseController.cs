@@ -1,7 +1,7 @@
 ﻿namespace BillsManagement.API.Controllers
 {
     using BillsManagement.Business.Contracts.ServiceContracts;
-    using BillsManagement.Exception.CustomExceptions;
+    using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Utility;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

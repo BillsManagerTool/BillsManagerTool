@@ -5,7 +5,7 @@
     using BillsManagement.Data.Contracts.Args;
     using BillsManagement.DataContracts.Auth;
     using BillsManagement.DomainModel;
-    using BillsManagement.Exception.CustomExceptions;
+    using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Security;
     using Microsoft.Extensions.Options;
     using System;
