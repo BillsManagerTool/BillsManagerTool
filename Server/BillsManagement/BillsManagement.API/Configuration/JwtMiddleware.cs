@@ -1,7 +1,7 @@
 ﻿namespace BillsManagement.API.Configuration
 {
     using BillsManagement.Business.Contracts.ServiceContracts;
-    using BillsManagement.Utility.Security;
+    using BillsManagement.Security;
     using Microsoft.AspNetCore.Http;
     using System.Linq;
     using System.Threading.Tasks;

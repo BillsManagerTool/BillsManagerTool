@@ -7,7 +7,6 @@
     using BillsManagement.Data.Contracts;
     using BillsManagement.Security;
     using BillsManagement.Utility;
-    using BillsManagement.Utility.Security;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Builder;

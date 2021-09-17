@@ -7,7 +7,6 @@
     using BillsManagement.DomainModel;
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Security;
-    using BillsManagement.Utility.Security;
     using Microsoft.Extensions.Options;
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Utility.Security
+﻿namespace BillsManagement.Security
 {
     using BillsManagement.Security;
     using Microsoft.Extensions.Options;
