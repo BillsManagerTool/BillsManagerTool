@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BillsManagement.DAL\BillsManagement.Data.csproj" />
+    <ProjectReference Include="..\BillsManagement.Data\BillsManagement.Data.csproj" />
     <ProjectReference Include="..\BillsManagement.Exception\BillsManagement.Exception.csproj" />
     <ProjectReference Include="..\BillsManagement.Utility\BillsManagement.Utility.csproj" />
   </ItemGroup>
