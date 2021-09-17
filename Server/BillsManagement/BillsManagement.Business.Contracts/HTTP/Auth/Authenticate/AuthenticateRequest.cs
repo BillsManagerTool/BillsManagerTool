@@ -1,6 +1,6 @@
-﻿namespace BillsManagement.DataContracts.Auth
+﻿namespace BillsManagement.Business.Contracts.HTTP
 {
-    public class RegisterRequest
+    public class AuthenticateRequest
     {
         public string Email { get; set; }
 

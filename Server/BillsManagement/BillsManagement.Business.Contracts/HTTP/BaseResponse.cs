@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.DataContracts
+﻿namespace BillsManagement.Business.Contracts.HTTP
 {
     using System.Net;
     using System.Text.Json.Serialization;

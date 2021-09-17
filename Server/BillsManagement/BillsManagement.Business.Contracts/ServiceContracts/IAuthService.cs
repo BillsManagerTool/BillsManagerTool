@@ -1,6 +1,6 @@
 ﻿namespace BillsManagement.Business.Contracts.ServiceContracts
 {
-    using BillsManagement.DataContracts.Auth;
+    using BillsManagement.Business.Contracts.HTTP;
 
     public interface IAuthService
     {

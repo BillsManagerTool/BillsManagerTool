@@ -3,7 +3,6 @@
     using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.Data.Contracts;
     using BillsManagement.Data.Contracts.Args;
-    using BillsManagement.DataContracts.Auth;
     using BillsManagement.DomainModel;
     using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Security;
@@ -11,6 +10,7 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using BillsManagement.Business.Contracts.HTTP;
 
     public partial class AuthService : IAuthService
     {
