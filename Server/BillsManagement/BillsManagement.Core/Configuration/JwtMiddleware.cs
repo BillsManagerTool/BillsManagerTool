@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Core.Configuration
+﻿namespace BillsManagement.API.Configuration
 {
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility.Security;

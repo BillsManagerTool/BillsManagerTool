@@ -1,7 +1,7 @@
-﻿namespace BillsManagement.Core
+﻿namespace BillsManagement.API
 {
     using AutoMapper;
-    using BillsManagement.Core.Configuration;
+    using BillsManagement.API.Configuration;
     using BillsManagement.Core.CustomExceptions;
     using BillsManagement.DAL.Models;
     using BillsManagement.Repository;
@@ -26,9 +26,14 @@
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Text;
 
+    /// <summary>
+    /// The application startup class
+    /// </summary>
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private readonly IConfiguration _configuration;
@@ -36,6 +41,7 @@
         private readonly string _assemblyVersion;
         private readonly string _applicationBaseDirectory;
 
+        /// <summary>Initializes a new instance of the <see cref="Startup"/> class.</summary>
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -45,7 +51,9 @@
             _applicationBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             // Users secrets
@@ -133,7 +141,9 @@
             services.AddSingleton<IAuthorizationHandler, HousekeeperRequirementHandler>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.Use(async (ctx, next) =>

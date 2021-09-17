@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BillsManagement.API</name>
+    </assembly>
+    <members>
+        <member name="F:BillsManagement.Utility.ApiConstants.CoreXmlDocumentation">
+            <summary>
+            API project XML documentation file name
+            </summary>
+        </member>
+        <member name="F:BillsManagement.Utility.ApiConstants.DomainModelsXmlDocumentation">
+            <summary>
+            Domain project XML documentation file name
+            </summary>
+        </member>
+        <member name="T:BillsManagement.API.Startup">
+            <summary>
+            The application startup class
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>Initializes a new instance of the <see cref="T:BillsManagement.API.Startup"/> class.</summary>
+        </member>
+        <member name="M:BillsManagement.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+        </member>
+    </members>
+</doc>

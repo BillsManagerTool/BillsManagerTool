@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Core.Controllers
+﻿namespace BillsManagement.API.Controllers
 {
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility.Constants;

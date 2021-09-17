@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Core
+﻿namespace BillsManagement.API
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;

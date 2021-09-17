@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Core.Controllers
+﻿namespace BillsManagement.API.Controllers
 {
     using BillsManagement.Exception.CustomExceptions;
     using BillsManagement.Services.ServiceContracts;

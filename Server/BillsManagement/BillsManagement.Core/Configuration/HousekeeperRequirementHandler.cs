@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Core.Configuration
+﻿namespace BillsManagement.API.Configuration
 {
     using Microsoft.AspNetCore.Authorization;
     using System.Threading.Tasks;

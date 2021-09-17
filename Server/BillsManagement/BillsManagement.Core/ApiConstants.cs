@@ -11,7 +11,7 @@ namespace BillsManagement.Utility
         /// <summary>
         /// API project XML documentation file name
         /// </summary>
-        public const string CoreXmlDocumentation = "BillsManagement.Core.xml";
+        public const string CoreXmlDocumentation = "BillsManagement.API.xml";
 
         /// <summary>
         /// Domain project XML documentation file name
