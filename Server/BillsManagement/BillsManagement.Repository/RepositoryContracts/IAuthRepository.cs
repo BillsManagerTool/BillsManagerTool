@@ -1,9 +1,8 @@
-﻿namespace BillsManagement.Repository.RepositoryContracts
+﻿namespace BillsManagement.Data.Contracts
 {
-    using BillsManagement.DAL.Models;
     using BillsManagement.DataContracts.Args;
 
-    public interface IAuthRepository : IBaseRepository<Occupant>
+    public interface IAuthRepository : IBaseRepository<DomainModel.Occupant>
     {
         void Register(RegisterArgument args);
 

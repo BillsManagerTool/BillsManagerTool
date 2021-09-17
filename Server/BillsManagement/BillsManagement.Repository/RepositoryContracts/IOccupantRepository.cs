@@ -1,8 +1,6 @@
-﻿namespace BillsManagement.Repository.RepositoryContracts
+﻿namespace BillsManagement.Data.Contracts
 {
-    using BillsManagement.DAL.Models;
-
-    public interface IOccupantRepository : IBaseRepository<OccupantDetail>
+    public interface IOccupantRepository : IBaseRepository<DomainModel.Occupant>
     {
         DomainModel.DetailedOccupant GetOccupantDetailsById(int id);
     }

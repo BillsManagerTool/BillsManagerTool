@@ -1,10 +1,10 @@
 ﻿namespace BillsManagement.Services.Services.AuthService
 {
+    using BillsManagement.Data.Contracts;
     using BillsManagement.DataContracts.Args;
     using BillsManagement.DataContracts.Auth;
     using BillsManagement.DomainModel;
     using BillsManagement.Exception.CustomExceptions;
-    using BillsManagement.Repository.RepositoryContracts;
     using BillsManagement.Security;
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility.Security;

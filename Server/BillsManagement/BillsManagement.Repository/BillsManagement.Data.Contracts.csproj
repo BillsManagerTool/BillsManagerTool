@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BillsManagement.DAL\BillsManagement.DAL.csproj" />
     <ProjectReference Include="..\BillsManagement.DataContracts\BillsManagement.DataContracts.csproj" />
     <ProjectReference Include="..\BillsManagement.DomainModels\BillsManagement.DomainModels.csproj" />
     <ProjectReference Include="..\BillsManagement.Exception\BillsManagement.Exception.csproj" />

@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BillsManagement.DAL\BillsManagement.DAL.csproj" />
+    <ProjectReference Include="..\BillsManagement.DAL\BillsManagement.Data.csproj" />
     <ProjectReference Include="..\BillsManagement.DataContracts\BillsManagement.DataContracts.csproj" />
     <ProjectReference Include="..\BillsManagement.DomainModels\BillsManagement.DomainModels.csproj" />
     <ProjectReference Include="..\BillsManagement.Exception\BillsManagement.Exception.csproj" />
-    <ProjectReference Include="..\BillsManagement.Repository\BillsManagement.Repository.csproj" />
+    <ProjectReference Include="..\BillsManagement.Repository\BillsManagement.Data.Contracts.csproj" />
     <ProjectReference Include="..\BillsManagement.Security\BillsManagement.Security.csproj" />
   </ItemGroup>
 

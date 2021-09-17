@@ -3,10 +3,8 @@
     using AutoMapper;
     using BillsManagement.API.Configuration;
     using BillsManagement.Core.CustomExceptions;
-    using BillsManagement.DAL.Models;
-    using BillsManagement.Repository;
-    using BillsManagement.Repository.Repositories;
-    using BillsManagement.Repository.RepositoryContracts;
+    using BillsManagement.Data.Models;
+    using BillsManagement.Data.Contracts;
     using BillsManagement.Security;
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Services.Services.AuthService;
@@ -29,6 +27,8 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Text;
+    using BillsManagement.Data.Repositories;
+    using BillsManagement.Data;
 
     /// <summary>
     /// The application startup class

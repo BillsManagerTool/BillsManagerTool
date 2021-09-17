@@ -1,6 +1,6 @@
 ﻿namespace BillsManagement.Services.Services.ChargesService
 {
-    using BillsManagement.Repository.RepositoryContracts;
+    using BillsManagement.Data.Contracts;
     using BillsManagement.Services.ServiceContracts;
 
     public partial class ChargesService : IChargesService

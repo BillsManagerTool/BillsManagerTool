@@ -1,9 +1,8 @@
-﻿namespace BillsManagement.Repository.RepositoryContracts
+﻿namespace BillsManagement.Data.Contracts
 {
-    using BillsManagement.DAL.Models;
     using System.Collections.Generic;
 
-    public interface IChargesRepository : IBaseRepository<Charge>
+    public interface IChargesRepository : IBaseRepository<DomainModel.Charge>
     {
         List<DomainModel.Charge> GetCharges();
     }

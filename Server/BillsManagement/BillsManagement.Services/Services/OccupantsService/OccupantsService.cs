@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using BillsManagement.DAL.Models;
+using BillsManagement.Data.Contracts;
 using BillsManagement.DomainModel;
-using BillsManagement.Repository.RepositoryContracts;
 using BillsManagement.Services.ServiceContracts;
 
 namespace BillsManagement.Services.Services.OccupantsService

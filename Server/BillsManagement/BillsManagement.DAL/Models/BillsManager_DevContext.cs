@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace BillsManagement.DAL.Models
+namespace BillsManagement.Data.Models
 {
     public partial class BillsManager_DevContext : DbContext
     {
