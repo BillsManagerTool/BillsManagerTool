@@ -8,21 +8,27 @@
         public AutoMapping()
         {
 
-            #region Charges Translators
+            #region Occupants Translators
 
-            //CreateMap<Charge, DomainModel.Charge>()
-            //      .ForMember(destination => destination.ChargeId, options => options.MapFrom(source => source.ChargeId))
-            //      .ForMember(destination => destination.UserId, options => options.MapFrom(source => source.UserId))
-            //      .ForMember(destination => destination.ChargeTypeId, options => options.MapFrom(source => source.ChargeTypeId))
-            //      .ForMember(destination => destination.ChargeDate, options => options.MapFrom(source => source.ChargeDate))
-            //      .ForMember(destination => destination.DueAmount, options => options.MapFrom(source => source.DueAmount));
+            CreateMap<OccupantDetail, DomainModel.OccupantDetails>()
+                  .ForMember(destination => destination.OccupantDetailsId, options => options.MapFrom(source => source.OccupantDetailsId))
+                  .ForMember(destination => destination.FirstName, options => options.MapFrom(source => source.FirstName))
+                  .ForMember(destination => destination.LastName, options => options.MapFrom(source => source.LastName))
+                  .ForMember(destination => destination.Email, options => options.MapFrom(source => source.Email))
+                  .ForMember(destination => destination.MobileNumber, options => options.MapFrom(source => source.MobileNumber))
+                  .ForMember(destination => destination.IsHousekeeper, options => options.MapFrom(source => source.IsHousekeeper))
+                  .ForMember(destination => destination.IsOwner, options => options.MapFrom(source => source.IsOwner))
+                  .ForMember(destination => destination.IsCurrentOccupant, options => options.MapFrom(source => source.IsCurrentOccupant));
 
-            //CreateMap<DomainModel.Charge, Charge>()
-            //      .ForMember(destination => destination.ChargeId, options => options.MapFrom(source => source.ChargeId))
-            //      .ForMember(destination => destination.UserId, options => options.MapFrom(source => source.UserId))
-            //      .ForMember(destination => destination.ChargeTypeId, options => options.MapFrom(source => source.ChargeTypeId))
-            //      .ForMember(destination => destination.ChargeDate, options => options.MapFrom(source => source.ChargeDate))
-            //      .ForMember(destination => destination.DueAmount, options => options.MapFrom(source => source.DueAmount));
+            CreateMap<OccupantDetail, DomainModel.DetailedOccupant>()
+                  .ForMember(destination => destination.OccupantDetailsId, options => options.MapFrom(source => source.OccupantDetailsId))
+                  .ForMember(destination => destination.FirstName, options => options.MapFrom(source => source.FirstName))
+                  .ForMember(destination => destination.LastName, options => options.MapFrom(source => source.LastName))
+                  .ForMember(destination => destination.Email, options => options.MapFrom(source => source.Email))
+                  .ForMember(destination => destination.MobileNumber, options => options.MapFrom(source => source.MobileNumber))
+                  .ForMember(destination => destination.IsHousekeeper, options => options.MapFrom(source => source.IsHousekeeper))
+                  .ForMember(destination => destination.IsOwner, options => options.MapFrom(source => source.IsOwner))
+                  .ForMember(destination => destination.IsCurrentOccupant, options => options.MapFrom(source => source.IsCurrentOccupant)).ReverseMap();
 
             #endregion
 

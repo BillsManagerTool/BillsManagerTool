@@ -4,6 +4,6 @@
 
     public interface IOccupantRepository : IBaseRepository<OccupantDetail>
     {
-        OccupantDetail GetOccupantDetailsById(int id);
+        DomainModel.DetailedOccupant GetOccupantDetailsById(int id);
     }
 }

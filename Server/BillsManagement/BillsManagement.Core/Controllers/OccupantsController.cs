@@ -1,5 +1,6 @@
 ﻿namespace BillsManagement.Core.Controllers
 {
+    using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility.Constants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -9,16 +10,24 @@
     [Route(Endpoint.BaseOccupantRoute)]
     public class OccupantsController : Controller
     {
+        private readonly IOccupantService _service;
+
+        public OccupantsController(IOccupantService service)
+        {
+            this._service = service;
+        }
+
         [HttpGet]
         [Route(Endpoint.GetOccupant)]
         [Authorize(AuthenticationPolicy.Housekeeper)]
-        public ActionResult<string> GetOccupant()
+        public ActionResult<DomainModel.DetailedOccupant> GetOccupant()
         {
             try
             {
                 // Thats how we get user id after successfully validating and extracting data from jwt middleware
                 var id = HttpContext.Items["UserId"];
-                return "Occupant";
+                var occupantDetails = this._service.GetOccupantDetailsById(int.Parse(id.ToString()));
+                return occupantDetails;
             }
             catch (Exception)
             {
