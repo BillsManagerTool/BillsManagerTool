@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-using BillsManagement.Data.Contracts;
-using BillsManagement.DomainModel;
-using BillsManagement.Services.ServiceContracts;
-
-namespace BillsManagement.Services.Services.OccupantsService
+﻿namespace BillsManagement.Services.Services.OccupantsService
 {
+    using BillsManagement.Data.Contracts;
+    using BillsManagement.DomainModel;
+    using BillsManagement.Services.ServiceContracts;
+
     public class OccupantsService : IOccupantService
     {
         private readonly IOccupantRepository _occupantRepository;

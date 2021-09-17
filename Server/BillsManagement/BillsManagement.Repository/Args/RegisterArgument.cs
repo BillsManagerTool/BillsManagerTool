@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.DataContracts.Args
+﻿namespace BillsManagement.Data.Contracts.Args
 {
     public class RegisterArgument
     {

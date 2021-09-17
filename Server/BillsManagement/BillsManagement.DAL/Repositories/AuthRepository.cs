@@ -2,8 +2,8 @@
 {
     using AutoMapper;
     using BillsManagement.Data.Contracts;
+    using BillsManagement.Data.Contracts.Args;
     using BillsManagement.Data.Models;
-    using BillsManagement.DataContracts.Args;
     using System;
     using System.Linq;
 

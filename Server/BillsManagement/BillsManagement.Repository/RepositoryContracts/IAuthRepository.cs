@@ -1,6 +1,6 @@
 ﻿namespace BillsManagement.Data.Contracts
 {
-    using BillsManagement.DataContracts.Args;
+    using BillsManagement.Data.Contracts.Args;
 
     public interface IAuthRepository : IBaseRepository<DomainModel.Occupant>
     {
