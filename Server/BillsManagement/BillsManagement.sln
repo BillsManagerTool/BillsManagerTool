@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.API", "BillsManagement.Core\BillsManagement.API.csproj", "{06BA0B9F-2860-46B2-B7A5-22B33FEDF296}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Data", "BillsManagement.DAL\BillsManagement.Data.csproj", "{64677613-9D40-4D42-A44F-34535D407660}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Data.Contracts", "BillsManagement.Repository\BillsManagement.Data.Contracts.csproj", "{9B8145D9-DB1A-4E05-9263-A278EDB502B1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Services", "BillsManagement.Services\BillsManagement.Services.csproj", "{B6B1D46E-33BF-4588-8FA6-8F77745640E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Security", "BillsManagement.Security\BillsManagement.Security.csproj", "{3D19393F-4E20-4AC5-A5D8-CECDCC0A3713}"
@@ -21,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Exception",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.DataContracts", "BillsManagement.DataContracts\BillsManagement.DataContracts.csproj", "{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsManagement.Tests", "BillsManagement.Tests\BillsManagement.Tests.csproj", "{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Tests", "BillsManagement.Tests\BillsManagement.Tests.csproj", "{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.API", "BillsManagement.API\BillsManagement.API.csproj", "{5A30AF68-1A12-4F19-B728-3AA720A3C26B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Data", "BillsManagement.Data\BillsManagement.Data.csproj", "{AEAF74D1-2AF3-4607-B19D-426DD484071A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Data.Contracts", "BillsManagement.Data.Contracts\BillsManagement.Data.Contracts.csproj", "{1458EF05-C45C-4113-9210-FE48047AF11F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,18 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{06BA0B9F-2860-46B2-B7A5-22B33FEDF296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06BA0B9F-2860-46B2-B7A5-22B33FEDF296}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06BA0B9F-2860-46B2-B7A5-22B33FEDF296}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06BA0B9F-2860-46B2-B7A5-22B33FEDF296}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64677613-9D40-4D42-A44F-34535D407660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64677613-9D40-4D42-A44F-34535D407660}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64677613-9D40-4D42-A44F-34535D407660}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64677613-9D40-4D42-A44F-34535D407660}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B8145D9-DB1A-4E05-9263-A278EDB502B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B8145D9-DB1A-4E05-9263-A278EDB502B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B8145D9-DB1A-4E05-9263-A278EDB502B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B8145D9-DB1A-4E05-9263-A278EDB502B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6B1D46E-33BF-4588-8FA6-8F77745640E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6B1D46E-33BF-4588-8FA6-8F77745640E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6B1D46E-33BF-4588-8FA6-8F77745640E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +57,18 @@ Global
 		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAF74D1-2AF3-4607-B19D-426DD484071A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAF74D1-2AF3-4607-B19D-426DD484071A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAF74D1-2AF3-4607-B19D-426DD484071A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAF74D1-2AF3-4607-B19D-426DD484071A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1458EF05-C45C-4113-9210-FE48047AF11F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1458EF05-C45C-4113-9210-FE48047AF11F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1458EF05-C45C-4113-9210-FE48047AF11F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1458EF05-C45C-4113-9210-FE48047AF11F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

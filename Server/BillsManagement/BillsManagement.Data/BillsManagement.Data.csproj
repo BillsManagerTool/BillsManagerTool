@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BillsManagement.Data.Contracts\BillsManagement.Data.Contracts.csproj" />
+    <ProjectReference Include="..\BillsManagement.DataContracts\BillsManagement.DataContracts.csproj" />
     <ProjectReference Include="..\BillsManagement.DomainModels\BillsManagement.DomainModels.csproj" />
     <ProjectReference Include="..\BillsManagement.Repository\BillsManagement.Data.Contracts.csproj" />
   </ItemGroup>
