@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Exception",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.DataContracts", "BillsManagement.DataContracts\BillsManagement.DataContracts.csproj", "{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsManagement.Tests", "BillsManagement.Tests\BillsManagement.Tests.csproj", "{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAFE543F-23A7-40D4-8F5A-E9E9F8970102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
