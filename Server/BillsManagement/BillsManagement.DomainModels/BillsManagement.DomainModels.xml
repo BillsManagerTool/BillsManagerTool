@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BillsManagement.DomainModels</name>
+    </assembly>
+    <members>
+        <member name="T:BillsManagement.DomainModel.DetailedOccupant">
+            <summary>
+            Detailed information for the occupant
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.OccupantDetailsId">
+            <summary>
+            Id of the occupant details
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.OccupantId">
+            <summary>
+            Id of the occupant
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.FirstName">
+            <summary>
+            First name of the occupant from details table
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.LastName">
+            <summary>
+            Last name of the occupant from details table
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.Email">
+            <summary>
+            Email of the occupant from details table
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.IsHousekeeper">
+            <summary>
+            Shows is the user is the housekeeper of the entrance
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.IsOwner">
+            <summary>
+            Shows if the user is the owner of the apartment
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.IsCurrentOccupant">
+            <summary>
+            Shows if the user is the current occupant of the apartment
+            </summary>
+        </member>
+        <member name="P:BillsManagement.DomainModel.DetailedOccupant.MobileNumber">
+            <summary>
+            Mobile number of the occupant
+            </summary>
+        </member>
+    </members>
+</doc>

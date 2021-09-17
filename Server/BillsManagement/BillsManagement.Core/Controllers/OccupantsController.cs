@@ -24,7 +24,6 @@
         {
             try
             {
-                // Thats how we get user id after successfully validating and extracting data from jwt middleware
                 var id = HttpContext.Items["UserId"];
                 var occupantDetails = this._service.GetOccupantDetailsById(int.Parse(id.ToString()));
                 return occupantDetails;
