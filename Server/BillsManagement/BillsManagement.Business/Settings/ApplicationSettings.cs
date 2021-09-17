@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Services
+﻿namespace BillsManagement.Business
 {
     public class ApplicationSettings
     {

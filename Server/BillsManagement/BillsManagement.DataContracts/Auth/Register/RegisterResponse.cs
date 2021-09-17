@@ -1,7 +1,7 @@
-﻿namespace BillsManagement.DataContracts.Auth
-{
-    public class RegisterResponse : BaseResponse
-    {
+﻿//namespace BillsManagement.DataContracts.Auth
+//{
+//    public class RegisterResponse : BaseResponse
+//    {
 
-    }
-}
+//    }
+//}

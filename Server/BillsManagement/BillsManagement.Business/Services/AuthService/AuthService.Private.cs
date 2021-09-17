@@ -1,7 +1,7 @@
-﻿namespace BillsManagement.Services.Services.AuthService
+﻿namespace BillsManagement.Business.Services.AuthService
 {
+    using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.Exception.CustomExceptions;
-    using BillsManagement.Services.ServiceContracts;
     using System.Net;
     using System.Net.Mail;
     using System.Text;

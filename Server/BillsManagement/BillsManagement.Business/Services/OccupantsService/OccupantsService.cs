@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Services.Services.OccupantsService
+﻿namespace BillsManagement.Business.Services.OccupantsService
 {
     using BillsManagement.Data.Contracts;
     using BillsManagement.DomainModel;

@@ -25,10 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BillsManagement.Business.Contracts\BillsManagement.Business.Contracts.csproj" />
+    <ProjectReference Include="..\BillsManagement.Business\BillsManagement.Business.csproj" />
     <ProjectReference Include="..\BillsManagement.DataContracts\BillsManagement.DataContracts.csproj" />
     <ProjectReference Include="..\BillsManagement.Data\BillsManagement.Data.csproj" />
     <ProjectReference Include="..\BillsManagement.Exception\BillsManagement.Exception.csproj" />
-    <ProjectReference Include="..\BillsManagement.Services\BillsManagement.Services.csproj" />
+    <ProjectReference Include="..\BillsManagement.Services\BillsManagement.Business.csproj" />
   </ItemGroup>
 
 </Project>

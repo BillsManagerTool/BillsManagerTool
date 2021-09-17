@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Services.ServiceContracts
+﻿namespace BillsManagement.Business.Contracts.ServiceContracts
 {
     using BillsManagement.DataContracts.Auth;
 

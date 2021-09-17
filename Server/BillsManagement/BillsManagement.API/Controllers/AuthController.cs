@@ -1,7 +1,7 @@
 ﻿namespace BillsManagement.API.Controllers
 {
+    using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.DataContracts.Auth;
-    using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Utility.Constants;
     using Microsoft.AspNetCore.Mvc;
     using System;

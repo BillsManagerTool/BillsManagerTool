@@ -6,10 +6,6 @@
     using BillsManagement.Data.Models;
     using BillsManagement.Data.Contracts;
     using BillsManagement.Security;
-    using BillsManagement.Services.ServiceContracts;
-    using BillsManagement.Services.Services.AuthService;
-    using BillsManagement.Services.Services.ChargesService;
-    using BillsManagement.Services.Services.OccupantsService;
     using BillsManagement.Utility;
     using BillsManagement.Utility.Security;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,6 +25,11 @@
     using System.Text;
     using BillsManagement.Data.Repositories;
     using BillsManagement.Data;
+    using BillsManagement.Business.Contracts.ServiceContracts;
+    using BillsManagement.Business.Services.AuthService;
+    using BillsManagement.Services.ServiceContracts;
+    using BillsManagement.Business.Services.ChargesService;
+    using BillsManagement.Business.Services.OccupantsService;
 
     /// <summary>
     /// The application startup class

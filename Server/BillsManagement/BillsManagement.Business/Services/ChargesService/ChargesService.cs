@@ -1,4 +1,4 @@
-﻿namespace BillsManagement.Services.Services.ChargesService
+﻿namespace BillsManagement.Business.Services.ChargesService
 {
     using BillsManagement.Data.Contracts;
     using BillsManagement.Services.ServiceContracts;
