@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Utility", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.DomainModels", "BillsManagement.DomainModels\BillsManagement.DomainModels.csproj", "{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Tests", "BillsManagement.Tests\BillsManagement.Tests.csproj", "{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.API", "BillsManagement.API\BillsManagement.API.csproj", "{5A30AF68-1A12-4F19-B728-3AA720A3C26B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Data", "BillsManagement.Data\BillsManagement.Data.csproj", "{AEAF74D1-2AF3-4607-B19D-426DD484071A}"
@@ -22,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Business.Contracts", "BillsManagement.Business.Contracts\BillsManagement.Business.Contracts.csproj", "{3458E7B2-B6FB-4423-9AEF-76B38EA1678B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillsManagement.Custom", "BillsManagement.Custom\BillsManagement.Custom.csproj", "{77F6CCEB-2971-491E-9638-82DE1C6CE55D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillsManagement.Tests", "BillsManagement.Tests\BillsManagement.Tests.csproj", "{0AB314F4-001D-4628-83C7-42E89B73A420}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DBC1E5C-4BFD-48FC-89BC-CBE461EB20D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F3D8F32-9C46-4A9B-AADD-EB80D43A8D67}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A30AF68-1A12-4F19-B728-3AA720A3C26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +65,10 @@ Global
 		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77F6CCEB-2971-491E-9638-82DE1C6CE55D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AB314F4-001D-4628-83C7-42E89B73A420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB314F4-001D-4628-83C7-42E89B73A420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB314F4-001D-4628-83C7-42E89B73A420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB314F4-001D-4628-83C7-42E89B73A420}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
