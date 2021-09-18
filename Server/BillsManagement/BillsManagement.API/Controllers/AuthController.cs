@@ -7,17 +7,28 @@
     using System;
     using System.Net;
 
+    /// <summary>
+    /// Auth controller.
+    /// </summary>
     [ApiController]
     [Route(Endpoint.BaseAuthRoute)]
     public class AuthController : BaseController
     {
         private readonly IAuthService _service;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthController"/> class.
+        /// </summary>
         public AuthController(IAuthService service)
         {
             this._service = service;
         }
 
+        /// <summary>
+        /// Register an occupant
+        /// </summary>
+        /// <param name="request">Accepts request of <see cref="Business.Contracts.HTTP.RegisterRequest"/></param>
+        /// <returns>ActionResult as an instance of <see cref="Business.Contracts.HTTP.RegisterResponse"/> class.</returns>
         [HttpPost]
         [Route(Endpoint.Register)]
         public ActionResult<RegisterResponse> Register(RegisterRequest request)
@@ -35,6 +46,12 @@
             }
         }
 
+        /// <summary>
+        /// Authenticates the occupant.
+        /// After successful authentication generates jwt token.
+        /// </summary>
+        /// <param name="request">Accepts request of <see cref="Business.Contracts.HTTP.AuthenticateRequest"/></param>
+        /// <returns>ActionResult as an instance of <see cref="Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
         [HttpPost]
         [Route(Endpoint.Authenticate)]
         public ActionResult<AuthenticateResponse> Authenticate(AuthenticateRequest request)

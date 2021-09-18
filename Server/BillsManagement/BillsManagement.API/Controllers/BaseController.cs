@@ -1,15 +1,12 @@
 ﻿namespace BillsManagement.API.Controllers
 {
-    using BillsManagement.Business.Contracts.ServiceContracts;
-    using BillsManagement.Custom.CustomExceptions;
-    using BillsManagement.Utility;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
-    using System.Linq;
-    using System.Net;
-    using System.Security.Claims;
 
+    /// <summary>
+    /// Base controller.
+    /// </summary>
     public class BaseController : Controller
     {
         /// <summary>
@@ -23,12 +20,10 @@
             }
         }
 
-        protected Guid GetUserId()
-        {
-            var userId = this.User.Claims.FirstOrDefault(claimRecord => claimRecord.Type == "UserId").Value;
-            return Guid.Parse(userId);
-        }
-
+        /// <summary>
+        /// Append refresh token to response cookie
+        /// </summary>
+        /// <param name="token">Refresh token</param>
         protected void SetTokenCookie(string token)
         {
             // append cookie with refresh token to the http response
@@ -40,6 +35,10 @@
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
 
+        /// <summary>
+        /// Getting ip address
+        /// </summary>
+        /// <returns>Ip address</returns>
         protected string GetIpAddress()
         {
             // get source ip address for the current request

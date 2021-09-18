@@ -1,16 +1,13 @@
-﻿using BillsManagement.API.Controllers;
-using BillsManagement.DomainModel;
-using BillsManagement.Services.ServiceContracts;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
-
-namespace BillsManagement.Tests
+﻿namespace BillsManagement.Tests
 {
+    using BillsManagement.API.Controllers;
+    using BillsManagement.DomainModel;
+    using BillsManagement.Services.ServiceContracts;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class OccupantsControllerTests
     {

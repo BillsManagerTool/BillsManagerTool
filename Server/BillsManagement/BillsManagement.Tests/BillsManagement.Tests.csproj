@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -18,10 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BillsManagement.API\BillsManagement.API.csproj" />
     <ProjectReference Include="..\BillsManagement.Business.Contracts\BillsManagement.Business.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ControllerTests\" />
   </ItemGroup>
 
 </Project>

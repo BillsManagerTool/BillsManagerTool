@@ -14,10 +14,78 @@
             Domain project XML documentation file name
             </summary>
         </member>
+        <member name="T:BillsManagement.API.Controllers.AuthController">
+            <summary>
+            Auth controller.
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.AuthController.#ctor(BillsManagement.Business.Contracts.ServiceContracts.IAuthService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BillsManagement.API.Controllers.AuthController"/> class.
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.AuthController.Register(BillsManagement.Business.Contracts.HTTP.RegisterRequest)">
+            <summary>
+            Register an occupant
+            </summary>
+            <param name="request">Accepts request of <see cref="T:BillsManagement.Business.Contracts.HTTP.RegisterRequest"/></param>
+            <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.RegisterResponse"/> class.</returns>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.AuthController.Authenticate(BillsManagement.Business.Contracts.HTTP.AuthenticateRequest)">
+            <summary>
+            Authenticates the occupant.
+            After successful authentication generates jwt token.
+            </summary>
+            <param name="request">Accepts request of <see cref="T:BillsManagement.Business.Contracts.HTTP.AuthenticateRequest"/></param>
+            <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
+        </member>
+        <member name="T:BillsManagement.API.Controllers.BaseController">
+            <summary>
+            Base controller.
+            </summary>
+        </member>
         <member name="P:BillsManagement.API.Controllers.BaseController.OccupantId">
             <summary>
             Returns occupants id from the current request extracted token
             </summary>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.BaseController.SetTokenCookie(System.String)">
+            <summary>
+            Append refresh token to response cookie
+            </summary>
+            <param name="token">Refresh token</param>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.BaseController.GetIpAddress">
+            <summary>
+            Getting ip address
+            </summary>
+            <returns>Ip address</returns>
+        </member>
+        <member name="T:BillsManagement.API.Controllers.ChargesController">
+            <summary>
+            Charges controller.
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.ChargesController.#ctor(BillsManagement.Services.ServiceContracts.IChargesService,BillsManagement.Business.Contracts.ServiceContracts.IAuthService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BillsManagement.API.Controllers.ChargesController"/> class.
+            </summary>
+        </member>
+        <member name="T:BillsManagement.API.Controllers.OccupantsController">
+            <summary>
+            Occupants controller.
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.OccupantsController.#ctor(BillsManagement.Services.ServiceContracts.IOccupantService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BillsManagement.API.Controllers.OccupantsController"/> class.
+            </summary>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.OccupantsController.GetOccupant">
+            <summary>
+            Get occupant details by extracted from the auth token occupant id.
+            </summary>
+            <returns>ActionResult as an instance of <see cref="T:BillsManagement.DomainModel.DetailedOccupant"/> class.</returns>
         </member>
         <member name="T:BillsManagement.API.Startup">
             <summary>
