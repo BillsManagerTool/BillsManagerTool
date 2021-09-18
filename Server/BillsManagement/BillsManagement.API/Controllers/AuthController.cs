@@ -14,7 +14,6 @@
         private readonly IAuthService _service;
 
         public AuthController(IAuthService service)
-            : base(service)
         {
             this._service = service;
         }

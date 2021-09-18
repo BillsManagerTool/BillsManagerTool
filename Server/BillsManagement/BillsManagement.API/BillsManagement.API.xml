@@ -14,6 +14,11 @@
             Domain project XML documentation file name
             </summary>
         </member>
+        <member name="P:BillsManagement.API.Controllers.BaseController.OccupantId">
+            <summary>
+            Returns occupants id from the current request extracted token
+            </summary>
+        </member>
         <member name="T:BillsManagement.API.Startup">
             <summary>
             The application startup class

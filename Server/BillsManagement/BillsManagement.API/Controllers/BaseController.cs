@@ -12,30 +12,21 @@
 
     public class BaseController : Controller
     {
-        private readonly IAuthService _authService;
-
-        public BaseController(IAuthService authService)
-        {
-            this._authService = authService;
+        /// <summary>
+        /// Returns occupants id from the current request extracted token
+        /// </summary>
+        protected int OccupantId 
+        { 
+            get
+            {
+                return int.Parse(HttpContext.Items["UserId"].ToString());
+            }
         }
 
         protected Guid GetUserId()
         {
             var userId = this.User.Claims.FirstOrDefault(claimRecord => claimRecord.Type == "UserId").Value;
             return Guid.Parse(userId);
-        }
-
-        protected void Authorize()
-        {
-            Claim claim = this.User.Claims
-                .FirstOrDefault(claimRecord => claimRecord.Type == "UserId");
-
-            if (claim == null)
-            {
-                throw new HttpStatusCodeException(HttpStatusCode.Unauthorized, GlobalConstants.UnauthorizedMessage);
-            }
-
-            int extractedOccupantId = int.Parse(claim.Value);
         }
 
         protected void SetTokenCookie(string token)

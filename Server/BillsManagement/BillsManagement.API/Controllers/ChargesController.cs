@@ -12,7 +12,6 @@
         private readonly IChargesService _service;
 
         public ChargesController(IChargesService service, IAuthService userService)
-            : base(userService)
         {
             this._service = service;
         }
