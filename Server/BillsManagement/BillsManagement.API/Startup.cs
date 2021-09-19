@@ -81,9 +81,9 @@
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             // DbContext configuration
-            var connectionString = this._configuration["Secrets:JWT_Secret"];
+            //var connectionString = this._configuration["Secrets:JWT_Secret"];
             services.AddDbContext<BillsManager_DevContext>(options =>
-                options.UseSqlServer(this._configuration["Secrets:ConnectionString"]));
+                options.UseSqlServer(this._configuration.GetConnectionString("BillsManagerConnectionString")));
 
             // Repository configurations
             services.AddScoped<IAuthRepository, AuthRepository>();

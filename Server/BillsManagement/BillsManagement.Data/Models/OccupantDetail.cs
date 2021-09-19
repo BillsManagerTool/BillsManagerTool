@@ -21,7 +21,6 @@ namespace BillsManagement.Data.Models
         public bool? IsOwner { get; set; }
         public bool? IsHousekeeper { get; set; }
         public bool? IsCurrentOccupant { get; set; }
-        public int RefreshTokenId { get; set; }
         public string Password { get; set; }
 
         public virtual ICollection<Occupant> Occupants { get; set; }

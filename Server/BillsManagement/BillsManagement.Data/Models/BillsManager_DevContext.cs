@@ -164,7 +164,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F72E67F2EB");
+                    .HasName("PK__Notifica__BA44B3F78D873FFD");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -195,7 +195,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EB05CEE0AE");
+                    .HasName("PK__Occupant__C28410EBF8EE1396");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -239,15 +239,11 @@ namespace BillsManagement.Data.Models
             {
                 entity.ToTable("RefreshToken", "Security");
 
-                entity.Property(e => e.Created)
-                    .HasColumnType("smalldatetime")
-                    .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.Created).HasColumnType("smalldatetime");
 
-                entity.Property(e => e.Expires)
-                    .HasColumnType("smalldatetime")
-                    .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.Expires).HasColumnType("smalldatetime");
 
-                entity.Property(e => e.ReasonRevoked).HasMaxLength(256);
+                entity.Property(e => e.ReasonRevoked).HasMaxLength(64);
 
                 entity.Property(e => e.ReplacedByToken).HasMaxLength(1024);
 
@@ -263,7 +259,7 @@ namespace BillsManagement.Data.Models
                     .WithMany(p => p.RefreshTokens)
                     .HasForeignKey(d => d.OccupantDetailsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OccupantDetailsRefreshToken");
+                    .HasConstraintName("FK_OccupanтDetailsRefreshToken");
             });
 
             modelBuilder.Entity<Town>(entity =>
