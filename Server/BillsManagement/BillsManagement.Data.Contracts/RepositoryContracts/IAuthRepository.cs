@@ -13,5 +13,17 @@
         DomainModel.Occupant GetOccupantById(int id);
 
         void SaveRefreshToken(int occupantId, DomainModel.RefreshToken refreshToken);
+
+        DomainModel.RefreshToken GetRefreshTokenByOccupantDetailsId(int occupantDetailsId);
+
+        void RemoveOldRefreshTokens(int occupantId);
+
+        DomainModel.RefreshToken GetChildToken(DomainModel.RefreshToken refreshToken);
+
+        void ReplaceRefreshToken(DomainModel.RefreshToken refreshToken);
+
+        DomainModel.OccupantDetails GetOccupantDetailsByOccupantId(int occupantId);
+
+        DomainModel.OccupantRefreshToken GetOccupantDetailsByRefreshToken(string token);
     }
 }

@@ -7,5 +7,6 @@
         RegisterResponse Register(RegisterRequest request);
         AuthenticateResponse Authenticate(AuthenticateRequest request, string ipAddress);
         DomainModel.Occupant GetOccupantById(int id);
+        AuthenticateResponse RefreshToken(string token, string ipAddress);
     }
 }

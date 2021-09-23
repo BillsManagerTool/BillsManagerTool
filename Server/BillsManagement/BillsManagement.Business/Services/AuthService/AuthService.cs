@@ -56,6 +56,49 @@
             return response;
         }
 
+        public AuthenticateResponse RefreshToken(string token, string ipAddress)
+        {
+            var occupantRefreshToken = this._authRepository.GetOccupantDetailsByRefreshToken(token);
+
+            if (occupantRefreshToken.RefreshToken.IsRevoked)
+            {
+                // revoke all descendant tokens in case this token has been compromised
+                this.RevokeDescendantRefreshTokens(occupantRefreshToken.RefreshToken, occupantRefreshToken.OccupantDetails, ipAddress, $"Attempted reuse of revoked ancestor token: {token}");
+            }
+
+            if (!occupantRefreshToken.RefreshToken.IsActive)
+            {
+                string msg = "Invalid token";
+                throw new HttpStatusCodeException(HttpStatusCode.NotAcceptable, msg);
+            }
+
+            // replace old refresh token with a new one (rotate token)
+            var newRefreshToken = RotateRefreshToken(occupantRefreshToken.RefreshToken, ipAddress);
+            this._authRepository.ReplaceRefreshToken(newRefreshToken);
+
+            // remove old refresh tokens from user
+            this.RemoveOldRefreshTokens(occupantRefreshToken.OccupantDetails);
+
+            // generate new jwt
+            var jwtToken = _jwtUtils.GenerateJwtToken(occupantRefreshToken.OccupantDetails);
+
+            return new AuthenticateResponse(occupantRefreshToken.OccupantDetails.Email, jwtToken, newRefreshToken.Token);
+        }
+
+        //public void RevokeToken(string token, string ipAddress)
+        //{
+        //    var user = getUserByRefreshToken(token);
+        //    var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
+
+        //    if (!refreshToken.IsActive)
+        //        throw new AppException("Invalid token");
+
+        //    // revoke token and save
+        //    revokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
+        //    _context.Update(user);
+        //    _context.SaveChanges();
+        //}
+
         public RegisterResponse Register(RegisterRequest request)
         {
             this.ValidateOccupantExistence(request.Email);

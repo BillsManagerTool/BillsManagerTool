@@ -28,6 +28,19 @@
             return occupant;
         }
 
+        public DomainModel.RefreshToken GetRefreshTokenByOccupantDetailsId(int occupantDetailsId)
+        {
+            DomainModel.RefreshToken refreshTokenModel = new DomainModel.RefreshToken();
+
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var refreshTokenEntity = context.RefreshTokens.SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
+                refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
+            }
+
+            return refreshTokenModel;
+        }
+
         public DomainModel.OccupantDetails GetOccupantDetails(string email)
         {
             DomainModel.OccupantDetails occupantDetails = new DomainModel.OccupantDetails();
@@ -61,6 +74,21 @@
             //} 
 
             return occupantDetails;
+        }
+
+        public DomainModel.OccupantDetails GetOccupantDetailsByOccupantId(int occupantId)
+        {
+            DomainModel.OccupantDetails occupantDetailsModel = new DomainModel.OccupantDetails();
+
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var occupantEntity = context.Occupants.SingleOrDefault(x => x.OccupantId == occupantId);
+                var occupantDetailsEntity = context.OccupantDetails
+                    .SingleOrDefault(x => x.OccupantDetailsId == occupantEntity.OccupantDetailsId);
+                occupantDetailsModel = this._mapper.Map<OccupantDetail, DomainModel.OccupantDetails>(occupantDetailsEntity);
+            }
+
+            return occupantDetailsModel;
         }
 
         public bool IsExistingOccupant(string email) // TODO: Change name to CheckIfOccupantExistsByEmail
@@ -101,6 +129,34 @@
             }
         }
 
+        public void RemoveOldRefreshTokens(int occupantDetailsId)
+        {
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                foreach (var token in context.RefreshTokens.Where(x => x.OccupantDetailsId == occupantDetailsId))
+                {
+                    var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(token);
+                    if (!refreshTokenModel.IsActive
+                        && refreshTokenModel.Created.AddDays(2) <= DateTime.UtcNow)
+                    {
+                        context.RefreshTokens.Remove(token);
+                        context.SaveChanges();
+                    }
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        public void ReplaceRefreshToken(DomainModel.RefreshToken refreshToken)
+        {
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
+                context.RefreshTokens.Add(refreshTokenEntity);
+            }
+        }
+
         public void SaveRefreshToken(int occupantDetailsId, DomainModel.RefreshToken refreshToken)
         {
 
@@ -115,6 +171,39 @@
                 context.Update(occupantDetailsEntity);
                 context.SaveChanges();
             }
+        }
+
+        public DomainModel.RefreshToken GetChildToken(DomainModel.RefreshToken refreshToken)
+        {
+            DomainModel.RefreshToken refreshTokenModel = new DomainModel.RefreshToken();
+
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var refreshTokenEntity = context.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken.ReplacedByToken);
+                refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
+            }
+
+            return refreshTokenModel;
+        }
+
+        public DomainModel.OccupantRefreshToken GetOccupantDetailsByRefreshToken(string token)
+        {
+            DomainModel.OccupantRefreshToken occupantRefreshTokenModel = new DomainModel.OccupantRefreshToken();
+
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var refreshTokenEntity = context.RefreshTokens.SingleOrDefault(x => x.Token == token);
+                var occupantDetailsEntity = context.OccupantDetails
+                    .SingleOrDefault(x => x.OccupantDetailsId == refreshTokenEntity.OccupantDetailsId);
+
+                var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
+                var occupantDetailsModel = this._mapper.Map<OccupantDetail, DomainModel.OccupantDetails>(occupantDetailsEntity);
+
+                occupantRefreshTokenModel.RefreshToken = refreshTokenModel;
+                occupantRefreshTokenModel.OccupantDetails = occupantDetailsModel;
+            }
+
+            return occupantRefreshTokenModel;
         }
     }
 }

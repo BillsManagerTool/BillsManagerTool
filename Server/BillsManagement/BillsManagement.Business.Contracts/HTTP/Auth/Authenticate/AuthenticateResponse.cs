@@ -4,6 +4,17 @@
 
     public class AuthenticateResponse : BaseResponse
     {
+        public AuthenticateResponse()
+        {
+
+        }
+        public AuthenticateResponse(string email, string token, string refreshToken)
+        {
+            this.Email = email;
+            this.Token = token;
+            this.RefreshToken = refreshToken;
+        }
+
         [JsonPropertyName("JWT")]
         public string Token { get; set; }
 
