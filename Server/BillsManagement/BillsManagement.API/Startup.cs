@@ -29,7 +29,6 @@
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Business.Services.ChargesService;
     using BillsManagement.Business.Services.OccupantsService;
-    using BillsManagement.Data.Utils;
 
     /// <summary>
     /// The application startup class

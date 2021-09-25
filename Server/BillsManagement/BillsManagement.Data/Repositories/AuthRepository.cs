@@ -112,9 +112,8 @@
         {
             // foreach and del
             var refreshTokenEntity = this._context.RefreshTokens.FirstOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
-            var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
-            if (!refreshTokenModel.IsActive
-                && refreshTokenModel.Created.AddMinutes(5) <= DateTime.UtcNow)
+            if (!refreshTokenEntity.IsActive
+                && refreshTokenEntity.Created.Value.AddMinutes(5) <= DateTime.UtcNow)
             {
                 this._context.RefreshTokens.Remove(refreshTokenEntity);
                 this._context.SaveChanges();
