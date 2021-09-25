@@ -16,13 +16,8 @@
 
         public DomainModel.Occupant GetOccupantById(int id)
         {
-            DomainModel.Occupant occupant = new DomainModel.Occupant();
-
-            using (BillsManager_DevContext context = new BillsManager_DevContext())
-            {
-                var occupantEntity = context.Occupants.Find(id);
-                occupant = this._mapper.Map<Occupant, DomainModel.Occupant>(occupantEntity);
-            }
+            var occupantEntity = this._context.Occupants.Find(id);
+            DomainModel.Occupant occupant = this._mapper.Map<Occupant, DomainModel.Occupant>(occupantEntity);
 
             return occupant;
         }
