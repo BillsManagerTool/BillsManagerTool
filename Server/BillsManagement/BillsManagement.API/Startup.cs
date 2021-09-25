@@ -29,6 +29,7 @@
     using BillsManagement.Services.ServiceContracts;
     using BillsManagement.Business.Services.ChargesService;
     using BillsManagement.Business.Services.OccupantsService;
+    using BillsManagement.Data.Utils;
 
     /// <summary>
     /// The application startup class
@@ -81,9 +82,15 @@
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             // DbContext configuration
-            //var connectionString = this._configuration["Secrets:JWT_Secret"];
+            string connStr = this._configuration.GetConnectionString("DevConnection");
             services.AddDbContext<BillsManager_DevContext>(options =>
-                options.UseSqlServer(this._configuration.GetConnectionString("BillsManagerConnectionString")));
+            {
+                options.UseSqlServer(connStr);
+            });
+
+            services.AddScoped<BillsManager_DevContext>();
+            //services.AddDbContext<BillsManager_DevContext>(options =>
+            //    options.UseSqlServer(this._configuration.GetConnectionString("BillsManagerConnectionString")));
 
             // Repository configurations
             services.AddScoped<IAuthRepository, AuthRepository>();

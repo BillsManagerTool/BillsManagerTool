@@ -7,18 +7,18 @@
 
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        public readonly BillsManager_DevContext _dbContext;
+        public readonly BillsManager_DevContext _context;
         public readonly IMapper _mapper;
 
-        public BaseRepository(BillsManager_DevContext dbContext, IMapper mapper)
+        public BaseRepository(BillsManager_DevContext context, IMapper mapper)
         {
-            this._dbContext = dbContext;
+            this._context = context;
             this._mapper = mapper;
         }
 
         public DomainModel.Settings GetNotificationSettings(int key)
         {
-            var notificationSettingsEntity = this._dbContext.NotificationSettings.FirstOrDefault(x => x.SettingsKey == 1);
+            var notificationSettingsEntity = this._context.NotificationSettings.FirstOrDefault(x => x.SettingsKey == 1);
 
             var notificationSettingsModel = this._mapper.Map<NotificationSetting, DomainModel.Settings>(notificationSettingsEntity);
 

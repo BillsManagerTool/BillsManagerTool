@@ -15,8 +15,8 @@
 
         public DomainModel.DetailedOccupant GetOccupantDetailsById(int id)
         {
-            var occupant = this._dbContext.Occupants.SingleOrDefault(x => x.OccupantId == id);
-            var occupantDetailsEntity = this._dbContext.OccupantDetails.SingleOrDefault(x => x.OccupantDetailsId == occupant.OccupantDetailsId);
+            var occupant = this._context.Occupants.SingleOrDefault(x => x.OccupantId == id);
+            var occupantDetailsEntity = this._context.OccupantDetails.SingleOrDefault(x => x.OccupantDetailsId == occupant.OccupantDetailsId);
 
             var detailedOccupant = this._mapper.Map<OccupantDetail, DomainModel.DetailedOccupant>(occupantDetailsEntity);
             detailedOccupant.OccupantId = occupant.OccupantId;

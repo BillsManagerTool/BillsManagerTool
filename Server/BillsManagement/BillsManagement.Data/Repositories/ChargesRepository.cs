@@ -17,7 +17,7 @@
 
         public List<DomainModel.Charge> GetCharges()
         {
-            List<Charge> charges = this._dbContext.Charges.ToList();
+            List<Charge> charges = this._context.Charges.ToList();
 
             List<DomainModel.Charge> mappedCharges = new List<DomainModel.Charge>();
             foreach (var charge in charges)
