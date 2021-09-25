@@ -110,20 +110,23 @@
 
         public void RemoveOldRefreshTokens(int occupantDetailsId)
         {
-            // foreach and del
-            var refreshTokenEntity = this._context.RefreshTokens.FirstOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
-            if (!refreshTokenEntity.IsActive
-                && refreshTokenEntity.Created.Value.AddMinutes(5) <= DateTime.UtcNow)
+            foreach (var refreshTokenEntity in this._context.RefreshTokens.Where(x => x.OccupantDetailsId == occupantDetailsId))
             {
-                this._context.RefreshTokens.Remove(refreshTokenEntity);
-                this._context.SaveChanges();
+                if (!refreshTokenEntity.IsActive
+                    && refreshTokenEntity.Created.Value.AddMinutes(5) <= DateTime.UtcNow)
+                {
+                    this._context.RefreshTokens.Remove(refreshTokenEntity);
+                }
             }
+
+            this._context.SaveChanges();
         }
 
         public void ReplaceRefreshToken(DomainModel.RefreshToken refreshToken)
         {
-                var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
-                this._context.RefreshTokens.Add(refreshTokenEntity);
+            var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
+            this._context.RefreshTokens.Add(refreshTokenEntity);
+            this._context.SaveChanges();
         }
 
         public void SaveRefreshToken(int occupantDetailsId, DomainModel.RefreshToken refreshToken)
@@ -163,9 +166,13 @@
 
         public void RevokeRefreshToken(DomainModel.RefreshToken refreshToken)
         {
-            var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
-            var token = this._context.RefreshTokens.Find(refreshToken.Id);
-            token = refreshTokenEntity;
+            //var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
+            var refreshTokenEntity = this._context.RefreshTokens.SingleOrDefault(x => x.Id == refreshToken.Id);
+            refreshTokenEntity.Revoked = refreshToken.Revoked;
+            refreshTokenEntity.RevokedByIp = refreshToken.RevokedByIp;
+            refreshTokenEntity.ReasonRevoked = refreshToken.ReasonRevoked;
+            refreshTokenEntity.ReplacedByToken = refreshToken.ReplacedByToken;
+            this._context.RefreshTokens.Update(refreshTokenEntity);
             this._context.SaveChanges();
         }
     }

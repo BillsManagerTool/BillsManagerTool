@@ -73,26 +73,26 @@
             }
         }
 
-        //[HttpPost]
-        //[Route("refresh-token")]
-        //public ActionResult<AuthenticateResponse> RefreshToken()
-        //{
-        //    try
-        //    {
-        //        AuthenticateResponse response = new AuthenticateResponse();
+        [HttpPost]
+        [Route("refresh-token")]
+        public ActionResult<AuthenticateResponse> RefreshToken()
+        {
+            try
+            {
+                AuthenticateResponse response = new AuthenticateResponse();
 
-        //        var refreshToken = Request.Cookies["refreshToken"];
-        //        var ipAddress = this.GetIpAddress();
+                var refreshToken = Request.Cookies["refreshToken"];
+                var ipAddress = this.GetIpAddress();
 
-        //        response = this._service.RefreshToken(refreshToken, ipAddress);
-        //        this.SetTokenCookie(response.RefreshToken);
-        //        response.StatusCode = HttpStatusCode.OK;
-        //        return response;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+                response = this._service.RefreshToken(refreshToken, ipAddress);
+                this.SetTokenCookie(response.RefreshToken);
+                response.StatusCode = HttpStatusCode.OK;
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

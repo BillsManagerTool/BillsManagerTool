@@ -73,6 +73,7 @@
 
             // replace old refresh token with a new one (rotate token)
             var newRefreshToken = RotateRefreshToken(occupantRefreshToken.RefreshToken, ipAddress);
+            newRefreshToken.OccupantDetailsId = occupantRefreshToken.OccupantDetails.OccupantDetailsId;
             this._authRepository.ReplaceRefreshToken(newRefreshToken);
 
             // remove old inactive refresh tokens from user based on TTL in app settings

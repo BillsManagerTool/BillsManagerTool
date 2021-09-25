@@ -59,6 +59,7 @@
 
             CreateMap<DomainModel.RefreshToken, RefreshToken>()
                 .ForMember(destination => destination.Id, options => options.MapFrom(source => source.Id))
+                .ForMember(destination => destination.OccupantDetailsId, options => options.MapFrom(source => source.OccupantDetailsId))
                 .ForMember(destination => destination.Token, options => options.MapFrom(source => source.Token))
                 .ForMember(destination => destination.Expires, options => options.MapFrom(source => source.Expires))
                 .ForMember(destination => destination.Created, options => options.MapFrom(source => source.Created))
