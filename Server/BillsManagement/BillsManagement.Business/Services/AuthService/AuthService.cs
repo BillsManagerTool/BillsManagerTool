@@ -31,7 +31,6 @@
         {
             OccupantDetails occupantDetails = this._authRepository.GetOccupantDetails(request.Email);
 
-            // validate
             if (occupantDetails == null)
             {
                 string msg = "User is not valid.";
@@ -45,8 +44,8 @@
 
             this._authRepository.SaveRefreshToken(occupantDetails.OccupantDetailsId, refreshToken);
 
-            // remove old refresh tokens from user
-            //removeOldRefreshTokens(user);
+            // remove old inactive refresh tokens from user based on TTL in app settings
+            this._authRepository.RemoveOldRefreshTokens(occupantDetails.OccupantDetailsId);
 
             AuthenticateResponse response = new AuthenticateResponse();
             response.Token = jwtToken;
@@ -76,8 +75,8 @@
             var newRefreshToken = RotateRefreshToken(occupantRefreshToken.RefreshToken, ipAddress);
             this._authRepository.ReplaceRefreshToken(newRefreshToken);
 
-            // remove old refresh tokens from user
-            this.RemoveOldRefreshTokens(occupantRefreshToken.OccupantDetails);
+            // remove old inactive refresh tokens from user based on TTL in app settings
+            this._authRepository.RemoveOldRefreshTokens(occupantRefreshToken.OccupantDetails.OccupantDetailsId);
 
             // generate new jwt
             var jwtToken = _jwtUtils.GenerateJwtToken(occupantRefreshToken.OccupantDetails);

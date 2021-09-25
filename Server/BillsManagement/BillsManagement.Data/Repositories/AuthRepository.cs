@@ -133,18 +133,25 @@
         {
             using (BillsManager_DevContext context = new BillsManager_DevContext())
             {
-                foreach (var token in context.RefreshTokens.Where(x => x.OccupantDetailsId == occupantDetailsId))
-                {
-                    var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(token);
-                    if (!refreshTokenModel.IsActive
-                        && refreshTokenModel.Created.AddDays(2) <= DateTime.UtcNow)
-                    {
-                        context.RefreshTokens.Remove(token);
-                        context.SaveChanges();
-                    }
-                }
+                var refreshTokenEntity = context.RefreshTokens.FirstOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
+                var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
 
-                context.SaveChanges();
+                if (!refreshTokenModel.IsActive
+                    && refreshTokenModel.Created.AddMinutes(5) <= DateTime.UtcNow)
+                {
+                    context.RefreshTokens.Remove(refreshTokenEntity);
+                    context.SaveChanges();
+                }
+                //foreach (var token in context.RefreshTokens.Where(x => x.OccupantDetailsId == occupantDetailsId))
+                //{
+                //    var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(token);
+                //    if (!refreshTokenModel.IsActive
+                //        && refreshTokenModel.Created.AddMinutes(5) <= DateTime.UtcNow)
+                //    {
+                //        context.RefreshTokens.Remove(token);
+                //        context.SaveChanges();
+                //    }
+                //}
             }
         }
 
@@ -170,6 +177,7 @@
                 occupantDetailsEntity.RefreshTokens.Add(refreshTokenEntity);
                 context.Update(occupantDetailsEntity);
                 context.SaveChanges();
+                context.Dispose();
             }
         }
 
@@ -204,6 +212,17 @@
             }
 
             return occupantRefreshTokenModel;
+        }
+
+        public void RevokeRefreshToken(DomainModel.RefreshToken refreshToken)
+        {
+            var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
+            using (BillsManager_DevContext context = new BillsManager_DevContext())
+            {
+                var token = context.RefreshTokens.Find(refreshToken.Id);
+                token = refreshTokenEntity;
+                context.SaveChanges();
+            }
         }
     }
 }

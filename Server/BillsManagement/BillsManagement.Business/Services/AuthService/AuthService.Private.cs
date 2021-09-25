@@ -42,10 +42,6 @@
             }
         }
 
-        private void RemoveOldRefreshTokens(OccupantDetails occupantDetails)
-            // remove old inactive refresh tokens from user based on TTL in app settings
-            => this._authRepository.RemoveOldRefreshTokens(occupantDetails.OccupantDetailsId);
-
         private void RevokeDescendantRefreshTokens(RefreshToken refreshToken, OccupantDetails occupantDetails, string ipAddress, string reason)
         {
             // recursively traverse the refresh token chain and ensure all descendants are revoked
@@ -59,12 +55,14 @@
             }
         }
 
-        private void RevokeRefreshToken(RefreshToken token, string ipAddress, string reason = null, string replacedByToken = null)
+        private void RevokeRefreshToken(RefreshToken token, string ipAddress, string reason, string replacedByToken = null)
         {
             token.Revoked = DateTime.UtcNow;
             token.RevokedByIp = ipAddress;
             token.ReasonRevoked = reason;
             token.ReplacedByToken = replacedByToken;
+
+            this._authRepository.RevokeRefreshToken(token);
         }
 
         private RefreshToken RotateRefreshToken(RefreshToken refreshToken, string ipAddress)

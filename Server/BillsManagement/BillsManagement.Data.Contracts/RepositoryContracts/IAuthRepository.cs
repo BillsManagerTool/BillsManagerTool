@@ -25,5 +25,7 @@
         DomainModel.OccupantDetails GetOccupantDetailsByOccupantId(int occupantId);
 
         DomainModel.OccupantRefreshToken GetOccupantDetailsByRefreshToken(string token);
+
+        void RevokeRefreshToken(DomainModel.RefreshToken refreshToken);
     }
 }
