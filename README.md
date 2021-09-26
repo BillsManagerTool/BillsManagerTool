@@ -93,8 +93,11 @@ Manual of how to set up the project locally.
 3. Set up server.  
 	<font size="3">3.1. Open cloned folder and run the following command:</font>
    ```sh
-   cd Server\BillsManagement\BillsManagement.Core
+   cd Server\BillsManagement\BillsManagement.API
    ```
+
+   <font size="3">***Important:*** Add appsettings.json file under BillsManagement.API directory. Contact your team lead for the file structure and replace the server name with your local server name</font>
+
    <font size="3">3.2.  Allow user-secrets: </font>
 	  ```sh
    dotnet user-secrets init
@@ -103,10 +106,6 @@ Manual of how to set up the project locally.
 	  ```sh
    dotnet user-secrets set "Secrets:JWT_Secret" "7582ae4085c54c2c85c7b770ae720c3d"
    ```
-	  ```sh
-   dotnet user-secrets set "Secrets:ConnectionString" "server=.\SQLEXPRESS;database=BillsManager_Dev;Trusted_Connection=true;MultipleActiveResultSets=true;"
-   ```
-	<font size="3">***Important:*** Replace server name (SQLEXPRESS) with your own SQL Server name</font>
 
    <font size="3">3.4. Run the server:</font>
       ```sh
