@@ -3,7 +3,9 @@
     using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.DomainModel;
+    using BillsManagement.DomainModel.Auth;
     using System;
+    using System.Collections.Specialized;
     using System.Net;
     using System.Net.Mail;
     using System.Text;
@@ -79,6 +81,21 @@
             sb.Append("</body></html>");
 
             return sb.ToString();
+        }
+
+        private string BuildQueryString(RegisterLinkDetails registerLinkDetails)
+        {
+            NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+            queryString.Add("HousekeeperEmail", registerLinkDetails.HousekeeperEmail);
+            queryString.Add("BuildingAddress", registerLinkDetails.BuildingAddress);
+            queryString.Add("EntranceNumber", registerLinkDetails.EntranceNumber);
+            queryString.Add("Town", registerLinkDetails.Town);
+            queryString.Add("Country", registerLinkDetails.Country);
+            queryString.Add("BuildingId", registerLinkDetails.BuildingId.ToString());
+            queryString.Add("EntranceId", registerLinkDetails.EntranceId.ToString());
+
+            return queryString.ToString();
         }
     }
 }

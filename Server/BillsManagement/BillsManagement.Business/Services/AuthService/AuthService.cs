@@ -11,6 +11,7 @@
     using System.Net;
     using BillsManagement.Business.Contracts.HTTP;
     using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
+    using System.Web;
 
     public partial class AuthService : IAuthService
     {
@@ -139,7 +140,11 @@
             GenerateRegisterLinkResponse response = new GenerateRegisterLinkResponse();
 
             // prepare information needed
-            var housekeeperDetails = this._authRepository.GetOccupantDetailsByOccupantId(occupantId);
+            var registerLinkDetails = this._authRepository.GetRegisterLinkDetails(occupantId);
+
+            // build the query string params
+            var queryString = this.BuildQueryString(registerLinkDetails);
+            response.QueryString = HttpUtility.UrlDecode(queryString); // ??
 
             return response;
         }

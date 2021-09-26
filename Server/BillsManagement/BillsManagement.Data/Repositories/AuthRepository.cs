@@ -68,6 +68,7 @@
             var occupantDetailsEntity = this._context.OccupantDetails
                 .SingleOrDefault(x => x.OccupantDetailsId == occupantEntity.OccupantDetailsId);
 
+
             occupantDetailsModel = this._mapper.Map<OccupantDetail, DomainModel.OccupantDetails>(occupantDetailsEntity);
 
             return occupantDetailsModel;
@@ -229,14 +230,34 @@
         {
             RegisterLinkDetails registerLinkDetails = new RegisterLinkDetails();
 
-            var occupantDetailsId = this._context.Occupants
-                .SingleOrDefault(x => x.OccupantId == occupantId).OccupantDetailsId;
-            var occupantEmail = this._context.OccupantDetails
-                .SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId).Email;
+            var query = from ota in this._context.OccupantToApartments
+                        join o in this._context.Occupants 
+                            on occupantId equals o.OccupantId
+                        join od in this._context.OccupantDetails
+                            on o.OccupantDetailsId equals od.OccupantDetailsId
+                        join a in this._context.Apartments
+                            on ota.ApartmentId equals a.ApartmentId
+                        join e in this._context.Entrances
+                            on a.EntranceId equals e.EntranceId
+                        join b in this._context.Buildings
+                            on e.BuildingId equals b.BuildingId
+                        join t in this._context.Towns
+                            on b.TownId equals t.TownId
+                        join c in this._context.Countries
+                            on t.CountryId equals c.CountryId
+                        where ota.OccupantId == occupantId
+                        select new RegisterLinkDetails()
+                        {
+                            HousekeeperEmail = od.Email,
+                            EntranceId = e.EntranceId,
+                            EntranceNumber = e.EntranceNumber,
+                            BuildingId = b.BuildingId,
+                            BuildingAddress = b.Address,
+                            Town = t.Name,
+                            Country = c.Name
+                        };
 
-            registerLinkDetails.HousekeeperEmail = occupantEmail;
-
-            return registerLinkDetails;
+            return registerLinkDetails = query.FirstOrDefault();
         }
     }
 }
