@@ -1,6 +1,5 @@
 ﻿namespace BillsManagement.Business.Services.AuthService
 {
-    using BillsManagement.Business.Contracts.HTTP;
     using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.DomainModel;
@@ -49,9 +48,9 @@
             {
                 var childToken = this._authRepository.GetChildToken(refreshToken);
                 if (childToken.IsActive)
-                    RevokeRefreshToken(childToken, ipAddress, reason);
+                    this.RevokeRefreshToken(childToken, ipAddress, reason);
                 else
-                    RevokeDescendantRefreshTokens(childToken, occupantDetails, ipAddress, reason);
+                    this.RevokeDescendantRefreshTokens(childToken, occupantDetails, ipAddress, reason);
             }
         }
 
@@ -68,7 +67,7 @@
         private RefreshToken RotateRefreshToken(RefreshToken refreshToken, string ipAddress)
         {
             var newRefreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
-            RevokeRefreshToken(refreshToken, ipAddress, "Replaced by new token", newRefreshToken.Token);
+            this.RevokeRefreshToken(refreshToken, ipAddress, "Replaced by new token", newRefreshToken.Token);
             return newRefreshToken;
         }
 

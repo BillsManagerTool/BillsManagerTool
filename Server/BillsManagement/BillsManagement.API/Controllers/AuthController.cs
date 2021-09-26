@@ -1,6 +1,7 @@
 ﻿namespace BillsManagement.API.Controllers
 {
     using BillsManagement.Business.Contracts.HTTP;
+    using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
     using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.Utility.Constants;
     using Microsoft.AspNetCore.Mvc;
@@ -86,6 +87,23 @@
 
                 response = this._service.RefreshToken(refreshToken, ipAddress);
                 this.SetTokenCookie(response.RefreshToken);
+                response.StatusCode = HttpStatusCode.OK;
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("register-link")]
+        public ActionResult<GenerateRegisterLinkResponse> GenerateRegisterLink()
+        {
+            try
+            {
+                GenerateRegisterLinkResponse response = new GenerateRegisterLinkResponse();
+                response = this._service.GenerateRegisterLink(this.OccupantId);
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
             }

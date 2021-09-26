@@ -6,23 +6,19 @@
     using BillsManagement.DomainModel;
     using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Security;
-    using Microsoft.Extensions.Options;
     using System;
     using System.Collections.Generic;
     using System.Net;
     using BillsManagement.Business.Contracts.HTTP;
+    using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
 
     public partial class AuthService : IAuthService
     {
-        private readonly Secrets _secrets;
         private readonly IAuthRepository _authRepository;
         private readonly IJwtUtils _jwtUtils;
 
-        public AuthService(IOptions<Secrets> secrets,
-            IAuthRepository authRepository,
-            IJwtUtils jwtUtils)
+        public AuthService(IAuthRepository authRepository, IJwtUtils jwtUtils)
         {
-            this._secrets = secrets.Value ?? throw new ArgumentException(nameof(secrets));
             this._authRepository = authRepository;
             this._jwtUtils = jwtUtils;
         }
@@ -62,7 +58,10 @@
             if (occupantRefreshToken.RefreshToken.IsRevoked)
             {
                 // revoke all descendant tokens in case this token has been compromised
-                this.RevokeDescendantRefreshTokens(occupantRefreshToken.RefreshToken, occupantRefreshToken.OccupantDetails, ipAddress, $"Attempted reuse of revoked ancestor token: {token}");
+                this.RevokeDescendantRefreshTokens(occupantRefreshToken.RefreshToken, 
+                    occupantRefreshToken.OccupantDetails, 
+                    ipAddress, 
+                    $"Attempted reuse of revoked ancestor token: {token}");
             }
 
             if (!occupantRefreshToken.RefreshToken.IsActive)
@@ -126,6 +125,13 @@
                 throw new KeyNotFoundException("Occupant not found");
 
             return occupant;
+        }
+
+        public GenerateRegisterLinkResponse GenerateRegisterLink(int occupantId)
+        {
+            GenerateRegisterLinkResponse response = new GenerateRegisterLinkResponse();
+
+            return response;
         }
     }
 }

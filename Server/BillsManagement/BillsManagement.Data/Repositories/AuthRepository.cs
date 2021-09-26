@@ -17,6 +17,7 @@
         public DomainModel.Occupant GetOccupantById(int id)
         {
             var occupantEntity = this._context.Occupants.Find(id);
+
             DomainModel.Occupant occupant = this._mapper.Map<Occupant, DomainModel.Occupant>(occupantEntity);
 
             return occupant;
@@ -26,7 +27,9 @@
         {
             DomainModel.RefreshToken refreshTokenModel = new DomainModel.RefreshToken();
 
-            var refreshTokenEntity = this._context.RefreshTokens.SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
+            var refreshTokenEntity = this._context.RefreshTokens
+                .SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
+
             refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
 
             return refreshTokenModel;
@@ -53,14 +56,6 @@
 
             occupantDetails = query.FirstOrDefault();
 
-            // TODO: Move to service layer
-
-            //if (occupantDetails == null)
-            //{
-            //    string msg = "Can't read user details.";
-            //    throw new HttpStatusCodeException(HttpStatusCode.NotFound, msg);
-            //} 
-
             return occupantDetails;
         }
 
@@ -71,6 +66,7 @@
             var occupantEntity = this._context.Occupants.SingleOrDefault(x => x.OccupantId == occupantId);
             var occupantDetailsEntity = this._context.OccupantDetails
                 .SingleOrDefault(x => x.OccupantDetailsId == occupantEntity.OccupantDetailsId);
+
             occupantDetailsModel = this._mapper.Map<OccupantDetail, DomainModel.OccupantDetails>(occupantDetailsEntity);
 
             return occupantDetailsModel;
@@ -80,7 +76,8 @@
         {
             OccupantDetail occupant = new OccupantDetail();
 
-            occupant = this._context.OccupantDetails.FirstOrDefault(o => o.Email == email);
+            occupant = this._context.OccupantDetails
+                .FirstOrDefault(o => o.Email == email);
 
             bool isExisting = false;
 
@@ -110,7 +107,8 @@
 
         public void RemoveOldRefreshTokens(int occupantDetailsId)
         {
-            foreach (var refreshTokenEntity in this._context.RefreshTokens.Where(x => x.OccupantDetailsId == occupantDetailsId))
+            foreach (var refreshTokenEntity in this._context.RefreshTokens
+                .Where(x => x.OccupantDetailsId == occupantDetailsId))
             {
                 if (!refreshTokenEntity.IsActive
                     && refreshTokenEntity.Created.Value.AddMinutes(5) <= DateTime.UtcNow)
@@ -125,6 +123,7 @@
         public void ReplaceRefreshToken(DomainModel.RefreshToken refreshToken)
         {
             var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
+
             this._context.RefreshTokens.Add(refreshTokenEntity);
             this._context.SaveChanges();
         }
@@ -133,7 +132,9 @@
         {
             var occupantDetailsEntity = this._context.OccupantDetails
                 .SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
+
             var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
+
             occupantDetailsEntity.RefreshTokens.Add(refreshTokenEntity);
             this._context.Update(occupantDetailsEntity);
             this._context.SaveChanges();
@@ -143,7 +144,9 @@
         {
             DomainModel.RefreshToken refreshTokenModel = new DomainModel.RefreshToken();
 
-            var refreshTokenEntity = this._context.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken.ReplacedByToken);
+            var refreshTokenEntity = this._context.RefreshTokens
+                .SingleOrDefault(x => x.Token == refreshToken.ReplacedByToken);
+
             refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
 
             return refreshTokenModel;
@@ -156,8 +159,10 @@
             var refreshTokenEntity = this._context.RefreshTokens.SingleOrDefault(x => x.Token == token);
             var occupantDetailsEntity = this._context.OccupantDetails
                 .SingleOrDefault(x => x.OccupantDetailsId == refreshTokenEntity.OccupantDetailsId);
+
             var refreshTokenModel = this._mapper.Map<RefreshToken, DomainModel.RefreshToken>(refreshTokenEntity);
             var occupantDetailsModel = this._mapper.Map<OccupantDetail, DomainModel.OccupantDetails>(occupantDetailsEntity);
+
             occupantRefreshTokenModel.RefreshToken = refreshTokenModel;
             occupantRefreshTokenModel.OccupantDetails = occupantDetailsModel;
 
@@ -166,12 +171,13 @@
 
         public void RevokeRefreshToken(DomainModel.RefreshToken refreshToken)
         {
-            //var refreshTokenEntity = this._mapper.Map<DomainModel.RefreshToken, RefreshToken>(refreshToken);
             var refreshTokenEntity = this._context.RefreshTokens.SingleOrDefault(x => x.Id == refreshToken.Id);
+
             refreshTokenEntity.Revoked = refreshToken.Revoked;
             refreshTokenEntity.RevokedByIp = refreshToken.RevokedByIp;
             refreshTokenEntity.ReasonRevoked = refreshToken.ReasonRevoked;
             refreshTokenEntity.ReplacedByToken = refreshToken.ReplacedByToken;
+
             this._context.RefreshTokens.Update(refreshTokenEntity);
             this._context.SaveChanges();
         }
