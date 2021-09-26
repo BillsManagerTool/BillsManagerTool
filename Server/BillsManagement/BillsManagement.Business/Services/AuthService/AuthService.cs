@@ -131,6 +131,9 @@
         {
             GenerateRegisterLinkResponse response = new GenerateRegisterLinkResponse();
 
+            // prepare information needed
+            var housekeeperDetails = this._authRepository.GetOccupantDetailsByOccupantId(occupantId);
+
             return response;
         }
     }
