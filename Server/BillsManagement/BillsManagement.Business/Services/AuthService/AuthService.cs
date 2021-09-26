@@ -110,7 +110,9 @@
                 BuildingAddress = request.BuildingAddress,
                 EntranceNumber = request.EntranceNumber,
                 CountryId = request.CountryId,
-                TownId = request.TownId
+                TownId = request.TownId,
+                ApartmentFloor = request.ApartmentFloor,
+                ApartmentNumber = request.ApartmentNumber
             };
 
             this._authRepository.Register(registerArgs);

@@ -4,6 +4,7 @@
     using BillsManagement.Data.Contracts;
     using BillsManagement.Data.Contracts.Args;
     using BillsManagement.Data.Models;
+    using BillsManagement.DomainModel.Auth;
     using System;
     using System.Linq;
 
@@ -89,19 +90,45 @@
             return isExisting;
         }
 
-        public void Register(RegisterArgument arg)
+        public void Register(RegisterArgument args)
         {
+            var costCenterCode = $"CC-{args.ApartmentNumber}";
+
             Occupant occupant = new Occupant()
             {
                 OccupantDetails = new OccupantDetail()
                 {
-                    Email = arg.Email,
-                    Password = arg.Password
+                    Email = args.Email,
+                    Password = args.Password
                 },
                 PeriodStart = DateTime.Now
             };
 
-            this._context.Occupants.Add(occupant);
+            OccupantToApartment occupantToApartmentEntity = new OccupantToApartment()
+            {
+                Occupant = occupant,
+                Apartment = new Apartment()
+                {
+                    Number = args.ApartmentNumber,
+                    Floor = args.ApartmentFloor,
+                    CostCenter = new CostCenter()
+                    {
+                        Code = costCenterCode,
+                        Occupant = occupant
+                    },
+                    Entrance = new Entrance()
+                    {
+                        EntranceNumber = args.EntranceNumber,
+                        Building = new Building()
+                        {
+                            Address = args.BuildingAddress,
+                            TownId = args.TownId,
+                        }
+                    }
+                }
+            };
+
+            this._context.OccupantToApartments.Add(occupantToApartmentEntity);
             this._context.SaveChanges();
         }
 
@@ -196,6 +223,20 @@
 
             this._context.Entrances.Add(entranceEntity);
             this._context.SaveChanges();
+        }
+
+        public RegisterLinkDetails GetRegisterLinkDetails(int occupantId)
+        {
+            RegisterLinkDetails registerLinkDetails = new RegisterLinkDetails();
+
+            var occupantDetailsId = this._context.Occupants
+                .SingleOrDefault(x => x.OccupantId == occupantId).OccupantDetailsId;
+            var occupantEmail = this._context.OccupantDetails
+                .SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId).Email;
+
+            registerLinkDetails.HousekeeperEmail = occupantEmail;
+
+            return registerLinkDetails;
         }
     }
 }

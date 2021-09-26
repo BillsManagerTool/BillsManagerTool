@@ -8,5 +8,7 @@
         public int CountryId { get; set; }
         public string BuildingAddress { get; set; }
         public string EntranceNumber { get; set; }
+        public string ApartmentNumber { get; set; }
+        public int ApartmentFloor { get; set; }
     }
 }

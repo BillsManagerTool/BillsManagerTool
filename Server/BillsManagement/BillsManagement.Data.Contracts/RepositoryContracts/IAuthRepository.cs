@@ -1,6 +1,7 @@
 ﻿namespace BillsManagement.Data.Contracts
 {
     using BillsManagement.Data.Contracts.Args;
+    using BillsManagement.DomainModel.Auth;
 
     public interface IAuthRepository : IBaseRepository<DomainModel.Occupant>
     {
@@ -29,5 +30,7 @@
         void RevokeRefreshToken(DomainModel.RefreshToken refreshToken);
 
         void RegisterBuilding(RegisterArgument args);
+
+        RegisterLinkDetails GetRegisterLinkDetails(int occupantId);
     }
 }

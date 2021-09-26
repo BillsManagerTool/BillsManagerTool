@@ -21,5 +21,11 @@ namespace BillsManagement.Business.Contracts.HTTP
 
         [Required(ErrorMessage = "Entrance Number is required")]
         public string EntranceNumber { get; set; }
+
+        [Required(ErrorMessage = "Apartment Number is required")]
+        public string ApartmentNumber { get; set; }
+
+        [Required(ErrorMessage = "Apartment Floor is required")]
+        public int ApartmentFloor { get; set; }
     }
 }
