@@ -27,5 +27,7 @@
         DomainModel.OccupantRefreshToken GetOccupantDetailsByRefreshToken(string token);
 
         void RevokeRefreshToken(DomainModel.RefreshToken refreshToken);
+
+        void RegisterBuilding(RegisterArgument args);
     }
 }

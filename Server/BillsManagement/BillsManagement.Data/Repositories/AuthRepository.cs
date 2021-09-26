@@ -181,5 +181,21 @@
             this._context.RefreshTokens.Update(refreshTokenEntity);
             this._context.SaveChanges();
         }
+
+        public void RegisterBuilding(RegisterArgument args)
+        {
+            Entrance entranceEntity = new Entrance()
+            {
+                EntranceNumber = args.EntranceNumber,
+                Building = new Building()
+                {
+                    Address = args.BuildingAddress,
+                    TownId = args.TownId,
+                }
+            };
+
+            this._context.Entrances.Add(entranceEntity);
+            this._context.SaveChanges();
+        }
     }
 }

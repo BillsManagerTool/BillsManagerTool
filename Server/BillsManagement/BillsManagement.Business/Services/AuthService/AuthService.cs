@@ -103,13 +103,18 @@
             this.ValidateOccupantExistence(request.Email);
             var encryptedPassword = PasswordCipher.Encrypt(request.Password);
 
-            var registerArg = new RegisterArgument()
+            var registerArgs = new RegisterArgument()
             {
                 Email = request.Email,
-                Password = encryptedPassword
+                Password = encryptedPassword,
+                BuildingAddress = request.BuildingAddress,
+                EntranceNumber = request.EntranceNumber,
+                CountryId = request.CountryId,
+                TownId = request.TownId
             };
 
-            this._authRepository.Register(registerArg);
+            this._authRepository.Register(registerArgs);
+            this._authRepository.RegisterBuilding(registerArgs);
 
             var settings = this._authRepository.GetNotificationSettings(1);
             this.SendRegisterNotificationEmail(request.Email, settings);
