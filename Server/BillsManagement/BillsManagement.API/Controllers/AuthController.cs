@@ -50,7 +50,7 @@
 
         /// <summary>
         /// Authenticates the occupant.
-        /// After successful authentication generates jwt token.
+        /// After successful authentication generates jwt token and append refresh token to the response cookie.
         /// </summary>
         /// <param name="request">Accepts request of <see cref="Business.Contracts.HTTP.AuthenticateRequest"/></param>
         /// <returns>ActionResult as an instance of <see cref="Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
@@ -75,6 +75,13 @@
             }
         }
 
+        /// <summary>
+        /// Extracts the refresh token from the cookie. If it is valid, generates and returns new json web token 
+        /// and attach the new refresh token to the response cookie. Removes the old refresh token from the database.
+        /// If the refresh token from request cookie is invalid, the refresh token is revoked in the database and it can't be used to generate
+        /// new json web token anymore.
+        /// </summary>
+        /// <returns>ActionResult as an instance of <see cref="Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
         [HttpPost]
         [Route("refresh-token")]
         public ActionResult<AuthenticateResponse> RefreshToken()
