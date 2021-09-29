@@ -4,6 +4,7 @@
     using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
     using BillsManagement.Business.Contracts.ServiceContracts;
     using BillsManagement.Utility.Constants;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Net;
@@ -96,8 +97,14 @@
             }
         }
 
+        /// <summary>
+        /// The method can be accessed only by HK.
+        /// It is used to generate a query string with the needed information for occupant register invitations.
+        /// </summary>
+        /// <returns>ActionResult as an instance of <see cref="GenerateRegisterLinkResponse"/> class.</returns>
         [HttpGet]
         [Route("register-link")]
+        [Authorize(AuthenticationPolicy.Housekeeper)]
         public ActionResult<GenerateRegisterLinkResponse> GenerateRegisterLink()
         {
             try
