@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Collections.Generic;
     using System.Net;
 
     /// <summary>
@@ -120,6 +121,32 @@
                 response = this._service.GenerateRegisterLink(this.OccupantId);
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("confirm-registration")]
+        public IActionResult ConfirmOccupantRegistration()
+        {
+            try
+            {
+                var confirmationLink = Url.Action("ConfirmOccupantRegistration", "Auth",
+                    new 
+                    { 
+                        occupantIds = new List<Guid>() 
+                        { 
+                            Guid.NewGuid(), 
+                            Guid.NewGuid() 
+                        }, 
+                        entranceId = Guid.NewGuid() 
+                    }, 
+                    Request.Scheme);
+
+                return Ok();
             }
             catch (Exception)
             {

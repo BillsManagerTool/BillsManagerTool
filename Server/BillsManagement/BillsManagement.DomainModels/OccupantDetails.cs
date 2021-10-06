@@ -1,7 +1,6 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DomainModel
 {
+    using System.Text.Json.Serialization;
     public class OccupantDetails
     {
         public int OccupantDetailsId { get; set; }

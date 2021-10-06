@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DomainModel
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Detailed information for the occupant
     /// </summary>

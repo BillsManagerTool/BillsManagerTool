@@ -10,9 +10,8 @@
 
     public static class PasswordCipher
     {
+        // Save password secret in user-secrets
         private const string Secret = "3319FBA22A224DC8833A83B769037D53";
-
-        // Save password secret for each user and for decrypt use the saved secret (Different for each user)
 
         public static string Encrypt(string password)
         {

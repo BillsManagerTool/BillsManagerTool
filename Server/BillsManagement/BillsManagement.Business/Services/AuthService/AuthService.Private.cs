@@ -73,6 +73,7 @@
             return newRefreshToken;
         }
 
+        // Move email templates in util class
         private string CreateNotificationMessage()
         {
             StringBuilder sb = new StringBuilder();

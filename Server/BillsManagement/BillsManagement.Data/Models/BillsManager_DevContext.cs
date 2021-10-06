@@ -36,10 +36,6 @@ namespace BillsManagement.Data.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=BillsManager_Dev;Trusted_Connection=True;MultipleActiveResultSets=true");
-            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

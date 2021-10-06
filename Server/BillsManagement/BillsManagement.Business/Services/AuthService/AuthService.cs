@@ -6,7 +6,6 @@
     using BillsManagement.DomainModel;
     using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.Security;
-    using System;
     using System.Collections.Generic;
     using System.Net;
     using BillsManagement.Business.Contracts.HTTP;

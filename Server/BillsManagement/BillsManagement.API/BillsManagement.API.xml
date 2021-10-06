@@ -34,10 +34,26 @@
         <member name="M:BillsManagement.API.Controllers.AuthController.Authenticate(BillsManagement.Business.Contracts.HTTP.AuthenticateRequest)">
             <summary>
             Authenticates the occupant.
-            After successful authentication generates jwt token.
+            After successful authentication generates jwt token and append refresh token to the response cookie.
             </summary>
             <param name="request">Accepts request of <see cref="T:BillsManagement.Business.Contracts.HTTP.AuthenticateRequest"/></param>
             <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.AuthController.RefreshToken">
+            <summary>
+            Extracts the refresh token from the cookie. If it is valid, generates and returns new json web token 
+            and attach the new refresh token to the response cookie. Removes the old refresh token from the database.
+            If the refresh token from request cookie is invalid, the refresh token is revoked in the database and it can't be used to generate
+            new json web token anymore.
+            </summary>
+            <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
+        </member>
+        <member name="M:BillsManagement.API.Controllers.AuthController.GenerateRegisterLink">
+            <summary>
+            The method can be accessed only by HK.
+            It is used to generate a query string with the needed information for occupant register invitations.
+            </summary>
+            <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.Auth.Authenticate.GenerateRegisterLinkResponse"/> class.</returns>
         </member>
         <member name="T:BillsManagement.API.Controllers.BaseController">
             <summary>

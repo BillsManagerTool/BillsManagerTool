@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BillsManagement.Data.Models
+﻿namespace BillsManagement.Data.Models
 {
+    using System;
+
     public partial class RefreshToken
     {
         public bool IsExpired => DateTime.UtcNow >= this.Expires;

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Text.Json.Serialization;
-
     public class Charge
     {
         [JsonPropertyName("ChargeId")]

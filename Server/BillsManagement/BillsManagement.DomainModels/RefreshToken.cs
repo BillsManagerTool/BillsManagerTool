@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text.Json.Serialization;
-
-namespace BillsManagement.DomainModel
+﻿namespace BillsManagement.DomainModel
 {
+    using System;
+    using System.Text.Json.Serialization;
     public class RefreshToken
     {
         [JsonIgnore]
