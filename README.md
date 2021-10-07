@@ -96,8 +96,6 @@ Manual of how to set up the project locally.
    cd Server\BillsManagement\BillsManagement.API
    ```
 
-   <font size="3">***Important:*** Add appsettings.json file under BillsManagement.API directory. Contact your team lead for the file structure and replace the server name with your local server name</font>
-
    <font size="3">3.2.  Allow user-secrets: </font>
 	  ```sh
    dotnet user-secrets init
@@ -106,6 +104,10 @@ Manual of how to set up the project locally.
 	  ```sh
    dotnet user-secrets set "Secrets:JWT_Secret" "7582ae4085c54c2c85c7b770ae720c3d"
    ```
+	  ```sh
+   dotnet user-secrets set "Secrets:JWT_Secret" "server={ServerInstance};database=BillsManager_Dev;Trusted_Connection=true;MultipleActiveResultSets=true;"
+   ```
+***Important:*** Replace {ServerInstance} with your local MSSQL Server instance name.
 
    <font size="3">3.4. Run the server:</font>
       ```sh
