@@ -110,7 +110,7 @@ Manual of how to set up the project locally.
    ```
 
    <font size="3">3.4. Run the server:</font>
-      ```sh
+      	```sh
    dotnet run
    ```
 
