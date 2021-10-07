@@ -1,4 +1,5 @@
 
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
@@ -104,13 +105,21 @@ Manual of how to set up the project locally.
 	  ```sh
    dotnet user-secrets set "Secrets:JWT_Secret" "7582ae4085c54c2c85c7b770ae720c3d"
    ```
+<<<<<<< HEAD
 	  ```sh
    dotnet user-secrets set "Secrets:JWT_Secret" "server={ServerInstance};database=BillsManager_Dev;Trusted_Connection=true;MultipleActiveResultSets=true;"
    ```
 ***Important:*** Replace {ServerInstance} with your local MSSQL Server instance name.
+=======
+	***Important:*** Replace {ServerInstance} with your local MSSQL Server instance name.
+
+	```sh
+   dotnet user-secrets set "Secrets:JWT_Secret" "server={ServerInstance};database=BillsManager_Dev;Trusted_Connection=true;MultipleActiveResultSets=true;"
+   ```
+>>>>>>> Server-Authentication
 
    <font size="3">3.4. Run the server:</font>
-      ```sh
+   ```sh
    dotnet run
    ```
 
