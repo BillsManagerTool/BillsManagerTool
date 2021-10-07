@@ -81,10 +81,11 @@
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             // DbContext configuration
-            string connStr = this._configuration.GetConnectionString("DevConnection");
+            //string connStr = this._configuration.GetConnectionString("DevConnection");
+            string connectionString = this._configuration["Secrets:ConnectionString"];
             services.AddDbContext<BillsManager_DevContext>(options =>
             {
-                options.UseSqlServer(connStr);
+                options.UseSqlServer(connectionString);
             });
 
             services.AddScoped<BillsManager_DevContext>();
