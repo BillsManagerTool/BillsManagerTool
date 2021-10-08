@@ -4,6 +4,7 @@
     using BillsManagement.Custom.CustomExceptions;
     using BillsManagement.DomainModel;
     using System;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Net;
     using System.Net.Mail;
@@ -20,16 +21,16 @@
             }
         }
 
-        private void SendRegisterNotificationEmail(string email, DomainModel.Settings settings)
+        private void SendEmailNotification(string receiver, string subject, string body)
         {
+            var settings = this._authRepository.GetNotificationSettings(1);
+
             using (MailMessage mail = new MailMessage())
             {
-                var notificationMessage = this.CreateNotificationMessage();
-
                 mail.From = new MailAddress(settings.BusinessEmail);
-                mail.To.Add(email);
-                mail.Subject = "Registration confirmed!";
-                mail.Body = notificationMessage;
+                mail.To.Add(receiver);
+                mail.Subject = subject;
+                mail.Body = body;
                 mail.IsBodyHtml = true;
                 //mail.Attachments.Add(new Attachment("C:\\file.zip"));
 

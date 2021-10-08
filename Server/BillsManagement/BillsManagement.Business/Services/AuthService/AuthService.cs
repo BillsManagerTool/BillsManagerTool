@@ -12,6 +12,8 @@
     using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
     using System.Web;
     using Microsoft.Extensions.Options;
+    using BillsManagement.Utility.Notifications;
+    using System.Linq;
 
     public partial class AuthService : IAuthService
     {
@@ -126,8 +128,9 @@
             this._authRepository.Register(registerArgs);
             this._authRepository.RegisterBuilding(registerArgs);
 
-            var settings = this._authRepository.GetNotificationSettings(1);
-            this.SendRegisterNotificationEmail(request.Email, settings);
+            string subject = "REGISTRATION SUCCESS!";
+            string body = this.CreateNotificationMessage();
+            this.SendEmailNotification(request.Email, subject, body);
 
             RegisterResponse response = new RegisterResponse();
             return response;
@@ -155,11 +158,21 @@
 
 
             // build the query string params
-            var queryString = this.BuildRegisterQueryString(token);
-
+            var registerTokenQueryParam = this.BuildRegisterQueryString(token);
             var clientUrl = this._appSettings.Value.Client_URL;
+            var encodedRegisterLink = this.BuildRegisterLink(registerTokenQueryParam, clientUrl);
+            var registerLink = HttpUtility.UrlDecode(encodedRegisterLink);
 
-            var registerLink = this.BuildRegisterLink(queryString, clientUrl);
+            EmailTemplate template = new EmailTemplate();
+            var invitationLinkBody = template.RegisterInvitationLinkTemplate(registerLink);
+
+            // TODO
+            List<string> emails = new List<string>();
+            var subject = "REGISTER INVITATION";
+            foreach (var email in emails)
+            {
+                this.SendEmailNotification(email, subject, invitationLinkBody);
+            }
 
             response.RegisterLink = HttpUtility.UrlDecode(registerLink); // ??
 
