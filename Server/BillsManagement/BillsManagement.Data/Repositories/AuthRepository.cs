@@ -241,20 +241,13 @@
                             on a.EntranceId equals e.EntranceId
                         join b in this._context.Buildings
                             on e.BuildingId equals b.BuildingId
-                        join t in this._context.Towns
-                            on b.TownId equals t.TownId
-                        join c in this._context.Countries
-                            on t.CountryId equals c.CountryId
                         where ota.OccupantId == occupantId
                         select new RegisterLinkDetails()
                         {
                             HousekeeperEmail = od.Email,
                             EntranceId = e.EntranceId,
-                            EntranceNumber = e.EntranceNumber,
                             BuildingId = b.BuildingId,
-                            BuildingAddress = b.Address,
-                            Town = t.Name, // ?
-                            Country = c.Name // ?
+                            BuildingAddress = b.Address
                         };
 
             return registerLinkDetails = query.FirstOrDefault();
