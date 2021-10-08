@@ -253,8 +253,8 @@
                             EntranceNumber = e.EntranceNumber,
                             BuildingId = b.BuildingId,
                             BuildingAddress = b.Address,
-                            Town = t.Name,
-                            Country = c.Name
+                            Town = t.Name, // ?
+                            Country = c.Name // ?
                         };
 
             return registerLinkDetails = query.FirstOrDefault();

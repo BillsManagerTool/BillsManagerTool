@@ -8,6 +8,6 @@ namespace BillsManagement.Business.Contracts.HTTP.Auth.Authenticate
 {
     public class GenerateRegisterLinkResponse : BaseResponse
     {
-        public string QueryString { get; set; }
+        public string RegisterLink { get; set; }
     }
 }

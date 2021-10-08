@@ -11,16 +11,24 @@
     using BillsManagement.Business.Contracts.HTTP;
     using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
     using System.Web;
+    using Microsoft.Extensions.Options;
 
     public partial class AuthService : IAuthService
     {
         private readonly IAuthRepository _authRepository;
         private readonly IJwtUtils _jwtUtils;
+        private readonly IRegisterLinkUtils _registerLinkUtils;
+        private readonly IOptions<ApplicationSettings> _appSettings;
 
-        public AuthService(IAuthRepository authRepository, IJwtUtils jwtUtils)
+        public AuthService(IAuthRepository authRepository, 
+            IJwtUtils jwtUtils, 
+            IRegisterLinkUtils registerLinkUtils,
+            IOptions<ApplicationSettings> appSettings)
         {
             this._authRepository = authRepository;
             this._jwtUtils = jwtUtils;
+            this._registerLinkUtils = registerLinkUtils;
+            this._appSettings = appSettings;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest request, string ipAddress)
@@ -141,9 +149,19 @@
             // prepare information needed
             var registerLinkDetails = this._authRepository.GetRegisterLinkDetails(occupantId);
 
+            var token = this._registerLinkUtils.GenerateRegisterToken(occupantId, 
+                registerLinkDetails.BuildingId, 
+                registerLinkDetails.EntranceId);
+
+
             // build the query string params
-            var queryString = this.BuildQueryString(registerLinkDetails);
-            response.QueryString = HttpUtility.UrlDecode(queryString); // ??
+            var queryString = this.BuildRegisterQueryString(token);
+
+            var clientUrl = this._appSettings.Value.Client_URL;
+
+            var registerLink = this.BuildRegisterLink(queryString, clientUrl);
+
+            response.RegisterLink = HttpUtility.UrlDecode(registerLink); // ??
 
             return response;
         }

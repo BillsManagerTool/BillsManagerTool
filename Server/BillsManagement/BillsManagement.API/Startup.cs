@@ -58,6 +58,9 @@
         {
             // Users secrets
             services.Configure<Secrets>(this._configuration.GetSection("Secrets"));
+            services.Configure<ApplicationSettings>(this._configuration.GetSection("ApplicationSettings"));
+
+            services.AddOptions();
 
             services.AddSwaggerGen(c =>
             {
@@ -98,6 +101,7 @@
             services.AddScoped<IOccupantRepository, OccupantRepository>();
 
             services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IRegisterLinkUtils, RegisterLinkUtils>();
 
             // Service configurations
             services.AddScoped<IAuthService, AuthService>();
