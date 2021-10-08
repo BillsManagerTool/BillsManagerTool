@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BillsManagement.Business.Contracts.HTTP.Auth.Authenticate
 {
-    public class GenerateRegisterLinkResponse : BaseResponse
+    public class SendRegisterInvitationResponse : BaseResponse
     {
-        public string RegisterLink { get; set; }
+
     }
 }

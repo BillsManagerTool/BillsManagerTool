@@ -48,12 +48,12 @@
             </summary>
             <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.AuthenticateResponse"/> class.</returns>
         </member>
-        <member name="M:BillsManagement.API.Controllers.AuthController.GenerateRegisterLink">
+        <member name="M:BillsManagement.API.Controllers.AuthController.SendRegisterInvitation(BillsManagement.Business.Contracts.HTTP.Auth.Authenticate.SendRegisterInvitationRequest)">
             <summary>
             The method can be accessed only by HK.
             It is used to generate a query string with the needed information for occupant register invitations.
             </summary>
-            <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.Auth.Authenticate.GenerateRegisterLinkResponse"/> class.</returns>
+            <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.Auth.Authenticate.SendRegisterInvitationResponse"/> class.</returns>
         </member>
         <member name="T:BillsManagement.API.Controllers.BaseController">
             <summary>

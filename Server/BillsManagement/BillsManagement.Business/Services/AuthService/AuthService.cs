@@ -14,6 +14,7 @@
     using Microsoft.Extensions.Options;
     using BillsManagement.Utility.Notifications;
     using System.Linq;
+    using System;
 
     public partial class AuthService : IAuthService
     {
@@ -145,9 +146,14 @@
             return occupant;
         }
 
-        public GenerateRegisterLinkResponse GenerateRegisterLink(int occupantId)
+
+        // Move to notification service
+        public void SendRegisterInvitation(int occupantId, List<string> emails)
         {
-            GenerateRegisterLinkResponse response = new GenerateRegisterLinkResponse();
+            if (emails == null)
+            {
+                throw new Exception("Empty emails collection");
+            }
 
             // prepare information needed
             var registerLinkDetails = this._authRepository.GetRegisterLinkDetails(occupantId);
@@ -167,16 +173,11 @@
             var invitationLinkBody = template.RegisterInvitationLinkTemplate(registerLink);
 
             // TODO
-            List<string> emails = new List<string>();
             var subject = "REGISTER INVITATION";
             foreach (var email in emails)
             {
                 this.SendEmailNotification(email, subject, invitationLinkBody);
             }
-
-            response.RegisterLink = HttpUtility.UrlDecode(registerLink); // ??
-
-            return response;
         }
     }
 }

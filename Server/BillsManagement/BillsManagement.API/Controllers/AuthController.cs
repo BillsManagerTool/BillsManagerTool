@@ -109,16 +109,16 @@
         /// The method can be accessed only by HK.
         /// It is used to generate a query string with the needed information for occupant register invitations.
         /// </summary>
-        /// <returns>ActionResult as an instance of <see cref="GenerateRegisterLinkResponse"/> class.</returns>
-        [HttpGet]
-        [Route("register-link")]
+        /// <returns>ActionResult as an instance of <see cref="SendRegisterInvitationResponse"/> class.</returns>
+        [HttpPost]
+        [Route("invite-occupants")]
         [Authorize(AuthenticationPolicy.Housekeeper)]
-        public ActionResult<GenerateRegisterLinkResponse> GenerateRegisterLink()
+        public ActionResult<SendRegisterInvitationResponse> SendRegisterInvitation(SendRegisterInvitationRequest request)
         {
             try
             {
-                GenerateRegisterLinkResponse response = new GenerateRegisterLinkResponse();
-                response = this._service.GenerateRegisterLink(this.OccupantId);
+                SendRegisterInvitationResponse response = new SendRegisterInvitationResponse();
+                this._service.SendRegisterInvitation(this.OccupantId, request.Emails);
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
             }
@@ -128,30 +128,30 @@
             }
         }
 
-        [HttpPost]
-        [Route("confirm-registration")]
-        public IActionResult ConfirmOccupantRegistration()
-        {
-            try
-            {
-                var confirmationLink = Url.Action("ConfirmOccupantRegistration", "Auth",
-                    new 
-                    { 
-                        occupantIds = new List<Guid>() 
-                        { 
-                            Guid.NewGuid(), 
-                            Guid.NewGuid() 
-                        }, 
-                        entranceId = Guid.NewGuid() 
-                    }, 
-                    Request.Scheme);
+        //[HttpPost]
+        //[Route("confirm-registration")]
+        //public IActionResult ConfirmOccupantRegistration()
+        //{
+        //    try
+        //    {
+        //        var confirmationLink = Url.Action("ConfirmOccupantRegistration", "Auth",
+        //            new 
+        //            { 
+        //                occupantIds = new List<Guid>() 
+        //                { 
+        //                    Guid.NewGuid(), 
+        //                    Guid.NewGuid() 
+        //                }, 
+        //                entranceId = Guid.NewGuid() 
+        //            }, 
+        //            Request.Scheme);
 
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //        return Ok();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
     }
 }
