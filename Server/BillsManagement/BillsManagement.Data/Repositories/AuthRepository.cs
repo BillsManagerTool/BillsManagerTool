@@ -15,7 +15,7 @@
         {
         }
 
-        public DomainModel.Occupant GetOccupantById(int id)
+        public DomainModel.Occupant GetOccupantById(Guid id)
         {
             var occupantEntity = this._context.Occupants.Find(id);
 
@@ -24,7 +24,7 @@
             return occupant;
         }
 
-        public DomainModel.RefreshToken GetRefreshTokenByOccupantDetailsId(int occupantDetailsId)
+        public DomainModel.RefreshToken GetRefreshTokenByOccupantDetailsId(Guid occupantDetailsId)
         {
             DomainModel.RefreshToken refreshTokenModel = new DomainModel.RefreshToken();
 
@@ -60,7 +60,7 @@
             return occupantDetails;
         }
 
-        public DomainModel.OccupantDetails GetOccupantDetailsByOccupantId(int occupantId)
+        public DomainModel.OccupantDetails GetOccupantDetailsByOccupantId(Guid occupantId)
         {
             DomainModel.OccupantDetails occupantDetailsModel = new DomainModel.OccupantDetails();
 
@@ -91,49 +91,51 @@
             return isExisting;
         }
 
-        public void Register(RegisterArgument args)
+        public void RegisterHousekeeper(RegisterArgument args)
         {
             var costCenterCode = $"CC-{args.ApartmentNumber}";
 
-            Occupant occupant = new Occupant()
-            {
-                OccupantDetails = new OccupantDetail()
-                {
-                    Email = args.Email,
-                    Password = args.Password
-                },
-                PeriodStart = DateTime.Now
-            };
+            OccupantDetail occupantDetail = new OccupantDetail();
+            occupantDetail.OccupantDetailsId = Guid.NewGuid();
+            occupantDetail.Email = args.Email;
+            occupantDetail.Password = args.Password;
 
-            OccupantToApartment occupantToApartmentEntity = new OccupantToApartment()
-            {
-                Occupant = occupant,
-                Apartment = new Apartment()
-                {
-                    Number = args.ApartmentNumber,
-                    Floor = args.ApartmentFloor,
-                    CostCenter = new CostCenter()
-                    {
-                        Code = costCenterCode,
-                        Occupant = occupant
-                    },
-                    Entrance = new Entrance()
-                    {
-                        EntranceNumber = args.EntranceNumber,
-                        Building = new Building()
-                        {
-                            Address = args.BuildingAddress,
-                            TownId = args.TownId,
-                        }
-                    }
-                }
-            };
+            Occupant occupant = new Occupant();
+            occupant.OccupantId = Guid.NewGuid();
+            occupant.OccupantDetailsId = occupantDetail.OccupantDetailsId;
+            occupant.PeriodStart = DateTime.Now;
 
-            this._context.OccupantToApartments.Add(occupantToApartmentEntity);
+            Entrance entrance = new Entrance();
+            entrance.EntranceId = Guid.NewGuid();
+            entrance.BuildingId = args.BuildingId;
+            entrance.EntranceNumber = args.EntranceNumber;
+
+            CostCenter costCenter = new CostCenter();
+            costCenter.CostCenterId = Guid.NewGuid();
+            costCenter.Code = costCenterCode;
+            costCenter.OccupantId = occupant.OccupantId;
+
+            Apartment apartment = new Apartment();
+            apartment.ApartmentId = Guid.NewGuid();
+            apartment.Number = args.ApartmentNumber;
+            apartment.Floor = args.ApartmentFloor;
+            apartment.EntranceId = entrance.EntranceId;
+            apartment.CostCenterId = costCenter.CostCenterId;
+
+            OccupantToApartment occupantToApartment = new OccupantToApartment();
+            occupantToApartment.OccupantId = occupant.OccupantId;
+            occupantToApartment.ApartmentId = apartment.ApartmentId;
+
+            this._context.OccupantDetails.Add(occupantDetail);
+            this._context.Occupants.Add(occupant);
+            this._context.Entrances.Add(entrance);
+            this._context.CostCenters.Add(costCenter);
+            this._context.Apartments.Add(apartment);
+            this._context.OccupantToApartments.Add(occupantToApartment);
             this._context.SaveChanges();
         }
 
-        public void RemoveOldRefreshTokens(int occupantDetailsId)
+        public void RemoveOldRefreshTokens(Guid occupantDetailsId)
         {
             foreach (var refreshTokenEntity in this._context.RefreshTokens
                 .Where(x => x.OccupantDetailsId == occupantDetailsId))
@@ -156,7 +158,7 @@
             this._context.SaveChanges();
         }
 
-        public void SaveRefreshToken(int occupantDetailsId, DomainModel.RefreshToken refreshToken)
+        public void SaveRefreshToken(Guid occupantDetailsId, DomainModel.RefreshToken refreshToken)
         {
             var occupantDetailsEntity = this._context.OccupantDetails
                 .SingleOrDefault(x => x.OccupantDetailsId == occupantDetailsId);
@@ -210,23 +212,20 @@
             this._context.SaveChanges();
         }
 
-        public void RegisterBuilding(RegisterArgument args)
+        public Guid RegisterBuilding(RegisterArgument args)
         {
-            Entrance entranceEntity = new Entrance()
-            {
-                EntranceNumber = args.EntranceNumber,
-                Building = new Building()
-                {
-                    Address = args.BuildingAddress,
-                    TownId = args.TownId,
-                }
-            };
+            Building building = new Building();
+            building.BuildingId = Guid.NewGuid();
+            building.Address = args.BuildingAddress;
+            building.TownId = args.TownId;
 
-            this._context.Entrances.Add(entranceEntity);
+            this._context.Buildings.Add(building);
             this._context.SaveChanges();
+
+            return building.BuildingId;
         }
 
-        public RegisterLinkDetails GetRegisterLinkDetails(int occupantId)
+        public RegisterLinkDetails GetRegisterLinkDetails(Guid occupantId)
         {
             RegisterLinkDetails registerLinkDetails = new RegisterLinkDetails();
 
@@ -256,6 +255,40 @@
         public void RegisterOccupant(RegisterOccupantArgs args)
         {
             var costCenterCode = $"CC-{args.ApartmentNumber}";
+
+            OccupantDetail occupantDetail = new OccupantDetail();
+            occupantDetail.OccupantDetailsId = Guid.NewGuid();
+            occupantDetail.Email = args.Email;
+            occupantDetail.Password = args.Password;
+
+            Occupant occupant = new Occupant();
+            occupant.OccupantId = Guid.NewGuid();
+            occupant.OccupantDetailsId = occupantDetail.OccupantDetailsId;
+            occupant.PeriodStart = DateTime.Now;
+
+            CostCenter costCenter = new CostCenter();
+            costCenter.CostCenterId = Guid.NewGuid();
+            costCenter.Code = costCenterCode;
+            costCenter.OccupantId = occupant.OccupantId;
+
+            Apartment apartment = new Apartment();
+            apartment.ApartmentId = Guid.NewGuid();
+            apartment.Number = args.ApartmentNumber;
+            apartment.Floor = args.ApartmentFloor;
+            apartment.EntranceId = args.EntranceId;
+            apartment.CostCenterId = costCenter.CostCenterId;
+
+            OccupantToApartment occupantToApartment = new OccupantToApartment();
+            occupantToApartment.OccupantToApartmentId = Guid.NewGuid();
+            occupantToApartment.OccupantId = occupant.OccupantId;
+            occupantToApartment.ApartmentId = apartment.ApartmentId;
+
+            this._context.OccupantDetails.Add(occupantDetail);
+            this._context.Occupants.Add(occupant);
+            this._context.CostCenters.Add(costCenter);
+            this._context.Apartments.Add(apartment);
+            this._context.OccupantToApartments.Add(occupantToApartment);
+            this._context.SaveChanges();
         }
     }
 }

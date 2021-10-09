@@ -12,11 +12,11 @@
         /// <summary>
         /// Returns occupants id from the current request extracted token
         /// </summary>
-        protected int OccupantId 
+        protected Guid OccupantId 
         { 
             get
             {
-                return int.Parse(HttpContext.Items["UserId"].ToString());
+                return Guid.Parse(HttpContext.Items["UserId"].ToString());
             }
         }
 

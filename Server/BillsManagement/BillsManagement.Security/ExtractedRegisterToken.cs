@@ -8,8 +8,8 @@ namespace BillsManagement.Security
 {
     public class ExtractedRegisterToken
     {
-        public int BuildingId { get; set; }
+        public Guid BuildingId { get; set; }
 
-        public int EntranceId { get; set; }
+        public Guid EntranceId { get; set; }
     }
 }

@@ -135,6 +135,7 @@
             try
             {
                 RegisterOccupantResponse response = new RegisterOccupantResponse();
+                this._service.RegisterOccupant(request);
                 response.StatusCode = HttpStatusCode.OK;
                 return response;
             }

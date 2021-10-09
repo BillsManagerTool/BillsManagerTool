@@ -1,4 +1,6 @@
-﻿namespace BillsManagement.Data.Contracts.Args
+﻿using System;
+
+namespace BillsManagement.Data.Contracts.Args
 {
     public class RegisterArgument
     {
@@ -10,5 +12,7 @@
         public string EntranceNumber { get; set; }
         public string ApartmentNumber { get; set; }
         public int ApartmentFloor { get; set; }
+
+        public Guid BuildingId { get; set; }
     }
 }

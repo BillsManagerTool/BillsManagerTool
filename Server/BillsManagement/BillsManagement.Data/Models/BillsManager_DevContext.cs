@@ -1,9 +1,6 @@
 ﻿using System;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 #nullable disable
 
@@ -36,6 +33,11 @@ namespace BillsManagement.Data.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=BillsManager_Dev;Trusted_Connection=True;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,6 +47,8 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<Apartment>(entity =>
             {
                 entity.ToTable("Apartment");
+
+                entity.Property(e => e.ApartmentId).ValueGeneratedNever();
 
                 entity.Property(e => e.Number)
                     .IsRequired()
@@ -67,6 +71,8 @@ namespace BillsManagement.Data.Models
             {
                 entity.ToTable("Building");
 
+                entity.Property(e => e.BuildingId).ValueGeneratedNever();
+
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(64);
@@ -81,6 +87,8 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<Charge>(entity =>
             {
                 entity.ToTable("Charge");
+
+                entity.Property(e => e.ChargeId).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("date");
 
@@ -105,6 +113,8 @@ namespace BillsManagement.Data.Models
             {
                 entity.ToTable("CostCenter");
 
+                entity.Property(e => e.CostCenterId).ValueGeneratedNever();
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(16);
@@ -121,6 +131,8 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<CostType>(entity =>
             {
                 entity.ToTable("CostType");
+
+                entity.Property(e => e.CostTypeId).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -148,6 +160,8 @@ namespace BillsManagement.Data.Models
             {
                 entity.ToTable("Entrance");
 
+                entity.Property(e => e.EntranceId).ValueGeneratedNever();
+
                 entity.Property(e => e.EntranceNumber)
                     .IsRequired()
                     .HasMaxLength(16);
@@ -162,7 +176,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F78D873FFD");
+                    .HasName("PK__Notifica__BA44B3F781FBF2D0");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -179,6 +193,8 @@ namespace BillsManagement.Data.Models
             {
                 entity.ToTable("Occupant");
 
+                entity.Property(e => e.OccupantId).ValueGeneratedNever();
+
                 entity.Property(e => e.LeaveDate).HasColumnType("date");
 
                 entity.Property(e => e.PeriodStart).HasColumnType("date");
@@ -193,7 +209,9 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EBF8EE1396");
+                    .HasName("PK__Occupant__C28410EBACCACFFE");
+
+                entity.Property(e => e.OccupantDetailsId).ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -219,6 +237,8 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<OccupantToApartment>(entity =>
             {
                 entity.ToTable("OccupantToApartment");
+
+                entity.Property(e => e.OccupantToApartmentId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Apartment)
                     .WithMany(p => p.OccupantToApartments)
@@ -257,7 +277,7 @@ namespace BillsManagement.Data.Models
                     .WithMany(p => p.RefreshTokens)
                     .HasForeignKey(d => d.OccupantDetailsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OccupanтDetailsRefreshToken");
+                    .HasConstraintName("FK_OccupantDetailsRefreshToken");
             });
 
             modelBuilder.Entity<Town>(entity =>

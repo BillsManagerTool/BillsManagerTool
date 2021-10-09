@@ -8,7 +8,7 @@ namespace BillsManagement.Security
 {
     public interface IRegisterLinkUtils
     {
-        string GenerateRegisterToken(int occupantId, int buildingId, int entranceId);
+        string GenerateRegisterToken(Guid occupantId, Guid buildingId, Guid entranceId);
         ExtractedRegisterToken ValidateRegisterToken(string token);
     }
 }

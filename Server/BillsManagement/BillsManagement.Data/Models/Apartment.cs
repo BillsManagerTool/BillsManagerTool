@@ -12,9 +12,9 @@ namespace BillsManagement.Data.Models
             OccupantToApartments = new HashSet<OccupantToApartment>();
         }
 
-        public int ApartmentId { get; set; }
-        public int EntranceId { get; set; }
-        public int CostCenterId { get; set; }
+        public Guid ApartmentId { get; set; }
+        public Guid EntranceId { get; set; }
+        public Guid CostCenterId { get; set; }
         public int Floor { get; set; }
         public string Number { get; set; }
 

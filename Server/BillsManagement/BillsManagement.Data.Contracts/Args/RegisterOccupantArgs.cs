@@ -16,8 +16,8 @@ namespace BillsManagement.Data.Contracts.Args
 
         public int ApartmentFloor { get; set; }
 
-        public int BuildingId { get; set; }
+        public Guid BuildingId { get; set; }
 
-        public int EntranceId { get; set; }
+        public Guid EntranceId { get; set; }
     }
 }

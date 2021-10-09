@@ -19,7 +19,7 @@ namespace BillsManagement.Security
             this._secrets = secrets.Value;
         }
 
-        public string GenerateRegisterToken(int housekeeperId, int buildingId, int entranceId)
+        public string GenerateRegisterToken(Guid housekeeperId, Guid buildingId, Guid entranceId)
         {
             // generate register token valid for 24h
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -63,8 +63,8 @@ namespace BillsManagement.Security
 
                 ExtractedRegisterToken extractedData = new ExtractedRegisterToken();
                 //extractedData.OccupantId = int.Parse(jwtToken.Claims.First(x => x.Type == "occupantId").Value);
-                extractedData.BuildingId = int.Parse(jwtToken.Claims.First(x => x.Type == "buildingId").Value);
-                extractedData.EntranceId = int.Parse(jwtToken.Claims.First(x => x.Type == "entranceId").Value);
+                extractedData.BuildingId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "buildingId").Value);
+                extractedData.EntranceId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "entranceId").Value);
 
                 return extractedData;
             }

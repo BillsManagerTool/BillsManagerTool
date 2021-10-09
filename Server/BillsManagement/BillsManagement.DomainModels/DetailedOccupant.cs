@@ -1,5 +1,6 @@
 ﻿namespace BillsManagement.DomainModel
 {
+    using System;
     using System.Text.Json.Serialization;
 
     /// <summary>
@@ -11,13 +12,13 @@
         /// Id of the occupant details
         /// </summary>
         [JsonPropertyName("dtls_id")]
-        public int OccupantDetailsId { get; set; }
+        public Guid OccupantDetailsId { get; set; }
 
         /// <summary>
         /// Id of the occupant
         /// </summary>
         [JsonPropertyName("ocpnt_id")]
-        public int OccupantId { get; set; }
+        public Guid OccupantId { get; set; }
 
         /// <summary>
         /// First name of the occupant from details table

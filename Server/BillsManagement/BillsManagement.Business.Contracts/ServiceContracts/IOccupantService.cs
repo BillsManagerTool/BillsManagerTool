@@ -1,7 +1,9 @@
-﻿namespace BillsManagement.Services.ServiceContracts
+﻿using System;
+
+namespace BillsManagement.Services.ServiceContracts
 {
     public interface IOccupantService
     {
-        DomainModel.DetailedOccupant GetOccupantDetailsById(int id);
+        DomainModel.DetailedOccupant GetOccupantDetailsById(Guid id);
     }
 }

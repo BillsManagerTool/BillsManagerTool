@@ -7,9 +7,9 @@ namespace BillsManagement.Data.Models
 {
     public partial class Charge
     {
-        public int ChargeId { get; set; }
-        public int CostCenterId { get; set; }
-        public int CostTypeId { get; set; }
+        public Guid ChargeId { get; set; }
+        public Guid CostCenterId { get; set; }
+        public Guid CostTypeId { get; set; }
         public decimal DueAmount { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool? IsPaid { get; set; }
