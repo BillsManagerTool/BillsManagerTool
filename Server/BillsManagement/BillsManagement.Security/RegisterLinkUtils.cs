@@ -40,7 +40,7 @@ namespace BillsManagement.Security
             return tokenHandler.WriteToken(token);
         }
 
-        public int? ValidateRegisterToken(string token)
+        public ExtractedRegisterToken ValidateRegisterToken(string token)
         {
             if (token == null)
                 return null;
@@ -60,12 +60,13 @@ namespace BillsManagement.Security
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var occupantId = int.Parse(jwtToken.Claims.First(x => x.Type == "occupantId").Value);
-                var buildingId = int.Parse(jwtToken.Claims.First(x => x.Type == "buildingId").Value);
-                var entranceId = int.Parse(jwtToken.Claims.First(x => x.Type == "entranceId").Value);
 
-                // return user id from JWT token if validation successful
-                return occupantId;
+                ExtractedRegisterToken extractedData = new ExtractedRegisterToken();
+                //extractedData.OccupantId = int.Parse(jwtToken.Claims.First(x => x.Type == "occupantId").Value);
+                extractedData.BuildingId = int.Parse(jwtToken.Claims.First(x => x.Type == "buildingId").Value);
+                extractedData.EntranceId = int.Parse(jwtToken.Claims.First(x => x.Type == "entranceId").Value);
+
+                return extractedData;
             }
             catch
             {

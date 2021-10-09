@@ -19,5 +19,6 @@
         void RevokeRefreshToken(DomainModel.RefreshToken refreshToken);
         void RegisterBuilding(RegisterArgument args);
         RegisterLinkDetails GetRegisterLinkDetails(int occupantId);
+        void RegisterOccupant(RegisterOccupantArgs args);
     }
 }

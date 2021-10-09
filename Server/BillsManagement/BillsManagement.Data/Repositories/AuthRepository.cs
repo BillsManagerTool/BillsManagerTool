@@ -252,5 +252,10 @@
 
             return registerLinkDetails = query.FirstOrDefault();
         }
+
+        public void RegisterOccupant(RegisterOccupantArgs args)
+        {
+            var costCenterCode = $"CC-{args.ApartmentNumber}";
+        }
     }
 }

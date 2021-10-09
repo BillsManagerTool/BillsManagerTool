@@ -147,7 +147,6 @@
             return occupant;
         }
 
-
         // Move to notification service
         public void SendRegisterInvitation(int occupantId, List<string> emails)
         {
@@ -179,6 +178,28 @@
             {
                 this.SendEmailNotification(email, subject, invitationLinkBody);
             }
+        }
+
+        public void RegisterOccupant(RegisterOccupantRequest request)
+        {
+            // Validate apartment number ???
+            this.ValidateOccupantExistence(request.Email);
+
+            var encryptedPassword = PasswordCipher.Encrypt(request.Password);
+
+            var extractedData = this._registerLinkUtils.ValidateRegisterToken(request.RegisterToken);
+
+            var registerOccupantArgs = new RegisterOccupantArgs()
+            {
+                BuildingId = extractedData.BuildingId,
+                EntranceId = extractedData.EntranceId,
+                Email = request.Email,
+                Password = encryptedPassword,
+                ApartmentNumber = request.ApartmentNumber,
+                ApartmentFloor = request.ApartmentFloor
+            };
+
+            this._authRepository.RegisterOccupant(registerOccupantArgs);
         }
     }
 }

@@ -11,5 +11,7 @@
         DomainModel.Occupant GetOccupantById(int id);
         AuthenticateResponse RefreshToken(string token, string ipAddress);
         void SendRegisterInvitation(int occupantId, List<string> emails);
+
+        void RegisterOccupant(RegisterOccupantRequest request);
     }
 }
