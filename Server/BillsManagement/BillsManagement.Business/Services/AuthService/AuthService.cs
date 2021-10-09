@@ -130,7 +130,8 @@
             this._authRepository.RegisterBuilding(registerArgs);
 
             string subject = "REGISTRATION SUCCESS!";
-            string body = this.CreateNotificationMessage();
+            EmailTemplate template = new EmailTemplate();
+            string body = template.RegisterNotificationTemplate();
             this.SendEmailNotification(request.Email, subject, body);
 
             RegisterResponse response = new RegisterResponse();

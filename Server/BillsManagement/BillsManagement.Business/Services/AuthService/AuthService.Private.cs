@@ -73,17 +73,6 @@
             return newRefreshToken;
         }
 
-        // Move email templates in util class
-        private string CreateNotificationMessage()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<html><body>");
-            sb.Append("<h3>Thank you for joining the Bills Management beta.</h3>");
-            sb.Append("</body></html>");
-
-            return sb.ToString();
-        }
-
         private string BuildRegisterQueryString(string token)
         {
             NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);

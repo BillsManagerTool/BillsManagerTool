@@ -12,7 +12,7 @@ namespace BillsManagement.Utility.Notifications
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("<html><body>");
-            sb.Append("<h3>Thank you for joining the Bills Management beta.</h3>");
+            sb.Append("<h4>Congratulations, your account has been successfully created.</h4>");
             sb.Append("</body></html>");
 
             return sb.ToString();
