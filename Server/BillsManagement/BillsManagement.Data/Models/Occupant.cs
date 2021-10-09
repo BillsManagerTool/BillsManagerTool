@@ -13,8 +13,8 @@ namespace BillsManagement.Data.Models
             OccupantToApartments = new HashSet<OccupantToApartment>();
         }
 
-        public int OccupantId { get; set; }
-        public int OccupantDetailsId { get; set; }
+        public Guid OccupantId { get; set; }
+        public Guid OccupantDetailsId { get; set; }
         public DateTime PeriodStart { get; set; }
         public DateTime? LeaveDate { get; set; }
 

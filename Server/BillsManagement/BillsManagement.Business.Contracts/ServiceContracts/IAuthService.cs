@@ -2,14 +2,17 @@
 {
     using BillsManagement.Business.Contracts.HTTP;
     using BillsManagement.Business.Contracts.HTTP.Auth.Authenticate;
+    using System;
     using System.Collections.Generic;
 
     public interface IAuthService
     {
         RegisterResponse Register(RegisterRequest request);
         AuthenticateResponse Authenticate(AuthenticateRequest request, string ipAddress);
-        DomainModel.Occupant GetOccupantById(int id);
+        DomainModel.Occupant GetOccupantById(Guid id);
         AuthenticateResponse RefreshToken(string token, string ipAddress);
-        void SendRegisterInvitation(int occupantId, List<string> emails);
+        void SendRegisterInvitation(Guid occupantId, List<string> emails);
+
+        void RegisterOccupant(RegisterOccupantRequest request);
     }
 }

@@ -1,10 +1,12 @@
 ﻿namespace BillsManagement.Security
 {
     using BillsManagement.DomainModel;
+    using System;
+
     public interface IJwtUtils
     {
         public string GenerateJwtToken(OccupantDetails user);
-        public int? ValidateJwtToken(string token);
+        public Guid? ValidateJwtToken(string token);
         public RefreshToken GenerateRefreshToken(string ipAddress);
     }
 }

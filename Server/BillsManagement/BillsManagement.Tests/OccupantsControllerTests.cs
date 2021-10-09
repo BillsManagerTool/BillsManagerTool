@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using System;
 
     [TestClass]
     public class OccupantsControllerTests
@@ -24,7 +25,7 @@
             this._controller.ControllerContext.HttpContext = new DefaultHttpContext();
 
             // Arrange
-            this._service.Setup(x => x.GetOccupantDetailsById(It.IsAny<int>()))
+            this._service.Setup(x => x.GetOccupantDetailsById(It.IsAny<Guid>()))
                 .Returns(new DetailedOccupant());
         }
 
@@ -33,11 +34,11 @@
         {
             // Arrange            
             this._controller.HttpContext.Items["UserId"] = 123;
-            var occupantId = int.Parse(this._controller.HttpContext.Items["UserId"].ToString());
+            var occupantId = Guid.Parse(this._controller.HttpContext.Items["UserId"].ToString());
 
             var expectedResult = new DetailedOccupant()
             {
-                OccupantId = 123
+                OccupantId = Guid.NewGuid()
             };
 
             this._service.Setup(x => x.GetOccupantDetailsById(occupantId))

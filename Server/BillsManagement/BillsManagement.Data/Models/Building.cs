@@ -12,7 +12,7 @@ namespace BillsManagement.Data.Models
             Entrances = new HashSet<Entrance>();
         }
 
-        public int BuildingId { get; set; }
+        public Guid BuildingId { get; set; }
         public int TownId { get; set; }
         public string Address { get; set; }
 

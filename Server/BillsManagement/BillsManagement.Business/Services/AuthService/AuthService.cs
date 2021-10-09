@@ -114,20 +114,20 @@
             this.ValidateOccupantExistence(request.Email);
             var encryptedPassword = PasswordCipher.Encrypt(request.Password);
 
-            var registerArgs = new RegisterArgument()
-            {
-                Email = request.Email,
-                Password = encryptedPassword,
-                BuildingAddress = request.BuildingAddress,
-                EntranceNumber = request.EntranceNumber,
-                CountryId = request.CountryId,
-                TownId = request.TownId,
-                ApartmentFloor = request.ApartmentFloor,
-                ApartmentNumber = request.ApartmentNumber
-            };
+            var registerArgs = new RegisterArgument();
+            registerArgs.Email = request.Email;
+            registerArgs.Password = encryptedPassword;
+            registerArgs.BuildingAddress = request.BuildingAddress;
+            registerArgs.EntranceNumber = request.EntranceNumber;
+            registerArgs.CountryId = request.CountryId;
+            registerArgs.TownId = request.TownId;
+            registerArgs.ApartmentFloor = request.ApartmentFloor;
+            registerArgs.ApartmentNumber = request.ApartmentNumber;
 
-            this._authRepository.Register(registerArgs);
-            this._authRepository.RegisterBuilding(registerArgs);
+            var buildingId = this._authRepository.RegisterBuilding(registerArgs);
+            registerArgs.BuildingId = buildingId;
+
+            this._authRepository.RegisterHousekeeper(registerArgs);
 
             string subject = "REGISTRATION SUCCESS!";
             EmailTemplate template = new EmailTemplate();
@@ -138,7 +138,7 @@
             return response;
         }
 
-        public Occupant GetOccupantById(int id)
+        public Occupant GetOccupantById(Guid id)
         {
             var occupant = this._authRepository.GetOccupantById(id);
             if (occupant == null)
@@ -147,9 +147,8 @@
             return occupant;
         }
 
-
         // Move to notification service
-        public void SendRegisterInvitation(int occupantId, List<string> emails)
+        public void SendRegisterInvitation(Guid occupantId, List<string> emails)
         {
             if (emails == null)
             {
@@ -179,6 +178,28 @@
             {
                 this.SendEmailNotification(email, subject, invitationLinkBody);
             }
+        }
+
+        public void RegisterOccupant(RegisterOccupantRequest request)
+        {
+            // Validate apartment number ???
+            this.ValidateOccupantExistence(request.Email);
+
+            var encryptedPassword = PasswordCipher.Encrypt(request.Password);
+            
+            var extractedData = this._registerLinkUtils.ValidateRegisterToken(request.RegisterToken);
+
+            var registerOccupantArgs = new RegisterOccupantArgs()
+            {
+                BuildingId = extractedData.BuildingId,
+                EntranceId = extractedData.EntranceId,
+                Email = request.Email,
+                Password = encryptedPassword,
+                ApartmentNumber = request.ApartmentNumber,
+                ApartmentFloor = request.ApartmentFloor
+            };
+
+            this._authRepository.RegisterOccupant(registerOccupantArgs);
         }
     }
 }

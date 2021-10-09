@@ -13,8 +13,8 @@ namespace BillsManagement.Data.Models
             Charges = new HashSet<Charge>();
         }
 
-        public int CostCenterId { get; set; }
-        public int OccupantId { get; set; }
+        public Guid CostCenterId { get; set; }
+        public Guid OccupantId { get; set; }
         public string Code { get; set; }
         public decimal? TotalDueAmount { get; set; }
 

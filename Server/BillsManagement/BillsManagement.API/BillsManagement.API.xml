@@ -26,7 +26,7 @@
         </member>
         <member name="M:BillsManagement.API.Controllers.AuthController.Register(BillsManagement.Business.Contracts.HTTP.RegisterRequest)">
             <summary>
-            Register an occupant
+            Register housekeeper, create building and entrance
             </summary>
             <param name="request">Accepts request of <see cref="T:BillsManagement.Business.Contracts.HTTP.RegisterRequest"/></param>
             <returns>ActionResult as an instance of <see cref="T:BillsManagement.Business.Contracts.HTTP.RegisterResponse"/> class.</returns>

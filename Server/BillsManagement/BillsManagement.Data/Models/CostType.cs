@@ -12,7 +12,7 @@ namespace BillsManagement.Data.Models
             Charges = new HashSet<Charge>();
         }
 
-        public int CostTypeId { get; set; }
+        public Guid CostTypeId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Charge> Charges { get; set; }

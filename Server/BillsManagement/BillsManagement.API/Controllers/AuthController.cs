@@ -28,7 +28,7 @@
         }
 
         /// <summary>
-        /// Register an occupant
+        /// Register housekeeper, create building and entrance
         /// </summary>
         /// <param name="request">Accepts request of <see cref="Business.Contracts.HTTP.RegisterRequest"/></param>
         /// <returns>ActionResult as an instance of <see cref="Business.Contracts.HTTP.RegisterResponse"/> class.</returns>
@@ -128,30 +128,21 @@
             }
         }
 
-        //[HttpPost]
-        //[Route("confirm-registration")]
-        //public IActionResult ConfirmOccupantRegistration()
-        //{
-        //    try
-        //    {
-        //        var confirmationLink = Url.Action("ConfirmOccupantRegistration", "Auth",
-        //            new 
-        //            { 
-        //                occupantIds = new List<Guid>() 
-        //                { 
-        //                    Guid.NewGuid(), 
-        //                    Guid.NewGuid() 
-        //                }, 
-        //                entranceId = Guid.NewGuid() 
-        //            }, 
-        //            Request.Scheme);
-
-        //        return Ok();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        [HttpPost]
+        [Route("register-occupant")]
+        public ActionResult<RegisterOccupantResponse> RegisterOccupant(RegisterOccupantRequest request)
+        {
+            try
+            {
+                RegisterOccupantResponse response = new RegisterOccupantResponse();
+                this._service.RegisterOccupant(request);
+                response.StatusCode = HttpStatusCode.OK;
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
