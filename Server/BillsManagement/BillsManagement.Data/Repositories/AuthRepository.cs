@@ -123,6 +123,7 @@
             apartment.CostCenterId = costCenter.CostCenterId;
 
             OccupantToApartment occupantToApartment = new OccupantToApartment();
+            occupantToApartment.OccupantToApartmentId = Guid.NewGuid();
             occupantToApartment.OccupantId = occupant.OccupantId;
             occupantToApartment.ApartmentId = apartment.ApartmentId;
 

@@ -176,7 +176,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F781FBF2D0");
+                    .HasName("PK__Notifica__BA44B3F785CAD192");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -209,7 +209,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EBACCACFFE");
+                    .HasName("PK__Occupant__C28410EB3DDFE06F");
 
                 entity.Property(e => e.OccupantDetailsId).ValueGeneratedNever();
 
