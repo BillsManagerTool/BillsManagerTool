@@ -1,9 +1,11 @@
-import { AuthenticateResponse } from './../models/authenticateResponse';
+import { RegisterRequest } from './../domain-models/registerRequest';
+import { IBaseResponse } from './../interfaces/baseResponse';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AuthenticateRequest } from '../models/authenticateRequest';
+import { AuthenticateRequest } from '../domain-models/authenticateRequest';
+import { AuthenticateResponse } from '../domain-models/authenticateResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -36,14 +38,10 @@ export class AuthService {
     );
   }
 
-  // register(email: string, password: string): Observable<IAuthenticateResponse> {
-  //   let request = new AuthenticateRequest();
-  //   request.Email = email;
-  //   request.Password = password;
-
-  //   return this.http.post<IAuthenticateResponse>(
-  //     `${this._BASE_URL}/auth/authenticate`,
-  //     request
-  //   );
-  // }
+  register(request: RegisterRequest): Observable<IBaseResponse> {
+    return this.http.post<IBaseResponse>(
+      `${this._BASE_URL}/auth/register`,
+      request
+    );
+  }
 }
