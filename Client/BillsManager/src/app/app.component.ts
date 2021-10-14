@@ -1,7 +1,6 @@
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { IAuthenticateResponse } from './interfaces/authenticateResponse';
-import { AuthenticateRequest } from './models/authenticateRequest';
+import { AuthenticateResponse } from './models/authenticateResponse';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +13,12 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    let request = new AuthenticateRequest();
-    request.Password = 'Pesho';
-    request.Email = 'Pesho';
+    let email = 'cholaka@gmail.com';
+    let password = 'cholaka1234';
 
-    console.log(request);
     this.authService
-      .authenticate(request)
-      .subscribe((response: IAuthenticateResponse) => {
+      .authenticate(email, password)
+      .subscribe((response: AuthenticateResponse) => {
         console.log(response);
       });
   }

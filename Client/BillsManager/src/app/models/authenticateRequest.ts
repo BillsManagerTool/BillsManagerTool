@@ -1,6 +1,4 @@
-import { IAuthenticateRequest } from '../interfaces/authenticateRequest';
-
-export class AuthenticateRequest implements IAuthenticateRequest {
+export class AuthenticateRequest {
   Email: string;
   Password: string;
 }
