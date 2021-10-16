@@ -44,4 +44,9 @@ export class AuthService {
       request
     );
   }
+
+  //https://restcountries.com/v3.1/name/united - search by partial name
+  getCountries() {
+    return this.http.get<any>(`https://countriesnow.space/api/v0.1/countries`);
+  }
 }
