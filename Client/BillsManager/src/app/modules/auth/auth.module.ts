@@ -6,10 +6,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
-  imports: [CommonModule, AuthRoutingModule, SharedModule],
+  imports: [CommonModule, AuthRoutingModule, SharedModule, PasswordModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
