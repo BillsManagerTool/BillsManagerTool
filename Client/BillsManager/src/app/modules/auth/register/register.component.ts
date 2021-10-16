@@ -1,3 +1,4 @@
+import { TranslateService } from './../../../services/translate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
@@ -30,21 +31,10 @@ export class RegisterComponent implements OnInit {
     country: new FormControl(Validators.required),
   });
 
-  btnConfig = {
-    styles: {
-      position: 'relative',
-      width: '200px',
-      height: '40px',
-      fontSize: '16px',
-      borderRadius: '5px',
-      backgroundColor: '#00a9d6',
-      fontFamily: 'sans-serif',
-      marginTop: '30px',
-    },
-    text: 'Register',
-  };
-
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit(): void {}
 
