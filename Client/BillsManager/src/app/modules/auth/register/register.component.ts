@@ -31,12 +31,17 @@ export class RegisterComponent implements OnInit {
     country: new FormControl(Validators.required),
   });
 
+  dataLocale: any;
+
   constructor(
     private authService: AuthService,
     private translateService: TranslateService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let lang = localStorage.getItem('ui-lang');
+    this.dataLocale = this.translateService.translate(lang);
+  }
 
   onSubmit() {
     console.log(this.registerHousekeeperForm.value);

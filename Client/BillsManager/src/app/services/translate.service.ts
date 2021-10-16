@@ -1,18 +1,19 @@
 import { JsonpClientBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import enUS from '../../localization/en-US.json';
+import bgBG from '../../localization/bg-BG.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TranslateService {
-  myData: any;
-
   constructor(private http: HttpClient) {}
 
-  translate(lenguage: string) {
-    if (lenguage === 'en-US') {
-      console.log(enUS);
+  translate(language: string) {
+    if (language === 'en-US') {
+      return enUS;
+    } else {
+      return bgBG;
     }
   }
 }
