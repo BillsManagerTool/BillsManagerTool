@@ -30,6 +30,20 @@ export class RegisterComponent implements OnInit {
     country: new FormControl(Validators.required),
   });
 
+  btnConfig = {
+    styles: {
+      position: 'relative',
+      width: '200px',
+      height: '40px',
+      fontSize: '16px',
+      borderRadius: '5px',
+      backgroundColor: '#00a9d6',
+      fontFamily: 'sans-serif',
+      marginTop: '30px',
+    },
+    text: 'Register',
+  };
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
