@@ -1,4 +1,3 @@
-import { TranslateService } from './services/translate.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,14 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'BillsManager';
 
-  constructor(private translateService: TranslateService) {}
-  lenguage: string;
-  ngOnInit() {
-    this.translateService.translate('en-US');
-    console.log(this.lenguage);
-  }
-
-  getValue(lenguage: string) {
-    console.log(lenguage);
-  }
+  constructor() {}
+  ngOnInit() {}
 }
