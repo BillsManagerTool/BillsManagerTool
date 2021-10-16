@@ -1,21 +1,28 @@
 <form [formGroup]="registerHousekeeperForm" (ngSubmit)="onSubmit()">
   <div class="wrapper">
-    <span class="p-float-label">
-      <input
-        class="form-control"
-        formControlName="email"
-        id="email"
-        type="email"
-        pInputText
-      />
+    <div class="name-inputs-wrapper">
+      <div class="p-field text-field first-name-content">
+        <label for="firstName">First name</label>
+        <input formControlName="firstName" type="text" pInputText />
+      </div>
+      <div class="p-field text-field last-name-content">
+        <label for="lastName">Last name</label>
+        <input formControlName="lastName" type="text" pInputText />
+      </div>
+    </div>
+
+    <div class="p-field text-field email-content">
       <label for="email">Email</label>
-    </span>
+      <input formControlName="email" type="email" pInputText />
+    </div>
+
+    <div class="p-field text-field password-content">
+      <label for="password">Password</label>
+      <input formControlName="password" type="password" pInputText />
+    </div>
   </div>
 
-  <!-- <label for="email">Email: </label>
-    <input id="email" type="email" formControlName="email" />
-  
-    <label for="password">Password: </label>
+  <!-- <label for="password">Password: </label>
     <input id="password" type="password" formControlName="password" />
   
     <label for="buildingAddress">Building Address: </label>

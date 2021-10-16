@@ -1,9 +1,41 @@
 .wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-  width: 100px;
-  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 500px;
+  margin: auto;
+  min-height: 100vh;
+  span {
+    margin: 25px;
+  }
+}
+
+.text-field {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+}
+
+.name-inputs-wrapper {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.first-name-content {
+  margin-right: 15px;
+}
+
+.last-name-content {
+  margin-left: 15px;
+}
+
+.email-content {
+  width: 530px;
 }

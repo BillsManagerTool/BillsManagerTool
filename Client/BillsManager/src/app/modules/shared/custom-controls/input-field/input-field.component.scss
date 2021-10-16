@@ -1,0 +1,9 @@
+.text-field {
+  display: flex;
+  flex-direction: column;
+  label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+}

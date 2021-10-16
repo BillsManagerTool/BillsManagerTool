@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'input-field',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input-field.component.scss'],
 })
 export class InputFieldComponent implements OnInit {
+  @Input() label: string;
+  @Input() formGroupName: FormGroup;
+  @Input() controlName: FormControl;
   constructor() {}
 
   ngOnInit(): void {}
