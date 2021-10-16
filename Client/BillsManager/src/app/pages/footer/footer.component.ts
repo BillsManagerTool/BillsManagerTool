@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  lenguage: string;
   constructor() {}
 
   ngOnInit(): void {}
 
-  getLenguage(lenguage: string) {
-    console.log(lenguage);
+  getLanguage(language: string) {
+    localStorage.setItem('ui-lang', language);
+    console.log(language);
   }
 }
