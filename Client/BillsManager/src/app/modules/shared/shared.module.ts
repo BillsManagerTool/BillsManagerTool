@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatChipsModule } from '@angular/material/chips';
+import { InputFieldComponent } from './custom-controls/input-field/input-field.component';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, MatCheckboxModule, MatChipsModule],
-  exports: [MatCheckboxModule, MatChipsModule],
+  declarations: [InputFieldComponent, InputFieldComponent],
+  imports: [CommonModule],
+  exports: [InputFieldComponent],
 })
 export class SharedModule {}
