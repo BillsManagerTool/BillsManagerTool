@@ -65,8 +65,8 @@
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(_assemblyVersion, new OpenApiInfo { Title = _assemblyName, Version = _assemblyVersion });
-                c.IncludeXmlComments($"{_applicationBaseDirectory}\\{ApiConstants.CoreXmlDocumentation}");
-                c.IncludeXmlComments($"{_applicationBaseDirectory}\\{ApiConstants.DomainModelsXmlDocumentation}");
+                c.IncludeXmlComments($"{_applicationBaseDirectory}/{ApiConstants.CoreXmlDocumentation}");
+                c.IncludeXmlComments($"{_applicationBaseDirectory}/{ApiConstants.DomainModelsXmlDocumentation}");
             });
 
             // Auto Mapper Configurations
