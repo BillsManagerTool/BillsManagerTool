@@ -4,7 +4,18 @@
             "Login": "Влизане"
         },
         "Register": {
-            "Register": "Регистрация"
+            "Register": "Регистрация",
+            "FirstName": "Първо име",
+            "LastName": "Фамилия",
+            "Email": "Имейл",
+            "Password": "Парола",
+            "ConfirmPassword": "Потвърди паролата",
+            "Country": "Държава",
+            "Town": "Град",
+            "BuildingAddress": "Адрес на сградата",
+            "EntranceNumber": "Номер на вход",
+            "ApartmentNumber": "Номер на апартамента",
+            "ApartmentFloor": "Етаж на апартамента"
         }
     }
 }

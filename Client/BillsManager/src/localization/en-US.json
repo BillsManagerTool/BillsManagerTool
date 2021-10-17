@@ -4,7 +4,18 @@
             "Login": "Login"
         },
         "Register": {
-            "Register": "Register"
+            "Register": "Register",
+            "FirstName": "First name",
+            "LastName": "Last name",
+            "Email": "Email",
+            "Password": "Password",
+            "ConfirmPassword": "Confirm password",
+            "Country": "Country",
+            "Town": "Town",
+            "BuildingAddress": "Building address",
+            "EntranceNumber": "Entrance number",
+            "ApartmentNumber": "Apartment number",
+            "ApartmentFloor": "Apartment floor"
         }
     }
 }

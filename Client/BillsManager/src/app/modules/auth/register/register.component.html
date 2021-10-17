@@ -2,33 +2,44 @@
   <div class="wrapper">
     <div class="name-inputs-wrapper">
       <div class="p-field text-field first-name-content">
-        <label for="firstName">First name</label>
+        <label for="firstName">{{ dataLocale.FirstName }}</label>
         <input formControlName="firstName" type="text" pInputText />
       </div>
       <div class="p-field text-field last-name-content">
-        <label for="lastName">Last name</label>
+        <label for="lastName">{{ dataLocale.LastName }}</label>
         <input formControlName="lastName" type="text" pInputText />
       </div>
     </div>
 
     <div class="p-field text-field email-content">
-      <label for="email">Email</label>
+      <label for="email">{{ dataLocale.Email }}</label>
       <input formControlName="email" type="email" pInputText />
     </div>
 
-    <div class="p-field text-field password-content">
-      <label for="password">Password</label>
-      <p-password
-        formControlName="password"
-        [feedback]="false"
-        [toggleMask]="true"
-      ></p-password>
+    <div class="password-group-content">
+      <div class="p-field password-content text-field">
+        <label for="password">{{ dataLocale.Password }}</label>
+        <p-password
+          formControlName="password"
+          [feedback]="false"
+          [toggleMask]="true"
+        ></p-password>
+      </div>
+      <div class="p-field password-confirm-content text-field">
+        <label for="confirmPassword">{{ dataLocale.ConfirmPassword }}</label>
+        <p-password
+          formControlName="confirmPassword"
+          [feedback]="false"
+          [toggleMask]="true"
+        ></p-password>
+      </div>
     </div>
+
     <button
       class="btn-base btn-register"
       [disabled]="!registerHousekeeperForm.valid"
     >
-      {{ dataLocale.Auth.Register.Register }}
+      {{ dataLocale.Register }}
     </button>
   </div>
 </form>

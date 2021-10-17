@@ -44,6 +44,19 @@
   width: 530px;
 }
 
+.password-group-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.password-content {
+  margin-right: 15px;
+}
+
+.password-confirm-content {
+  margin-left: 15px;
+}
+
 :host ::ng-deep p-password div input {
   width: 100%;
 }

@@ -25,6 +25,11 @@ export class RegisterComponent implements OnInit {
       Validators.minLength(6),
       Validators.maxLength(12),
     ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(12),
+    ]),
     buildingAddress: new FormControl(Validators.required),
     entranceNumber: new FormControl(Validators.required),
     apartmentNumber: new FormControl(Validators.required),
@@ -43,9 +48,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     let lang = localStorage.getItem('ui-lang');
-    this.dataLocale = this.translateService.translate(lang);
+    let data = this.translateService.translate(lang);
+    this.dataLocale = data.Auth.Register;
     this.externalService.getCountries().subscribe((response) => {
-      console.log(response);
+      // console.log(response);
     });
   }
 
