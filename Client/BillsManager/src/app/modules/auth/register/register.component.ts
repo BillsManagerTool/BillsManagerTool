@@ -39,6 +39,8 @@ export class RegisterComponent implements OnInit {
   });
 
   dataLocale: any;
+  towns: Array<any>;
+  contries: Array<any>;
 
   constructor(
     private authService: AuthService,
@@ -51,7 +53,8 @@ export class RegisterComponent implements OnInit {
     let data = this.translateService.translate(lang);
     this.dataLocale = data.Auth.Register;
     this.externalService.getCountries().subscribe((response) => {
-      // console.log(response);
+      console.log(response);
+      // this.towns = response.
     });
   }
 
