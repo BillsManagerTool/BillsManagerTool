@@ -1,0 +1,8 @@
+{
+  "ConnectionConfig": {
+    "ConnectionString": ""
+  },
+  "Secrets": {
+	"JWT_Secret": ""
+  }
+}
