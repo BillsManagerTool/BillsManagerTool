@@ -1,3 +1,4 @@
+import { ExternalService } from './../../../services/external.service';
 import { TranslateService } from './../../../services/translate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
       Validators.minLength(3),
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl(Validators.required, [
+    password: new FormControl('', [
+      Validators.required,
       Validators.minLength(6),
       Validators.maxLength(12),
     ]),
@@ -35,12 +37,16 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private externalService: ExternalService
   ) {}
 
   ngOnInit(): void {
     let lang = localStorage.getItem('ui-lang');
     this.dataLocale = this.translateService.translate(lang);
+    this.externalService.getCountries().subscribe((response) => {
+      console.log(response);
+    });
   }
 
   onSubmit() {
