@@ -40,7 +40,9 @@ export class RegisterComponent implements OnInit {
 
   dataLocale: any;
   towns: Array<any>;
-  contries: Array<any>;
+  countries: Array<any>;
+  selectedCountry: string;
+  selectedTown: string;
 
   constructor(
     private authService: AuthService,

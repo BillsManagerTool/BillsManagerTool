@@ -34,6 +34,28 @@
         ></p-password>
       </div>
     </div>
+    <div class="location-content">
+      <div class="text-field country-content">
+        <label for="country">{{ dataLocale.Country }}</label>
+        <p-dropdown
+          formControlName="country"
+          [options]="countries"
+          [(ngModel)]="selectedCountry"
+          editable="true"
+          [filterBy]="countries"
+        ></p-dropdown>
+      </div>
+      <div class="text-field town-content">
+        <label for="town">{{ dataLocale.Town }}</label>
+        <p-dropdown
+          formControlName="town"
+          [options]="towns"
+          [(ngModel)]="selectedTown"
+          editable="true"
+          [filterBy]="towns"
+        ></p-dropdown>
+      </div>
+    </div>
 
     <button
       class="btn-base btn-register"

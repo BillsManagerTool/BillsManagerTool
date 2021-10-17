@@ -17,9 +17,6 @@
   width: 250px;
   flex-direction: column;
   margin-bottom: 25px;
-  input {
-    background-color: #e7f9fe;
-  }
   label {
     font-size: 12px;
     margin-bottom: 5px;
@@ -29,7 +26,6 @@
 
 .name-inputs-wrapper {
   display: flex;
-  // margin-bottom: 25px;
 }
 
 .first-name-content {
@@ -49,11 +45,17 @@
   flex-direction: row;
 }
 
-.password-content {
+.location-content {
+  display: flex;
+}
+
+.password-content,
+.country-content {
   margin-right: 15px;
 }
 
-.password-confirm-content {
+.password-confirm-content,
+.town-content {
   margin-left: 15px;
 }
 
@@ -71,4 +73,8 @@
   right: 10px !important;
   top: 10px;
   margin-top: 0;
+}
+
+:host ::ng-deep p-dropdown .p-dropdown {
+  width: 100%;
 }
