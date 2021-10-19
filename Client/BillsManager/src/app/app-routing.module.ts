@@ -1,26 +1,21 @@
+import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BaseComponent } from './pages/base/base.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/BillsManager',
-    pathMatch: 'full',
+    component: HomeComponent,
   },
   {
-    path: 'BillsManager',
-    component: BaseComponent,
-  },
-  {
-    path: 'BillsManager/Auth',
+    path: 'Auth',
     loadChildren: () =>
-      import('./modules/auth/auth.module').then((module) => module.AuthModule),
+      import('./pages/auth/auth.module').then((module) => module.AuthModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
