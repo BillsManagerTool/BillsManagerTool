@@ -59,6 +59,10 @@
   margin-left: 15px;
 }
 
+.country-item {
+  text-align: left;
+}
+
 :host ::ng-deep p-password div input {
   width: 100%;
 }
@@ -77,4 +81,12 @@
 
 :host ::ng-deep p-dropdown .p-dropdown {
   width: 100%;
+}
+
+:host ::ng-deep .p-dropdown-panel {
+  width: 250px;
+}
+
+:host ::ng-deep .p-dropdown {
+  height: 37.33px;
 }

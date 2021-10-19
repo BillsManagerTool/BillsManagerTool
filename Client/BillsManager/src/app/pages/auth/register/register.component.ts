@@ -45,6 +45,8 @@ export class RegisterComponent implements OnInit {
   selectedCountry: any;
   selectedTown: string;
 
+  searchCountry: '';
+
   constructor(
     private authService: AuthService,
     private translateService: TranslateService,

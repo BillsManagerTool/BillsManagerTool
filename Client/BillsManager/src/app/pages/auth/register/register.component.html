@@ -37,27 +37,34 @@
     <div class="location-content">
       <div class="text-field country-content">
         <label for="country">{{ dataLocale.Country }}</label>
-        <p-autoComplete
+        <p-dropdown
           formControlName="country"
-          [(ngModel)]="selectedCountry.country[0]"
-          [showEmptyMessage]="true"
-          [suggestions]="filteredCountries"
-          (completeMethod)="filterCountry($event)"
-          field="name"
-          [minLength]="1"
-        ></p-autoComplete>
+          [options]="countries"
+          [(ngModel)]="selectedCountry"
+          optionLabel="country"
+          [filter]="true"
+          [resetFilterOnHide]="true"
+          filterBy="country"
+          [showClear]="true"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div
+              class="country-item country-item-value"
+              *ngIf="selectedCountry"
+            >
+              <div>{{ selectedCountry.country }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country.country }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
       </div>
+
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
-        <!-- <p-autoComplete
-          formControlName="town"
-          [(ngModel)]="selectedCountry"
-          [showEmptyMessage]="true"
-          [suggestions]="filteredCountries"
-          (completeMethod)="filterCountry($event)"
-          field="name"
-          [minLength]="1"
-        ></p-autoComplete> -->
       </div>
     </div>
 
