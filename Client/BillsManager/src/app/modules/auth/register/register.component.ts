@@ -34,14 +34,15 @@ export class RegisterComponent implements OnInit {
     entranceNumber: new FormControl(Validators.required),
     apartmentNumber: new FormControl(Validators.required),
     apartmentFloor: new FormControl(Validators.required),
-    town: new FormControl(Validators.required),
-    country: new FormControl(Validators.required),
+    town: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
   });
 
   dataLocale: any;
   towns: Array<any>;
-  countries: Array<any>;
-  selectedCountry: string;
+  countries: Array<any> = new Array<any>();
+  filteredCountries: Array<string> = new Array<string>();
+  selectedCountry: any;
   selectedTown: string;
 
   constructor(
@@ -54,13 +55,27 @@ export class RegisterComponent implements OnInit {
     let lang = localStorage.getItem('ui-lang');
     let data = this.translateService.translate(lang);
     this.dataLocale = data.Auth.Register;
-    this.externalService.getCountries().subscribe((response) => {
-      console.log(response);
-      // this.towns = response.
+    this.externalService.getCountries().then((response) => {
+      this.countries = response;
+      console.log(this.countries);
     });
   }
 
   onSubmit() {
     console.log(this.registerHousekeeperForm.value);
+  }
+
+  filterCountry(event) {
+    let filtered: any[] = [];
+    let query = event.query;
+    for (let i = 0; i < this.countries.length; i++) {
+      let country = this.countries[i];
+      console.log(this.countries[i]);
+      if (country.country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(country);
+      }
+    }
+    console.log(filtered);
+    this.filteredCountries = filtered;
   }
 }

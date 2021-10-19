@@ -37,23 +37,27 @@
     <div class="location-content">
       <div class="text-field country-content">
         <label for="country">{{ dataLocale.Country }}</label>
-        <p-dropdown
+        <p-autoComplete
           formControlName="country"
-          [options]="countries"
-          [(ngModel)]="selectedCountry"
-          editable="true"
-          [filterBy]="countries"
-        ></p-dropdown>
+          [(ngModel)]="selectedCountry.country[0]"
+          [showEmptyMessage]="true"
+          [suggestions]="filteredCountries"
+          (completeMethod)="filterCountry($event)"
+          field="name"
+          [minLength]="1"
+        ></p-autoComplete>
       </div>
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
-        <p-dropdown
+        <!-- <p-autoComplete
           formControlName="town"
-          [options]="towns"
-          [(ngModel)]="selectedTown"
-          editable="true"
-          [filterBy]="towns"
-        ></p-dropdown>
+          [(ngModel)]="selectedCountry"
+          [showEmptyMessage]="true"
+          [suggestions]="filteredCountries"
+          (completeMethod)="filterCountry($event)"
+          field="name"
+          [minLength]="1"
+        ></p-autoComplete> -->
       </div>
     </div>
 

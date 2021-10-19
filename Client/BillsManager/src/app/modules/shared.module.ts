@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -11,8 +11,13 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     InputTextModule,
     ReactiveFormsModule,
-    DropdownModule,
+    AutoCompleteModule,
   ],
-  exports: [FormsModule, InputTextModule, ReactiveFormsModule, DropdownModule],
+  exports: [
+    FormsModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    AutoCompleteModule,
+  ],
 })
 export class SharedModule {}
