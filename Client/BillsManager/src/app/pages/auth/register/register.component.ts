@@ -42,6 +42,8 @@ export class RegisterComponent implements OnInit {
   dataLocale: any;
   searchCountry: '';
   searchTown: '';
+  selectedCountry: string;
+  countries: any;
 
   countries$: Observable<ICountry[]>;
   towns: any;
@@ -55,7 +57,9 @@ export class RegisterComponent implements OnInit {
     let lang = localStorage.getItem('ui-lang');
     this.translateService.language = lang;
     this.countries$ = this.translateService.getCountriesAsObservable();
-
+    this.translateService.getCountriesAsObservable().subscribe((res) => {
+      this.countries = res;
+    });
     this.translateService.getCountriesAsObservable().subscribe((res) => {
       // console.log(res);
       this.towns = res;
