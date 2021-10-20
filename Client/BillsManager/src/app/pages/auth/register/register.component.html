@@ -47,7 +47,7 @@
           [showClear]="true"
           placeholder=" "
           #selectedValue
-          (onChange)="select(selectedValue.value.Country)"
+          (onChange)="onChangeCountry(selectedValue.value.Country)"
         >
           <ng-template pTemplate="selectedCountry">
             <div

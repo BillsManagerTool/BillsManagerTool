@@ -55,9 +55,6 @@ export class RegisterComponent implements OnInit {
     this.translateService.language = lang;
     this.translateService.getCountriesAsObservable().subscribe((res) => {
       this.countries = res;
-      this.towns = res.map((x) => x.Towns);
-      console.log(Object.values(this.towns));
-      console.log(this.towns);
     });
 
     let data = this.translateService.translateLabels(lang);
@@ -68,7 +65,13 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerHousekeeperForm.value);
   }
 
-  select(selectedCountry) {
-    console.log(selectedCountry);
+  onChangeCountry(selectedCountry) {
+    this.translateService.getCountriesAsObservable().subscribe((res) => {
+      res.forEach((country) => {
+        if (country.Country == selectedCountry) {
+          this.towns = country;
+        }
+      });
+    });
   }
 }
