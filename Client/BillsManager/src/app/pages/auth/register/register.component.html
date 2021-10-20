@@ -56,12 +56,7 @@
 
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
-        <input
-          formControlName="town"
-          type="text"
-          pInputText
-          [(ngModel)]="searchCountry"
-        />
+        <input formControlName="town" type="text" pInputText />
       </div>
     </div>
 
@@ -73,16 +68,3 @@
     </button>
   </div>
 </form>
-<!-- <input
-  type="number"
-  placeholder="enter user id..."
-  (input)="searchPosts($event.target.value)"
-/>
-<ng-container *ngIf="blogPosts$ | async as blogPosts">
-  <p>User posts titles:</p>
-  <ul>
-    <li *ngFor="let blogPost of blogPosts">
-      {{ blogPost.title }}
-    </li>
-  </ul>
-</ng-container> -->

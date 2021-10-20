@@ -1,8 +1,8 @@
 import { TranslateService } from './../../../services/translate.service';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +41,6 @@ export class RegisterComponent implements OnInit {
   dataLocale: any;
   countriesLocale: Array<string> = new Array<string>();
   countriesTest: any;
-  // filteredCountries: Array<string> = new Array<string>();
   selectedCountry: any;
   selectedTown: string;
 
@@ -61,9 +60,6 @@ export class RegisterComponent implements OnInit {
 
     let data = this.translateService.translateLabels(lang);
     this.dataLocale = data.Auth.Register;
-    // countries.forEach((element) => {
-    //   this.countriesLocale.push(element.Country);
-    // });
   }
 
   onSubmit() {
