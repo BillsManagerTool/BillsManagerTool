@@ -79,6 +79,12 @@
   margin-top: 0;
 }
 
+.countries-dropdown {
+  width: 250px;
+  height: 400px;
+  z-index: 1000;
+}
+
 :host ::ng-deep p-dropdown .p-dropdown {
   width: 100%;
 }

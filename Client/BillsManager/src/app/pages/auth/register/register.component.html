@@ -38,25 +38,42 @@
       <div class="text-field country-content">
         <label for="country">{{ dataLocale.Country }}</label>
         <input
+          list="countries-list"
           formControlName="country"
           type="text"
           [(ngModel)]="searchCountry"
           pInputText
         />
-        <div
-          *ngFor="
-            let country of countries$
-              | async
-              | searchTextFilter: searchCountry:'Country'
-          "
-        >
-          {{ country.Country }}
-        </div>
+        <datalist id="countries-list" class="countries-dropdown">
+          <option
+            *ngFor="
+              let country of countries$
+                | async
+                | searchTextFilter: searchCountry:'Country'
+            "
+          >
+            {{ country.Country }}
+          </option>
+        </datalist>
       </div>
 
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
-        <input formControlName="town" type="text" pInputText />
+        <input
+          formControlName="town"
+          type="text"
+          [(ngModel)]="searchTown"
+          pInputText
+        />
+        <!-- <div
+          *ngFor="
+            let country of countries$.Towns
+              | async
+              | searchTextFilter: searchTown:'Towns'
+          "
+        >
+          {{ country.Towns }}
+        </div> -->
       </div>
     </div>
 

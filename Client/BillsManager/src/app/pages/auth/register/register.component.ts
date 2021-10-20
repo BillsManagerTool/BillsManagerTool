@@ -1,3 +1,4 @@
+import { ICountry } from './../../../interfaces/country';
 import { TranslateService } from './../../../services/translate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -39,14 +40,11 @@ export class RegisterComponent implements OnInit {
   });
 
   dataLocale: any;
-  countriesLocale: Array<string> = new Array<string>();
-  countriesTest: any;
-  selectedCountry: any;
-  selectedTown: string;
-
   searchCountry: '';
+  searchTown: '';
 
-  countries$: Observable<any>;
+  countries$: Observable<ICountry[]>;
+  towns: any;
 
   constructor(
     private authService: AuthService,
@@ -58,8 +56,15 @@ export class RegisterComponent implements OnInit {
     this.translateService.language = lang;
     this.countries$ = this.translateService.getCountriesAsObservable();
 
+    this.translateService.getCountriesAsObservable().subscribe((res) => {
+      // console.log(res);
+      this.towns = res;
+    });
+
     let data = this.translateService.translateLabels(lang);
     this.dataLocale = data.Auth.Register;
+
+    this.translateService.getTownsAsObservable();
   }
 
   onSubmit() {

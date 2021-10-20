@@ -23,6 +23,16 @@ export class TranslateService {
     }
   }
 
+  getTownsAsObservable(): any {
+    if (this.language === 'en-US') {
+      let res = this.http.get<any>('../../assets/countries-en.json');
+      console.log(res);
+      return res;
+    } else {
+      return this.http.get<any>('../../assets/countries-bg.json');
+    }
+  }
+
   getLanguage(): void {
     let lg = localStorage.getItem('ui-lang');
     this.language = lg;
