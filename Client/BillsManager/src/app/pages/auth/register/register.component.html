@@ -47,7 +47,7 @@
           *ngFor="
             let country of countries$
               | async
-              | searchTextFilter: searchCountry:'country.Country'
+              | searchTextFilter: searchCountry:'Country'
           "
         >
           {{ country.Country }}
