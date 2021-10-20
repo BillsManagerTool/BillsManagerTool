@@ -37,34 +37,31 @@
     <div class="location-content">
       <div class="text-field country-content">
         <label for="country">{{ dataLocale.Country }}</label>
-        <p-dropdown
+        <input
           formControlName="country"
-          [options]="countries"
-          [(ngModel)]="selectedCountry"
-          optionLabel="country"
-          [filter]="true"
-          [resetFilterOnHide]="true"
-          filterBy="country"
-          [showClear]="true"
+          type="text"
+          [(ngModel)]="searchCountry"
+          pInputText
+        />
+        <div
+          *ngFor="
+            let country of countries$
+              | async
+              | searchTextFilter: searchCountry:'country.Country'
+          "
         >
-          <ng-template pTemplate="selectedItem">
-            <div
-              class="country-item country-item-value"
-              *ngIf="selectedCountry"
-            >
-              <div>{{ selectedCountry.country }}</div>
-            </div>
-          </ng-template>
-          <ng-template let-country pTemplate="item">
-            <div class="country-item">
-              <div>{{ country.country }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown>
+          {{ country.Country }}
+        </div>
       </div>
 
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
+        <input
+          formControlName="town"
+          type="text"
+          pInputText
+          [(ngModel)]="searchCountry"
+        />
       </div>
     </div>
 
@@ -76,3 +73,16 @@
     </button>
   </div>
 </form>
+<!-- <input
+  type="number"
+  placeholder="enter user id..."
+  (input)="searchPosts($event.target.value)"
+/>
+<ng-container *ngIf="blogPosts$ | async as blogPosts">
+  <p>User posts titles:</p>
+  <ul>
+    <li *ngFor="let blogPost of blogPosts">
+      {{ blogPost.title }}
+    </li>
+  </ul>
+</ng-container> -->

@@ -1,8 +1,8 @@
-import { ExternalService } from './../../../services/external.service';
 import { TranslateService } from './../../../services/translate.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -39,45 +39,34 @@ export class RegisterComponent implements OnInit {
   });
 
   dataLocale: any;
-  towns: Array<any>;
-  countries: Array<any> = new Array<any>();
-  filteredCountries: Array<string> = new Array<string>();
+  countriesLocale: Array<string> = new Array<string>();
+  countriesTest: any;
+  // filteredCountries: Array<string> = new Array<string>();
   selectedCountry: any;
   selectedTown: string;
 
   searchCountry: '';
 
+  countries$: Observable<any>;
+
   constructor(
     private authService: AuthService,
-    private translateService: TranslateService,
-    private externalService: ExternalService
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
     let lang = localStorage.getItem('ui-lang');
-    let data = this.translateService.translate(lang);
+    this.translateService.language = lang;
+    this.countries$ = this.translateService.getCountriesAsObservable();
+
+    let data = this.translateService.translateLabels(lang);
     this.dataLocale = data.Auth.Register;
-    this.externalService.getCountries().then((response) => {
-      this.countries = response;
-      console.log(this.countries);
-    });
+    // countries.forEach((element) => {
+    //   this.countriesLocale.push(element.Country);
+    // });
   }
 
   onSubmit() {
     console.log(this.registerHousekeeperForm.value);
-  }
-
-  filterCountry(event) {
-    let filtered: any[] = [];
-    let query = event.query;
-    for (let i = 0; i < this.countries.length; i++) {
-      let country = this.countries[i];
-      console.log(this.countries[i]);
-      if (country.country.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(country);
-      }
-    }
-    console.log(filtered);
-    this.filteredCountries = filtered;
   }
 }

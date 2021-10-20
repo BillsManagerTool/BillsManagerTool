@@ -1,0 +1,63 @@
+[
+  {
+    "Country": "Bulgaria",
+    "Continent": "EU",
+    "Capital": "Sofia",
+    "Currency": "BGN",
+    "Phone": "359",
+    "Towns": [
+      "Ahtopol",
+      "Asenovgrad",
+      "Balchik",
+      "Blagoevgrad",
+      "Burgas",
+      "Dobrich",
+      "Gabrovo",
+      "Haskovo",
+      "Karlovo",
+      "Kazanluk",
+      "Kiten",
+      "Kurdzhali",
+      "Kyustendil",
+      "Lovech",
+      "Montana",
+      "Nessebar",
+      "Nova Zagora",
+      "Pernik",
+      "Pleven",
+      "Plovdiv",
+      "Pomorie",
+      "Razgrad",
+      "Ruse",
+      "Shumen",
+      "Silistra",
+      "Sliven",
+      "Smolyan",
+      "Sofia",
+      "Stara Zagora",
+      "Svishtov",
+      "Targovishte",
+      "Valiko Tarnovo",
+      "Valingrad",
+      "Varna",
+      "Vidin",
+      "Vratsa",
+      "Yambol"
+    ]
+  },
+  {
+    "Country":"Turkey",
+    "Continent": "Европа",
+    "Capital": "Анкара",
+    "Currency": "Лири",
+    "Phone": "90",
+    "Towns": [
+      "Анкара",
+      "Анталия",
+      "Бурса",
+      "Истанбул",
+      "Измир",
+      "Одрин"
+    ]
+  }
+]

@@ -1,3 +1,4 @@
+import { FilterPipe } from './../../shared/pipes/filter.pipe';
 import { SharedModule } from '../shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { PasswordModule } from 'primeng/password';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, FilterPipe],
   imports: [CommonModule, AuthRoutingModule, SharedModule, PasswordModule],
   providers: [
     {

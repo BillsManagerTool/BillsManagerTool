@@ -1,3 +1,4 @@
+import { TranslateService } from './services/translate.service';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,11 +8,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './pages/footer/footer.component';
-import { FilterPipe } from './shared/pipes/filter.pipe';
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, FilterPipe, HomeComponent],
+  declarations: [AppComponent, FooterComponent, HomeComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
