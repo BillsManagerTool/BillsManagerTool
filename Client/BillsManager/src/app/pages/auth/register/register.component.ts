@@ -40,12 +40,9 @@ export class RegisterComponent implements OnInit {
   });
 
   dataLocale: any;
-  searchCountry: '';
-  searchTown: '';
   selectedCountry: string;
+  selectedTown: string;
   countries: any;
-
-  countries$: Observable<ICountry[]>;
   towns: any;
 
   constructor(
@@ -56,22 +53,22 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     let lang = localStorage.getItem('ui-lang');
     this.translateService.language = lang;
-    this.countries$ = this.translateService.getCountriesAsObservable();
     this.translateService.getCountriesAsObservable().subscribe((res) => {
       this.countries = res;
-    });
-    this.translateService.getCountriesAsObservable().subscribe((res) => {
-      // console.log(res);
-      this.towns = res;
+      this.towns = res.map((x) => x.Towns);
+      console.log(Object.values(this.towns));
+      console.log(this.towns);
     });
 
     let data = this.translateService.translateLabels(lang);
     this.dataLocale = data.Auth.Register;
-
-    this.translateService.getTownsAsObservable();
   }
 
   onSubmit() {
     console.log(this.registerHousekeeperForm.value);
+  }
+
+  select(selectedCountry) {
+    console.log(selectedCountry);
   }
 }

@@ -46,6 +46,8 @@
           filterBy="Country"
           [showClear]="true"
           placeholder=" "
+          #selectedValue
+          (onChange)="select(selectedValue.value.Country)"
         >
           <ng-template pTemplate="selectedCountry">
             <div
@@ -61,35 +63,31 @@
             </div>
           </ng-template>
         </p-dropdown>
-        <!-- <p-dropdown
-          [options]="
-            countries$ | async | searchTextFilter: searchCountry:'Country'
-          "
-          formControlName="country"
-          editable="true"
-          filterBy="Country"
-          optionLabel="Country"
-          [(ngModel)]="searchCountry"
-        ></p-dropdown> -->
       </div>
 
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
-        <input
-          formControlName="town"
-          type="text"
-          [(ngModel)]="searchTown"
-          pInputText
-        />
-        <!-- <div
-          *ngFor="
-            let country of countries$.Towns
-              | async
-              | searchTextFilter: searchTown:'Towns'
-          "
+        <p-dropdown
+          [options]="towns"
+          [(ngModel)]="selectedTown"
+          optionLabel="Country"
+          formControlName="country"
+          [filter]="true"
+          filterBy="Country"
+          [showClear]="true"
+          placeholder=" "
         >
-          {{ country.Towns }}
-        </div> -->
+          <ng-template pTemplate="selectedCountry">
+            <div class="town-item town-item-value" *ngIf="selectedTown">
+              <div>{{ selectedTown }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-town pTemplate="item">
+            <div class="town-item">
+              <div>{{ town }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
       </div>
     </div>
 
