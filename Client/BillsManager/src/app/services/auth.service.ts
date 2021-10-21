@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthenticateRequest } from '../domain-models/authenticateRequest';
 import { AuthenticateResponse } from '../domain-models/authenticateResponse';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,23 @@ export class AuthService {
     return `${this._BASE_URL}${endpoint}?${queryParams}`;
   }
 
+  comparePasswords(fb: FormGroup) {
+    let confirmPasswordControl = fb.get('confirmPassword');
+    console.log(confirmPasswordControl);
+    if (
+      confirmPasswordControl.errors == null ||
+      'passwordMismatch' in confirmPasswordControl.errors
+    ) {
+      if (fb.get('password').value != confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({
+          passwordMismatch: true,
+        });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+    }
+  }
+
   authenticate(
     email: string,
     password: string
@@ -38,7 +56,16 @@ export class AuthService {
     );
   }
 
-  register(request: RegisterRequest): Observable<IBaseResponse> {
+  register(requestFormGroup: FormGroup): Observable<IBaseResponse> {
+    let request = {
+      FirstName: requestFormGroup.value.firstName,
+      LastName: requestFormGroup.value.lastName,
+      Email: requestFormGroup.value.email,
+      Password: requestFormGroup.value.password,
+      Country: requestFormGroup.value.country.Country,
+      Town: requestFormGroup.value.town.name,
+    };
+    console.log(request);
     return this.http.post<IBaseResponse>(
       `${this._BASE_URL}/auth/register`,
       request
