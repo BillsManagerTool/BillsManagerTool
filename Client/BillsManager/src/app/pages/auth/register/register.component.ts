@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-register',
@@ -66,10 +67,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onChangeCountry(selectedCountry) {
+    this.towns = new Array<any>();
     this.translateService.getCountriesAsObservable().subscribe((res) => {
       res.forEach((country) => {
         if (country.Country == selectedCountry) {
-          this.towns = country;
+          this.towns = country.Towns.map((townName) => ({ name: townName }));
         }
       });
     });

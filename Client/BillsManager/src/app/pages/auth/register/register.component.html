@@ -47,7 +47,7 @@
           [showClear]="true"
           placeholder=" "
           #selectedValue
-          (onChange)="onChangeCountry(selectedValue.value.Country)"
+          (onChange)="onChangeCountry(selectedValue.value?.Country)"
         >
           <ng-template pTemplate="selectedCountry">
             <div
@@ -68,23 +68,23 @@
       <div class="text-field town-content">
         <label for="town">{{ dataLocale.Town }}</label>
         <p-dropdown
-          [options]="towns"
+          [(options)]="towns"
           [(ngModel)]="selectedTown"
-          optionLabel="Country"
-          formControlName="country"
+          optionLabel="name"
+          formControlName="town"
           [filter]="true"
-          filterBy="Country"
+          filterBy="name"
           [showClear]="true"
           placeholder=" "
         >
-          <ng-template pTemplate="selectedCountry">
+          <ng-template pTemplate="selectedTown">
             <div class="town-item town-item-value" *ngIf="selectedTown">
               <div>{{ selectedTown }}</div>
             </div>
           </ng-template>
           <ng-template let-town pTemplate="item">
             <div class="town-item">
-              <div>{{ town }}</div>
+              <div>{{ town.name }}</div>
             </div>
           </ng-template>
         </p-dropdown>

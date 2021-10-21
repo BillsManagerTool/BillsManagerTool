@@ -5,7 +5,7 @@
         },
         "Register": {
             "Register": "Регистрация",
-            "FirstName": "Първо име",
+            "FirstName": "Име",
             "LastName": "Фамилия",
             "Email": "Имейл",
             "Password": "Парола",

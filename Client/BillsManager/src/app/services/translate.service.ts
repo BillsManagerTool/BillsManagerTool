@@ -6,6 +6,7 @@ import countriesBG from '../../assets/countries-bg.json';
 import countriesEN from '../../assets/countries-en.json';
 import { Observable } from 'rxjs';
 import { ICountry } from '../interfaces/country';
+import { reduce } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class TranslateService {
   getTownsAsObservable(): any {
     if (this.language === 'en-US') {
       let res = this.http.get<any>('../../assets/countries-en.json');
+
       console.log(res);
       return res;
     } else {
