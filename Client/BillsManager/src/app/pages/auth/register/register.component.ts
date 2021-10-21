@@ -27,6 +27,8 @@ export class RegisterComponent implements OnInit {
   towns: any;
   submitted = false;
 
+  test: '';
+
   constructor(
     private authService: AuthService,
     private translateService: TranslateService,
