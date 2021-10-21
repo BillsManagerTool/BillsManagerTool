@@ -25,23 +25,6 @@ export class AuthService {
     return `${this._BASE_URL}${endpoint}?${queryParams}`;
   }
 
-  comparePasswords(fb: FormGroup) {
-    let confirmPasswordControl = fb.get('confirmPassword');
-    console.log(confirmPasswordControl);
-    if (
-      confirmPasswordControl.errors == null ||
-      'passwordMismatch' in confirmPasswordControl.errors
-    ) {
-      if (fb.get('password').value != confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({
-          passwordMismatch: true,
-        });
-      } else {
-        confirmPasswordControl.setErrors(null);
-      }
-    }
-  }
-
   authenticate(
     email: string,
     password: string

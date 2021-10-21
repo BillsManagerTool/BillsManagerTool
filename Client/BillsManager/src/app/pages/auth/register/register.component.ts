@@ -34,6 +34,9 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    let lang = localStorage.getItem('ui-lang');
+    this.translateService.language = lang;
+
     this.registerHousekeeperForm = this.formBuilder.group(
       {
         firstName: new FormControl('', [
@@ -64,20 +67,16 @@ export class RegisterComponent implements OnInit {
         validator: MustMatch('password', 'confirmPassword'),
       }
     );
+    let data = this.translateService.translateLabels(lang);
+    this.dataLocale = data.Auth.Register;
 
-    let lang = localStorage.getItem('ui-lang');
-    this.translateService.language = lang;
     this.translateService.getCountriesAsObservable().subscribe((res) => {
       this.countries = res;
     });
-
-    let data = this.translateService.translateLabels(lang);
-    this.dataLocale = data.Auth.Register;
   }
 
   onSubmit() {
     this.submitted = true;
-    this.authService.comparePasswords(this.registerHousekeeperForm);
     this.authService.register(this.registerHousekeeperForm).subscribe((res) => {
       console.log(res);
     });
@@ -94,7 +93,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get f() {
+  get formControls() {
     return this.registerHousekeeperForm.controls;
   }
 }
