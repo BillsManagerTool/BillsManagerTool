@@ -96,6 +96,11 @@
       </div>
     </div>
 
+    <div class="p-field text-field address-content">
+      <label for="buildingAddress">{{ dataLocale.BuildingAddress }}</label>
+      <input formControlName="buildingAddress" type="text" pInputText />
+    </div>
+
     <button
       class="btn-base btn-register"
       [disabled]="!registerHousekeeperForm.valid"

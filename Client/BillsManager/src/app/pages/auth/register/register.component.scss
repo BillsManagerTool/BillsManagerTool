@@ -40,6 +40,10 @@
   width: 530px;
 }
 
+.address-content {
+  width: 333px;
+}
+
 .password-group-content {
   display: flex;
   flex-direction: row;
@@ -61,6 +65,11 @@
 
 .country-item {
   text-align: left;
+}
+
+.text-field-label {
+  display: flex;
+  justify-content: space-between;
 }
 
 :host ::ng-deep p-password div input {

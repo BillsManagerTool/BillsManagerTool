@@ -8,8 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable } from 'rxjs';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { MustMatch } from 'src/app/shared/utils/password-validator';
 
 @Component({
@@ -23,7 +21,7 @@ export class RegisterComponent implements OnInit {
   dataLocale: any;
   selectedCountry: string;
   selectedTown: string;
-  countries: any;
+  countries: Array<ICountry>;
   towns: any;
   submitted = false;
 
@@ -58,7 +56,10 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(4),
         ]),
-        buildingAddress: new FormControl(Validators.required),
+        buildingAddress: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
         entranceNumber: new FormControl(Validators.required),
         apartmentNumber: new FormControl(Validators.required),
         apartmentFloor: new FormControl(Validators.required),
