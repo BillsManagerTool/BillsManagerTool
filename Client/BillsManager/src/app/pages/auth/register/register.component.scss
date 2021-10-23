@@ -70,7 +70,7 @@
   justify-content: space-between;
 }
 
-.address-info {
+.address-group {
   display: flex;
 }
 
@@ -82,6 +82,19 @@
 .address {
   width: 333px;
   margin-right: 15px;
+}
+
+.apartment-info-group {
+  width: 530px;
+  display: flex;
+}
+
+.apartment-floor {
+  margin-right: 15px;
+}
+
+.apartment-number {
+  margin-left: 15px;
 }
 
 :host ::ng-deep p-password div input {

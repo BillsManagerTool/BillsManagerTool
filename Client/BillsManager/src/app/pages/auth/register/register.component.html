@@ -95,7 +95,7 @@
         </p-dropdown>
       </div>
     </div>
-    <div class="address-info">
+    <div class="address-group">
       <div class="p-field text-field address">
         <label for="buildingAddress">{{ dataLocale.BuildingAddress }}</label>
         <input formControlName="buildingAddress" type="text" pInputText />
@@ -103,6 +103,17 @@
       <div class="p-field text-field entrance">
         <label for="entranceNumber">{{ dataLocale.EntranceNumber }}</label>
         <input formControlName="entranceNumber" type="text" pInputText />
+      </div>
+    </div>
+
+    <div class="apartment-info-group">
+      <div class="p-field text-field apartment-floor">
+        <label for="apartmentFloor">{{ dataLocale.ApartmentFloor }}</label>
+        <input formControlName="apartmentFloor" type="text" pInputText />
+      </div>
+      <div class="p-field text-field apartment-number">
+        <label for="apartmentNumber">{{ dataLocale.ApartmentNumber }}</label>
+        <input formControlName="apartmentNumber" type="text" pInputText />
       </div>
     </div>
 
