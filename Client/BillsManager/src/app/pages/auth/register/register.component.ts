@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(2),
         ]),
-        entranceNumber: new FormControl(Validators.required),
+        entranceNumber: new FormControl('', Validators.required),
         apartmentNumber: new FormControl(Validators.required),
         apartmentFloor: new FormControl(Validators.required),
         town: new FormControl('', Validators.required),

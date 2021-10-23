@@ -1,23 +1,23 @@
 <form [formGroup]="registerHousekeeperForm" (ngSubmit)="onSubmit()">
   <div class="wrapper">
     <div class="name-inputs-wrapper">
-      <div class="p-field text-field first-name-content">
+      <div class="p-field text-field first-name">
         <label for="firstName">{{ dataLocale.FirstName }}</label>
         <input formControlName="firstName" type="text" pInputText />
       </div>
-      <div class="p-field text-field last-name-content">
+      <div class="p-field text-field last-name">
         <label for="lastName">{{ dataLocale.LastName }}</label>
         <input formControlName="lastName" type="text" pInputText />
       </div>
     </div>
 
-    <div class="p-field text-field email-content">
+    <div class="p-field text-field email">
       <label for="email">{{ dataLocale.Email }}</label>
       <input formControlName="email" type="email" pInputText />
     </div>
 
-    <div class="password-group-content">
-      <div class="p-field password-content text-field">
+    <div class="password-group">
+      <div class="p-field password text-field">
         <label for="password">{{ dataLocale.Password }}</label>
         <p-password
           formControlName="password"
@@ -25,7 +25,7 @@
           [toggleMask]="true"
         ></p-password>
       </div>
-      <div class="p-field password-confirm-content text-field">
+      <div class="p-field password-confirm text-field">
         <label for="confirmPassword">{{ dataLocale.ConfirmPassword }}</label>
         <p-password
           formControlName="confirmPassword"
@@ -39,8 +39,8 @@
         </div>
       </div>
     </div>
-    <div class="location-content">
-      <div class="text-field country-content">
+    <div class="location">
+      <div class="text-field country">
         <label for="country">{{ dataLocale.Country }}</label>
         <p-dropdown
           [options]="countries"
@@ -70,7 +70,7 @@
         </p-dropdown>
       </div>
 
-      <div class="text-field town-content">
+      <div class="text-field town">
         <label for="town">{{ dataLocale.Town }}</label>
         <p-dropdown
           [(options)]="towns"
@@ -95,10 +95,15 @@
         </p-dropdown>
       </div>
     </div>
-
-    <div class="p-field text-field address-content">
-      <label for="buildingAddress">{{ dataLocale.BuildingAddress }}</label>
-      <input formControlName="buildingAddress" type="text" pInputText />
+    <div class="address-info">
+      <div class="p-field text-field address">
+        <label for="buildingAddress">{{ dataLocale.BuildingAddress }}</label>
+        <input formControlName="buildingAddress" type="text" pInputText />
+      </div>
+      <div class="p-field text-field entrance">
+        <label for="entranceNumber">{{ dataLocale.EntranceNumber }}</label>
+        <input formControlName="entranceNumber" type="text" pInputText />
+      </div>
     </div>
 
     <button
