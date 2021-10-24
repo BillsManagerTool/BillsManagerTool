@@ -99,6 +99,7 @@
             occupantDetail.OccupantDetailsId = Guid.NewGuid();
             occupantDetail.Email = args.Email;
             occupantDetail.Password = args.Password;
+            occupantDetail.IsHousekeeper = true;
 
             Occupant occupant = new Occupant();
             occupant.OccupantId = Guid.NewGuid();
