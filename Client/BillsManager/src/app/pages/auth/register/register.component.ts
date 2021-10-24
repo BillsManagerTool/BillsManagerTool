@@ -81,9 +81,10 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.authService.register(this.registerHousekeeperForm).subscribe((res) => {
-      // ??
+      if (res.StatusCode === 200) {
+        this.registerHousekeeperForm.reset();
+      }
     });
-    this.registerHousekeeperForm.reset();
   }
 
   onChangeCountry(selectedCountry) {
