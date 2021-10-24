@@ -11,10 +11,10 @@ namespace BillsManagement.Business.Contracts.HTTP
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Town is required")]
-        public int TownId { get; set; }
+        public string Town { get; set; }
 
         [Required(ErrorMessage = "Country is required")]
-        public int CountryId { get; set; }
+        public string Country { get; set; }
 
         [Required(ErrorMessage = "Building Address is required")]
         public string BuildingAddress { get; set; }

@@ -218,7 +218,8 @@
             Building building = new Building();
             building.BuildingId = Guid.NewGuid();
             building.Address = args.BuildingAddress;
-            building.TownId = args.TownId;
+            building.Town = args.Town;
+            building.Country = args.Country;
 
             this._context.Buildings.Add(building);
             this._context.SaveChanges();

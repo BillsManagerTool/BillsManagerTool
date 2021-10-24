@@ -5,6 +5,6 @@ export class RegisterRequest {
   EntranceNumber: string;
   ApartmentNumber: string;
   ApartmentFloor: number;
-  TownId: number;
-  CountryId: number;
+  Town: string;
+  Country: string;
 }

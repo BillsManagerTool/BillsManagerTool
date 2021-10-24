@@ -1,0 +1,31 @@
+:host ::ng-deep p-password div input {
+  width: 100%;
+}
+
+:host ::ng-deep p-password div {
+  width: 100%;
+  position: relative;
+}
+
+:host ::ng-deep p-password div i {
+  position: absolute;
+  right: 10px !important;
+  top: 10px;
+  margin-top: 0;
+}
+
+:host ::ng-deep p-dropdown .p-dropdown {
+  width: 100%;
+}
+
+:host ::ng-deep .p-dropdown-panel {
+  width: 250px;
+}
+
+:host ::ng-deep .p-dropdown {
+  height: 37.33px;
+}
+
+:host ::ng-deep .p-dropdown-label {
+  text-align: left;
+}
