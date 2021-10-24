@@ -119,8 +119,8 @@
             registerArgs.Password = encryptedPassword;
             registerArgs.BuildingAddress = request.BuildingAddress;
             registerArgs.EntranceNumber = request.EntranceNumber;
-            registerArgs.CountryId = request.CountryId;
-            registerArgs.TownId = request.TownId;
+            registerArgs.Country = request.Country;
+            registerArgs.Town = request.Town;
             registerArgs.ApartmentFloor = request.ApartmentFloor;
             registerArgs.ApartmentNumber = request.ApartmentNumber;
 

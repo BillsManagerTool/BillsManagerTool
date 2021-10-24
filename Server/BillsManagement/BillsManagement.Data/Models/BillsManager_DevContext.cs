@@ -22,14 +22,12 @@ namespace BillsManagement.Data.Models
         public virtual DbSet<Charge> Charges { get; set; }
         public virtual DbSet<CostCenter> CostCenters { get; set; }
         public virtual DbSet<CostType> CostTypes { get; set; }
-        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Entrance> Entrances { get; set; }
         public virtual DbSet<NotificationSetting> NotificationSettings { get; set; }
         public virtual DbSet<Occupant> Occupants { get; set; }
         public virtual DbSet<OccupantDetail> OccupantDetails { get; set; }
         public virtual DbSet<OccupantToApartment> OccupantToApartments { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
-        public virtual DbSet<Town> Towns { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -77,11 +75,13 @@ namespace BillsManagement.Data.Models
                     .IsRequired()
                     .HasMaxLength(64);
 
-                entity.HasOne(d => d.Town)
-                    .WithMany(p => p.Buildings)
-                    .HasForeignKey(d => d.TownId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TownBuilding");
+                entity.Property(e => e.Country)
+                    .IsRequired()
+                    .HasMaxLength(64);
+
+                entity.Property(e => e.Town)
+                    .IsRequired()
+                    .HasMaxLength(64);
             });
 
             modelBuilder.Entity<Charge>(entity =>
@@ -139,23 +139,6 @@ namespace BillsManagement.Data.Models
                     .HasMaxLength(64);
             });
 
-            modelBuilder.Entity<Country>(entity =>
-            {
-                entity.ToTable("Country");
-
-                entity.Property(e => e.AlphaCode3)
-                    .IsRequired()
-                    .HasMaxLength(8);
-
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(8);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(64);
-            });
-
             modelBuilder.Entity<Entrance>(entity =>
             {
                 entity.ToTable("Entrance");
@@ -176,7 +159,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<NotificationSetting>(entity =>
             {
                 entity.HasKey(e => e.SettingsKey)
-                    .HasName("PK__Notifica__BA44B3F785CAD192");
+                    .HasName("PK__Notifica__BA44B3F7585AB224");
 
                 entity.ToTable("NotificationSettings", "Settings");
 
@@ -209,7 +192,7 @@ namespace BillsManagement.Data.Models
             modelBuilder.Entity<OccupantDetail>(entity =>
             {
                 entity.HasKey(e => e.OccupantDetailsId)
-                    .HasName("PK__Occupant__C28410EB3DDFE06F");
+                    .HasName("PK__Occupant__C28410EB09B36B1A");
 
                 entity.Property(e => e.OccupantDetailsId).ValueGeneratedNever();
 
@@ -278,21 +261,6 @@ namespace BillsManagement.Data.Models
                     .HasForeignKey(d => d.OccupantDetailsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OccupantDetailsRefreshToken");
-            });
-
-            modelBuilder.Entity<Town>(entity =>
-            {
-                entity.ToTable("Town");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(64);
-
-                entity.HasOne(d => d.Country)
-                    .WithMany(p => p.Towns)
-                    .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CountryTown");
             });
 
             OnModelCreatingPartial(modelBuilder);

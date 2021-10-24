@@ -47,6 +47,10 @@ export class AuthService {
       Password: requestFormGroup.value.password,
       Country: requestFormGroup.value.country.Country,
       Town: requestFormGroup.value.town.name,
+      BuildingAddress: requestFormGroup.value.buildingAddress,
+      EntranceNumber: requestFormGroup.value.entranceNumber,
+      ApartmentNumber: requestFormGroup.value.apartmentNumber,
+      ApartmentFloor: requestFormGroup.value.apartmentFloor,
     };
     console.log(request);
     return this.http.post<IBaseResponse>(
